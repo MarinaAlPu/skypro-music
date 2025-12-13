@@ -5,15 +5,17 @@ import classnames from 'classnames';
 import './page.css';
 import styles from './page.module.css';
 
+import Navigation from '../components/Navigation/Navigation';
+import Centerblock from '@/components/Centerblock/Centerblock';
+
 
 export default function Home() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
-          <nav className={'main__nav'}>
+          {/* <nav className={'main__nav'}>
             <div className={'nav__logo'}>
-              {/*TODO: img –> Image*/}
               <Image
                 width={250}
                 height={170}
@@ -30,7 +32,6 @@ export default function Home() {
             <div className={'nav__menu'}>
               <ul className={'menu__list'}>
                 <li className={'menu__item'}>
-                  {/*TODO: a -> Link*/}
                   <Link href="#" className={'menu__link'}>
                     Главное
                   </Link>
@@ -47,8 +48,9 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-          </nav>
-          <div className={'centerblock'}>
+          </nav> */}
+          <Navigation />
+          {/* <div className={'centerblock'}>
             <div className={'centerblock__search'}>
               <svg className={'search__svg'}>
                 <use xlinkHref="/img/icon/sprite.svg#icon-search"></use>
@@ -249,7 +251,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <Centerblock />
           <div className={'main__sidebar'}>
             <div className={'sidebar__personal'}>
               <p className={'sidebar__personalName'}>Sergey.Ivanov</p>
