@@ -1,13 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import classnames from 'classnames';
-
 import './page.css';
 import styles from './page.module.css';
 
 import Navigation from '../components/Navigation/Navigation';
 import Centerblock from '@/components/Centerblock/Centerblock';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import Bar from '../components/Bar/Bar';
 
 
 export default function Home() {
@@ -303,7 +300,7 @@ export default function Home() {
           </div> */}
           <Sidebar />
         </main>
-        <div className={'bar'}>
+        {/* <div className={'bar'}>
           <div className={'bar__content'}>
             <div className={'bar__playerProgress'}></div>
             <div className={'bar__playerBlock'}>
@@ -387,7 +384,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        <Bar />
         <footer className="footer"></footer>
       </div>
     </div>
