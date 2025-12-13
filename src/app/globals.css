@@ -20,6 +20,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
