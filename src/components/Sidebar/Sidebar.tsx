@@ -19,33 +19,33 @@ export default function Sidebar() {
           <div className={styles.sidebar__item}>
             <Link className={styles.sidebar__link} href="#">
               <Image
-                className={styles.sidebar__img}
+                className="sidebar__img"
                 src="/img/playlist01.png"
                 alt="day's playlist"
                 width={250}
-                height={170}
+                height={150}
               />
             </Link>
           </div>
           <div className={styles.sidebar__item}>
             <Link className={styles.sidebar__link} href="#">
               <Image
-                className={styles.sidebar__img}
+                className="sidebar__img"
                 src="/img/playlist02.png"
                 alt="day's playlist"
                 width={250}
-                height={170}
+                height={150}
               />
             </Link>
           </div>
           <div className={styles.sidebar__item}>
             <Link className={styles.sidebar__link} href="#">
               <Image
-                className={styles.sidebar__img}
+                className="sidebar__img"
                 src="/img/playlist03.png"
                 alt="day's playlist"
                 width={250}
-                height={170}
+                height={150}
               />
             </Link>
           </div>
