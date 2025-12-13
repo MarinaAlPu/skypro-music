@@ -7,6 +7,7 @@ import styles from './page.module.css';
 
 import Navigation from '../components/Navigation/Navigation';
 import Centerblock from '@/components/Centerblock/Centerblock';
+import Sidebar from '@/components/Sidebar/Sidebar';
 
 
 export default function Home() {
@@ -253,7 +254,7 @@ export default function Home() {
             </div>
           </div> */}
           <Centerblock />
-          <div className={'main__sidebar'}>
+          {/* <div className={'main__sidebar'}>
             <div className={'sidebar__personal'}>
               <p className={'sidebar__personalName'}>Sergey.Ivanov</p>
               <div className={'sidebar__icon'}>
@@ -299,7 +300,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <Sidebar />
         </main>
         <div className={'bar'}>
           <div className={'bar__content'}>
