@@ -1,7 +1,7 @@
-import styles from './centerblockFilter.module.css';
+import styles from './filter.module.css';
 
 
-export default function CenterblockFilter() {
+export default function Filter() {
   return (
     <div className={styles.centerblock__filter}>
       <div className={styles.filter__title}>Искать по:</div>

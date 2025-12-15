@@ -1,8 +1,8 @@
-import styles from './centerblockPlaylistTracks.module.css';
-import CenterblockTrack from '../CenterblockPlaylistTrack/CenterblockPlaylistTrack';
+import styles from './playlistTracks.module.css';
+import CenterblockTrack from '../PlaylistTrack/PlaylistTrack';
 
 
-export default function CenterblockPlaylistTracks() {
+export default function PlaylistTracks() {
   return (
     <div className={styles.content__playlist}>
       <CenterblockTrack/>

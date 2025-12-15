@@ -1,4 +1,4 @@
-import styles from './centerblockPlaylistTitle.module.css';
+import styles from './playlistTitle.module.css';
 import classnames from 'classnames';
 
 

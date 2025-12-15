@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import styles from './centerblockPlaylistTrack.module.css';
+import styles from './playlistTrack.module.css';
 
 
-export default function CenterblockTrack() {
+export default function PlaylistTrack() {
   return (
     <div className={styles.playlist__item}>
       <div className={styles.playlist__track}>

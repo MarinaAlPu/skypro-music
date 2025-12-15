@@ -1,7 +1,7 @@
 import styles from './centerblock.module.css';
-import CenterblockFilter from '../CenterblockFilter/CenterblockFilter';
-import CenterblockPlaylistTitle from '../CenterblockPlaylistTitle/CenterblockPlaylistTitle';
-import CenterblockPlaylistTracks from '../CenterblockPlaylistTracks/CenterblockPlaylistTracks';
+import Filter from '../Filter/Filter';
+import PlaylistTitle from '../PlaylistTitle/PlaylistTitle';
+import PlaylistTracks from '../PlaylistTracks/PlaylistTracks';
 
 
 export default function Centerblock() {
@@ -19,10 +19,10 @@ export default function Centerblock() {
         />
       </div>
       <h2 className={styles.centerblock__h2}>Треки</h2>
-      <CenterblockFilter />
+      <Filter />
       <div className={styles.centerblock__content}>
-        <CenterblockPlaylistTitle />
-        <CenterblockPlaylistTracks />
+        <PlaylistTitle />
+        <PlaylistTracks />
       </div>
     </div>
   )
