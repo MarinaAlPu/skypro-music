@@ -32,6 +32,7 @@
   border-radius: 60px;
   padding: 6px 20px;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .filter__button:not(:last-child) {
