@@ -11,13 +11,12 @@ type titleItemProp = {
   onClick: () => void,
   isOpen: boolean,
   activeFilter: string
-  isFilterActive: boolean
 }
 
-export default function FilterItem({ title, onClick, isOpen, activeFilter, isFilterActive }: titleItemProp) {
-  // console.log(title);
-
-  // const[isFilterActive, setIsFilterActive] = useState();
+export default function FilterItem({ title, onClick, isOpen, activeFilter }: titleItemProp) {
+  // console.log("title в компоненте FilterItem: ", title);
+  // console.log("activeFilter в компоненте FilterItem: ", activeFilter);
+  // console.log("isOpen в компоненте FilterItem: ", isOpen);
 
   const uniqueAuthors = [...new Set(data.map(track => track.author))];
   // console.log("uniqueAuthors", uniqueAuthors);
@@ -28,15 +27,18 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, isFil
   const uniqueGenres = [...new Set(data.flatMap(track => track.genre))];
   // console.log("uniqueGenres", uniqueGenres);
 
-  const currentFilterState = activeFilter && isFilterActive ? title : null
-  // console.log("currentFilterState: ", currentFilterState);
 
   return (
     <>
       <div className={
-        classNames(styles.filter__button, {
-          [styles.active]: activeFilter === currentFilterState,
-        })
+        // activeFilter && title && isOpen
+        isOpen
+          ?
+          classNames(styles.filter__button, {
+            [styles.active]: activeFilter === title,
+          })
+          :
+          styles.filter__button
       }
         onClick={() => onClick()}
       >{title}
@@ -68,6 +70,7 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, isFil
             </ul>
           </div>
         }
+        {/* <div className={styles.filter__count}>5</div> */}
       </div>
     </>
   )
