@@ -27,6 +27,14 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter }: tit
   const uniqueGenres = [...new Set(data.flatMap(track => track.genre))];
   // console.log("uniqueGenres", uniqueGenres);
 
+  let count: number = 0;
+  if (title === "исполнителю") {
+    count = uniqueAuthors.length;
+  } else if (title === "году выпуска") {
+    count = uniqueReleaseYears.length;
+  } else if (title === "жанру") {
+    count = uniqueGenres.length;
+  }
 
   return (
     <>
@@ -70,7 +78,13 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter }: tit
             </ul>
           </div>
         }
-        {/* <div className={styles.filter__count}>5</div> */}
+        {isOpen ?
+          <div className={styles.filter__count}>
+            {count}
+          </div>
+          :
+          null
+        }
       </div>
     </>
   )
