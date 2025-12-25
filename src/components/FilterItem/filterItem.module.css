@@ -50,3 +50,8 @@
     background-color: white;
   }
 }
+
+.active {
+  color: #B672FF;
+  border-color: #B672FF;
+}

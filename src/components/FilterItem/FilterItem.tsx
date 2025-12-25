@@ -1,17 +1,23 @@
 'use client';
 
+import classNames from 'classnames';
 import styles from './filterItem.module.css';
 import { data } from '@/data';
+import { useState } from 'react';
 
 
 type titleItemProp = {
   title: string,
   onClick: () => void,
-  isOpen: boolean
+  isOpen: boolean,
+  activeFilter: string
+  isFilterActive: boolean
 }
 
-export default function FilterItem({ title, onClick, isOpen }: titleItemProp) {
+export default function FilterItem({ title, onClick, isOpen, activeFilter, isFilterActive }: titleItemProp) {
   // console.log(title);
+
+  // const[isFilterActive, setIsFilterActive] = useState();
 
   const uniqueAuthors = [...new Set(data.map(track => track.author))];
   // console.log("uniqueAuthors", uniqueAuthors);
@@ -22,10 +28,16 @@ export default function FilterItem({ title, onClick, isOpen }: titleItemProp) {
   const uniqueGenres = [...new Set(data.flatMap(track => track.genre))];
   // console.log("uniqueGenres", uniqueGenres);
 
+  const currentFilterState = activeFilter && isFilterActive ? title : null
+  // console.log("currentFilterState: ", currentFilterState);
 
   return (
     <>
-      <div className={styles.filter__button}
+      <div className={
+        classNames(styles.filter__button, {
+          [styles.active]: activeFilter === currentFilterState,
+        })
+      }
         onClick={() => onClick()}
       >{title}
         {isOpen &&

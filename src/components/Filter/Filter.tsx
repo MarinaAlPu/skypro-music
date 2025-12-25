@@ -7,10 +7,17 @@ import { useState } from 'react';
 
 export default function Filter() {
   const [isOpen, setIsOpen] = useState("");
+  const [activeFilter, setActiveFilter] = useState("");
+  // let activeFilter;
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
   const onOpenDropdownList = (title: string) => {
     setIsOpen(title === isOpen ? "" : title); // закрыть список, если он уже открыт
-    console.log("Открыть список: ", title);
+    setActiveFilter(title);
+    // activeFilter = title;
+    // console.log("Открыть список: ", title);
+    setIsFilterActive(!isFilterActive);
+    // console.log("Состояние фильтра: ", isFilterActive);
   };
 
   return (
@@ -20,16 +27,22 @@ export default function Filter() {
         title="исполнителю"
         onClick={() => onOpenDropdownList("исполнителю")}
         isOpen={isOpen === "исполнителю"}
+        activeFilter={activeFilter}
+        isFilterActive={isFilterActive}
         />
       <FilterItem
         title="году выпуска"
         onClick={() => onOpenDropdownList("году выпуска")}
         isOpen={isOpen === "году выпуска"}
+        activeFilter={activeFilter}
+        isFilterActive={isFilterActive}
         />
       <FilterItem
         title="жанру"
         onClick={() => onOpenDropdownList("жанру")}
         isOpen={isOpen === "жанру"}
+        activeFilter={activeFilter}
+        isFilterActive={isFilterActive}
       />
     </div>
   )
