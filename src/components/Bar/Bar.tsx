@@ -12,6 +12,9 @@ export default function Bar() {
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // console.log("currentTrack в Bar: ", currentTrack);
+  
+  const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
+  const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
@@ -97,12 +100,12 @@ export default function Bar() {
                 </div>
                 <div className={styles.trackPlay__author}>
                   <Link className={styles.trackPlay__authorLink} href="">
-                    Ты та...
+                    {currentTrackName}
                   </Link>
                 </div>
                 <div className={styles.trackPlay__album}>
                   <Link className={styles.trackPlay__albumLink} href="">
-                    Баста
+                    {currentTrackAuthor}
                   </Link>
                 </div>
               </div>
