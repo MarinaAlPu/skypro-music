@@ -24,6 +24,11 @@ export default function Bar() {
   if (!currentTrack) return <></>;
 
 
+  if (currentTrack && currentTrackIsPlay && audioRef.current) {
+    audioRef.current.play();
+  }
+
+
   const playPauseTrack = () => {
     if (currentTrackIsPlay === false) {
       // console.log("Нажали кнопку Play");

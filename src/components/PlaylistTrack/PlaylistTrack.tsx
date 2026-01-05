@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './playlistTrack.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { setCurrentTrack } from '@/store/features/trackSlice';
+import { setCurrentTrack, setIsPlay } from '@/store/features/trackSlice';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
@@ -34,8 +34,10 @@ export default function PlaylistTrack({ track }: trackTypeProp) {
 
 
   const onClickTrack = () => {
-    dispatch(setCurrentTrack(track))
+    dispatch(setCurrentTrack(track));
+    dispatch(setIsPlay(true));
   }
+
 
   return (
     <div className={styles.playlist__item}
