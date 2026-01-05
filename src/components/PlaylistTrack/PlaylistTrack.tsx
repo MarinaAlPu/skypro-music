@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import styles from './playlistTrack.module.css';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setCurrentTrack } from '@/store/features/trackSlice';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { formatTime } from '@/utils/helpers';
+import classNames from 'classnames';
 
 
-type trackProp = {
+type trackTypeProp = {
   // name: string,
   // author: string,
   // album: string,
@@ -17,8 +18,20 @@ type trackProp = {
 }
 
 // export default function PlaylistTrack({ name, author, album, time }: trackProp) {
-export default function PlaylistTrack({ track }: trackProp) {
+export default function PlaylistTrack({ track }: trackTypeProp) {
   const dispatch = useAppDispatch();
+
+  // получить текущий трек
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  // console.log("currentTrack в PlaylistTrack: ", currentTrack);
+
+  const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
+  // console.log("currentTrackId в PlaylistTrack: ", currentTrackId);
+
+  // проверить, что текущий трек играет
+  const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
+  // console.log("currentTrackIsPlay в PlaylistTrack: ", currentTrackIsPlay);
+
 
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track))
@@ -31,8 +44,14 @@ export default function PlaylistTrack({ track }: trackProp) {
       <div className={styles.playlist__track}>
         <div className={styles.track__title}>
           <div className={styles.track__titleImage}>
-            <svg className={styles.track__titleSvg}>
-              <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+            <svg className={classNames(
+              styles.track__titleSvg,
+              {
+                [styles.track__selected]: currentTrack && currentTrackId === track._id,
+                [styles.track__active]: currentTrackIsPlay === true && currentTrackId === track._id,
+              }
+            )}>
+              {currentTrackId !== track._id && <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>}
             </svg>
           </div>
           <div className="track__title-text">
@@ -58,6 +77,6 @@ export default function PlaylistTrack({ track }: trackProp) {
           <span className={styles.track__timeText}>{formatTime(track.duration_in_seconds)}</span>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
