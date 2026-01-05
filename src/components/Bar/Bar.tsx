@@ -51,7 +51,7 @@ export default function Bar() {
 
   return (
     <div className={styles.bar}>
-      <audio
+      <audio className={styles.audio}
         controls
         ref={audioRef}
         src={currentTrack?.track_file}>

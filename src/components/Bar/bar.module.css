@@ -105,6 +105,7 @@
   width: 22px;
   height: 20px;
   fill: #d9d9d9;
+  margin-right: 23px;
 }
 
 .player__btnNext {
@@ -358,4 +359,8 @@
     color: #ad61ff;
     cursor: pointer;
   }
+}
+
+.audio {
+  display: none;
 }
