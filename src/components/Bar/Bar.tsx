@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './bar.module.css';
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { setIsPlay } from '@/store/features/trackSlice';
 
 
@@ -12,7 +12,6 @@ export default function Bar() {
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // console.log("currentTrack в Bar: ", currentTrack);
-  
   const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
   const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
 
@@ -22,10 +21,21 @@ export default function Bar() {
 
   const dispatch = useAppDispatch();
 
+  const [volume, setVolume] = useState(0.5);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  if (!currentTrack) return <></>;
 
+  useEffect(() => {
+    if (audioRef.current) {
+      // console.log("audioRef.current.volume ДО: ", audioRef.current.volume);
+      audioRef.current.volume = volume;
+      // console.log("audioRef.current.volume ПОСЛЕ: ", audioRef.current.volume);
+    }
+  }, [volume]);
+
+
+  if (!currentTrack) return <></>;
 
   if (currentTrack && currentTrackIsPlay && audioRef.current) {
     audioRef.current.play();
@@ -46,15 +56,25 @@ export default function Bar() {
         dispatch(setIsPlay(false));
       }
     }
-  }
+  };
+
+  const onVolumeChange = (currentVolumeLevel: number) => {
+    if (audioRef.current) {
+      // console.log("currentVolumeLevel ДО: ", currentVolumeLevel);
+      setVolume(currentVolumeLevel);
+      // console.log("currentVolumeLevel ПОСЛЕ: ", currentVolumeLevel);
+    }
+  };
 
 
   return (
     <div className={styles.bar}>
-      <audio className={styles.audio}
+      <audio
+        className={styles.audio}
         controls
         ref={audioRef}
-        src={currentTrack?.track_file}>
+        src={currentTrack?.track_file}
+      >
       </audio>
       <div className={styles.bar__content}>
         <div className={styles.bar__playerProgress}></div>
@@ -136,6 +156,11 @@ export default function Bar() {
                   className={classnames(styles.volume__progressLine, styles.btn)}
                   type="range"
                   name="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={(e) => onVolumeChange(Number(e.target.value))}
                 />
               </div>
             </div>
