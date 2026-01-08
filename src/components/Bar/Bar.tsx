@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useRef, useState } from 'react';
 import { setIsPlay } from '@/store/features/trackSlice';
-import {getTimePanel} from '@/utils/helpers';
+import { getTimePanel } from '@/utils/helpers';
 
 
 export default function Bar() {
@@ -26,6 +26,7 @@ export default function Bar() {
   const [isLoop, setIsLoop] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isLoadedTrack, setIsLoadedTrack] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -37,6 +38,11 @@ export default function Bar() {
       // console.log("audioRef.current.volume ПОСЛЕ: ", audioRef.current.volume);
     }
   }, [volume]);
+
+  // при смене трека обнулять состояние, что трек не загрузился
+  useEffect(() => {
+    setIsLoadedTrack(false);
+  }, [currentTrack]);
 
 
   if (!currentTrack) return <></>;
@@ -75,7 +81,8 @@ export default function Bar() {
   };
 
   const onTimeUpdate = () => {
-    if (audioRef.current) {
+    // console.log(`трек "${currentTrackName}" isLoadedTrack: `, isLoadedTrack);
+    if (audioRef.current && isLoadedTrack) {
       // // учесть загрузился трек или нет, начинать проиграывать только после загрузки
       // isLoadedTrack д.б. = true
       setCurrentTime(audioRef.current.currentTime);
@@ -83,6 +90,15 @@ export default function Bar() {
 
       // console.log("currentTime: ", currentTime);
       // console.log("duration: ", duration);
+    }
+  };
+
+  const onLoadedMetadata = () => {
+    // console.log("Start");
+    if (audioRef.current) {
+      audioRef.current.play();
+      dispatch(setIsPlay(true));
+      setIsLoadedTrack(true);
     }
   }
 
@@ -96,6 +112,7 @@ export default function Bar() {
         src={currentTrack?.track_file}
         loop={isLoop}
         onTimeUpdate={onTimeUpdate}
+        onLoadedMetadata={onLoadedMetadata}
       >
       </audio>
       <div className={styles.bar__content}>
