@@ -4,9 +4,10 @@ import Link from 'next/link';
 import styles from './bar.module.css';
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ChangeEvent } from 'react';
 import { setIsPlay } from '@/store/features/trackSlice';
 import { getTimePanel } from '@/utils/helpers';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 
 export default function Bar() {
@@ -27,6 +28,7 @@ export default function Bar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isLoadedTrack, setIsLoadedTrack] = useState(false);
+  const [progressBarTime, setProgressBarTime] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -101,11 +103,22 @@ export default function Bar() {
       setIsLoadedTrack(true);
     }
   };
-  
+
   const onEnded = () => {
-    console.log("isLoop: ", isLoop);
-    console.log("Next track");
+    // console.log("isLoop: ", isLoop);
+    // console.log("Next track");
     dispatch(setIsPlay(false));
+    // setIsLoadedTrack(false);
+  };
+
+  // const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => { // React. - вместо импорта ChangeEvent
+  const onChangeProgress = (e: ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      // console.log("e: ", e);
+      setProgressBarTime(Number(e.target.value));
+
+      audioRef.current.currentTime = progressBarTime;
+    }
   };
 
 
@@ -128,7 +141,14 @@ export default function Bar() {
             {getTimePanel(currentTime, duration)}
           </div>
         </div>
-        <div className={styles.bar__playerProgress}></div>
+        {/* <div className={styles.bar__playerProgress}></div> */}
+        <ProgressBar
+          max={audioRef.current?.duration || 0} // если duration нет, то показывает 0 (пустая шкала)
+          value={currentTime}
+          step={0.1}
+          onChange={onChangeProgress}
+          readOnly={!isLoadedTrack} // когда трек загрузился readOnly = true
+        />
         <div className={styles.bar__playerBlock}>
           <div className={styles.bar__player}>
             <div className={styles.player__controls}>
