@@ -101,10 +101,11 @@ export default function Bar() {
       setIsLoadedTrack(true);
     }
   };
-
+  
   const onEnded = () => {
     console.log("isLoop: ", isLoop);
     console.log("Next track");
+    dispatch(setIsPlay(false));
   };
 
 
