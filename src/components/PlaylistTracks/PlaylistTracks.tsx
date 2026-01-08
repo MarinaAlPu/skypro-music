@@ -15,6 +15,7 @@ export default function PlaylistTracks() {
           // album={track.album}
           // time={formatTime(track.duration_in_seconds)}
           track={track}
+          playlist={data}
         />
       )}
     </div>
