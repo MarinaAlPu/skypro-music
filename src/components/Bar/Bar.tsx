@@ -5,7 +5,7 @@ import styles from './bar.module.css';
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useRef, useState, ChangeEvent } from 'react';
-import { setIsPlay, setNextTrack } from '@/store/features/trackSlice';
+import { setIsPlay, setNextTrack, setPrevTrack } from '@/store/features/trackSlice';
 import { getTimePanel } from '@/utils/helpers';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
@@ -138,6 +138,14 @@ export default function Bar() {
     }
   };
 
+  const onSetPrevTrack = () => {
+    if (currentTrackIndex === 0) {
+      // console.log(`Трек ${currentTrack.name} - первый трек в плейлисте`);
+    } else {
+      dispatch(setPrevTrack());
+    }
+  }
+
 
   return (
     <div className={styles.bar}>
@@ -169,7 +177,10 @@ export default function Bar() {
         <div className={styles.bar__playerBlock}>
           <div className={styles.bar__player}>
             <div className={styles.player__controls}>
-              <div className={styles.player__btnPrev}>
+              <div
+                className={styles.player__btnPrev}
+                onClick={onSetPrevTrack}
+              >
                 <svg className={styles.player__btnPrevSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
