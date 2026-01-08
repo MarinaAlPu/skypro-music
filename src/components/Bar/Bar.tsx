@@ -100,7 +100,12 @@ export default function Bar() {
       dispatch(setIsPlay(true));
       setIsLoadedTrack(true);
     }
-  }
+  };
+
+  const onEnded = () => {
+    console.log("isLoop: ", isLoop);
+    console.log("Next track");
+  };
 
 
   return (
@@ -113,6 +118,7 @@ export default function Bar() {
         loop={isLoop}
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={onLoadedMetadata}
+        onEnded={onEnded}
       >
       </audio>
       <div className={styles.bar__content}>
