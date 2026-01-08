@@ -5,28 +5,37 @@ import styles from './bar.module.css';
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useRef, useState, ChangeEvent } from 'react';
-import { setIsPlay, setNextTrack, setPrevTrack } from '@/store/features/trackSlice';
+import { setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle } from '@/store/features/trackSlice';
 import { getTimePanel } from '@/utils/helpers';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 
 export default function Bar() {
+  const dispatch = useAppDispatch();
+
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // console.log("currentTrack в Bar: ", currentTrack);
   const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
   const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
 
-  // получить текущий плейлист
-  const currentPlaylist = useAppSelector((state) => state.tracks.currentPlaylist);
+  // // получить текущий плейлист
+  // const currentPlaylist = useAppSelector((state) => state.tracks.currentPlaylist);
 
-  const currentTrackIndex = currentPlaylist.findIndex((track) => track._id === currentTrack?._id)
+  // const currentTrackIndex = currentPlaylist.findIndex((track) => track._id === currentTrack?._id)
+
+  // // получить текущий перемешанный плейлист
+  // const shaffledPlaylist = useAppSelector((state) => state.tracks.shuffledPlaylist);
+
+  // const shuffledTrackIndex = shaffledPlaylist.findIndex((track) => track._id === currentTrack?._id)
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
   // console.log("currentTrackIsPlay в Bar: ", currentTrackIsPlay);
 
-  const dispatch = useAppDispatch();
+  // проверить, включен ли shuffle
+  const isShuffle = useAppSelector((state) => state.tracks.isShuffle);
+
 
   const [volume, setVolume] = useState(0.5);
   const [isLoop, setIsLoop] = useState(false);
@@ -36,6 +45,9 @@ export default function Bar() {
   const [progressBarTime, setProgressBarTime] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // const playlist = isShuffle ? shaffledPlaylist : currentPlaylist;
+  // const trackIndex = isShuffle ? shuffledTrackIndex : currentTrackIndex;
 
 
   useEffect(() => {
@@ -114,6 +126,8 @@ export default function Bar() {
     // console.log("Next track");
     dispatch(setIsPlay(false));
     // setIsLoadedTrack(false);
+
+    setNextTrack();
   };
 
   // const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => { // React. - вместо импорта ChangeEvent
@@ -127,24 +141,16 @@ export default function Bar() {
   };
 
   const onSetNextTrack = () => {
-    // console.log("currentTrackIndex: ", currentTrackIndex);
-    // console.log("Длина плейлиста: ", currentPlaylist.length);
-
-    // если трек последний, то ничего не происходит
-    if (currentTrackIndex === currentPlaylist.length - 1) {
-      // console.log(`Трек ${currentTrack.name} - последний трек в плейлисте`);
-    } else {
       dispatch(setNextTrack());
-    }
   };
 
   const onSetPrevTrack = () => {
-    if (currentTrackIndex === 0) {
-      // console.log(`Трек ${currentTrack.name} - первый трек в плейлисте`);
-    } else {
       dispatch(setPrevTrack());
-    }
-  }
+  };
+
+  const onToggleShuffle = () => {
+    dispatch(toggleIsShuffle());
+  };
 
 
   return (
@@ -213,7 +219,15 @@ export default function Bar() {
                   <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                 </svg>
               </div>
-              <div className={classnames(styles.player__btnShuffle, styles.btnIcon)}>
+              <div
+                className={
+                  classnames(
+                    styles.player__btnShuffle, styles.btnIcon,
+                    { [styles.btnIcon__active]: isShuffle, }
+                  )
+                }
+                onClick={onToggleShuffle}
+              >
                 <svg className={styles.player__btnShuffleSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                 </svg>
