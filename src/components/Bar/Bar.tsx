@@ -81,8 +81,8 @@ export default function Bar() {
       setCurrentTime(audioRef.current.currentTime);
       setDuration(audioRef.current.duration);
 
-      console.log("currentTime: ", currentTime);
-      console.log("duration: ", duration);
+      // console.log("currentTime: ", currentTime);
+      // console.log("duration: ", duration);
     }
   }
 
