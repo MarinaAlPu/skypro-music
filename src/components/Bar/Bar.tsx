@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useRef, useState } from 'react';
 import { setIsPlay } from '@/store/features/trackSlice';
+import {getTimePanel} from '@/utils/helpers';
 
 
 export default function Bar() {
@@ -23,6 +24,8 @@ export default function Bar() {
 
   const [volume, setVolume] = useState(0.5);
   const [isLoop, setIsLoop] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -71,6 +74,18 @@ export default function Bar() {
     setIsLoop(!isLoop);
   };
 
+  const onTimeUpdate = () => {
+    if (audioRef.current) {
+      // // учесть загрузился трек или нет, начинать проиграывать только после загрузки
+      // isLoadedTrack д.б. = true
+      setCurrentTime(audioRef.current.currentTime);
+      setDuration(audioRef.current.duration);
+
+      console.log("currentTime: ", currentTime);
+      console.log("duration: ", duration);
+    }
+  }
+
 
   return (
     <div className={styles.bar}>
@@ -80,9 +95,15 @@ export default function Bar() {
         ref={audioRef}
         src={currentTrack?.track_file}
         loop={isLoop}
+        onTimeUpdate={onTimeUpdate}
       >
       </audio>
       <div className={styles.bar__content}>
+        <div className={styles.trackPlay__timeBlock}>
+          <div className={styles.trackPlay__time}>
+            {getTimePanel(currentTime, duration)}
+          </div>
+        </div>
         <div className={styles.bar__playerProgress}></div>
         <div className={styles.bar__playerBlock}>
           <div className={styles.bar__player}>

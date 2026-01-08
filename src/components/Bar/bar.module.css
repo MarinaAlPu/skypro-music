@@ -353,6 +353,7 @@
     color: #d9b6ff;
     cursor: pointer;
   }
+
   &:active {
     border-color: #ad61ff;
     color: #ad61ff;
@@ -364,9 +365,24 @@
   display: none;
 }
 
-
 .btnIcon__active svg {
   fill: transparent;
   stroke: #ffffff;
   cursor: pointer;
+}
+
+.trackPlay__timeBlock {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+.trackPlay__time {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  color: #ffffff;
 }
