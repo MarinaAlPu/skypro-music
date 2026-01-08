@@ -25,10 +25,26 @@ const trackSlice = createSlice({
     },
     setIsPlay: (state, action: PayloadAction<boolean>) => {
       state.isPlay = action.payload;
+    },
+    setNextTrack: (state) => {
+      if (state.currentTrack) {
+        const currentTrackIndex = state.currentPlaylist.findIndex((track) => track._id === state.currentTrack?._id);
+
+        // console.log("currentTrackIndex: ", currentTrackIndex);
+        // console.log("Длина плейлиста: ", state.currentPlaylist.length);
+
+        // // если трек последний, то ничего не происходит
+        // if (currentTrackIndex === state.currentPlaylist.length - 1) {
+        //   console.log(`Трек ${state.currentTrack.name} - последний трек в плейлисте`);
+        // } else {
+          const nextTrackIndex = currentTrackIndex + 1;
+          state.currentTrack = state.currentPlaylist[nextTrackIndex];
+        // }
+      }
     }
   }
 })
 
 
-export const { setCurrentTrack, setCurrentPlaylist, setIsPlay } = trackSlice.actions;
+export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

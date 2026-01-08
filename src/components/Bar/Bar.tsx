@@ -5,7 +5,7 @@ import styles from './bar.module.css';
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useRef, useState, ChangeEvent } from 'react';
-import { setIsPlay } from '@/store/features/trackSlice';
+import { setIsPlay, setNextTrack } from '@/store/features/trackSlice';
 import { getTimePanel } from '@/utils/helpers';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
@@ -16,6 +16,11 @@ export default function Bar() {
   // console.log("currentTrack в Bar: ", currentTrack);
   const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
   const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
+
+  // получить текущий плейлист
+  const currentPlaylist = useAppSelector((state) => state.tracks.currentPlaylist);
+
+  const currentTrackIndex = currentPlaylist.findIndex((track) => track._id === currentTrack?._id)
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
@@ -121,6 +126,18 @@ export default function Bar() {
     }
   };
 
+  const onSetNextTrack = () => {
+    // console.log("currentTrackIndex: ", currentTrackIndex);
+    // console.log("Длина плейлиста: ", currentPlaylist.length);
+
+    // если трек последний, то ничего не происходит
+    if (currentTrackIndex === currentPlaylist.length - 1) {
+      // console.log(`Трек ${currentTrack.name} - последний трек в плейлисте`);
+    } else {
+      dispatch(setNextTrack());
+    }
+  };
+
 
   return (
     <div className={styles.bar}>
@@ -165,7 +182,10 @@ export default function Bar() {
                     currentTrackIsPlay ? "/img/icon/sprite.svg#icon-pause" : "/img/icon/sprite.svg#icon-play"}></use>
                 </svg>
               </div>
-              <div className={styles.player__btnNext}>
+              <div
+                className={styles.player__btnNext}
+                onClick={onSetNextTrack}
+              >
                 <svg className={styles.player__btnNextSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                 </svg>
