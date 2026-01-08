@@ -22,6 +22,7 @@ export default function Bar() {
   const dispatch = useAppDispatch();
 
   const [volume, setVolume] = useState(0.5);
+  const [isLoop, setIsLoop] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -66,6 +67,10 @@ export default function Bar() {
     }
   };
 
+  const onToggleLoop = () => {
+    setIsLoop(!isLoop);
+  };
+
 
   return (
     <div className={styles.bar}>
@@ -74,6 +79,7 @@ export default function Bar() {
         controls
         ref={audioRef}
         src={currentTrack?.track_file}
+        loop={isLoop}
       >
       </audio>
       <div className={styles.bar__content}>
@@ -99,7 +105,14 @@ export default function Bar() {
                   <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                 </svg>
               </div>
-              <div className={classnames(styles.player__btnRepeat, styles.btnIcon)}>
+              <div
+                onClick={onToggleLoop}
+                className={
+                  classnames(
+                    styles.player__btnRepeat, styles.btnIcon,
+                    { [styles.btnIcon__active]: isLoop, }
+                  )}
+              >
                 <svg className={styles.player__btnRepeatSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                 </svg>
@@ -167,6 +180,6 @@ export default function Bar() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

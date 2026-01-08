@@ -363,3 +363,10 @@
 .audio {
   display: none;
 }
+
+
+.btnIcon__active svg {
+  fill: transparent;
+  stroke: #ffffff;
+  cursor: pointer;
+}
