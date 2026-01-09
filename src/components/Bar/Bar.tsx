@@ -63,6 +63,14 @@ export default function Bar() {
     setIsLoadedTrack(false);
   }, [currentTrack]);
 
+  // useEffect(() => {
+  //   if (audioRef.current && currentTrack) {
+  //     audioRef.current.src = currentTrack.track_file;
+  //     audioRef.current.play();
+  //     setIsPlay(true);
+  //   }
+  // }, [currentTrack])
+
 
   if (!currentTrack) return <></>;
 
@@ -127,7 +135,13 @@ export default function Bar() {
     dispatch(setIsPlay(false));
     // setIsLoadedTrack(false);
 
-    setNextTrack();
+    // if (isLoop) {
+    //   if (audioRef.current) {
+    //     audioRef.current.play();
+    //   }
+    // } else {
+      dispatch(setNextTrack());
+    // }
   };
 
   // const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => { // React. - вместо импорта ChangeEvent
@@ -141,11 +155,11 @@ export default function Bar() {
   };
 
   const onSetNextTrack = () => {
-      dispatch(setNextTrack());
+    dispatch(setNextTrack());
   };
 
   const onSetPrevTrack = () => {
-      dispatch(setPrevTrack());
+    dispatch(setPrevTrack());
   };
 
   const onToggleShuffle = () => {
@@ -184,7 +198,7 @@ export default function Bar() {
           <div className={styles.bar__player}>
             <div className={styles.player__controls}>
               <div
-                className={styles.player__btnPrev}
+                className={classnames(styles.player__btnPrev, styles.btn)}
                 onClick={onSetPrevTrack}
               >
                 <svg className={styles.player__btnPrevSvg}>
@@ -200,7 +214,7 @@ export default function Bar() {
                 </svg>
               </div>
               <div
-                className={styles.player__btnNext}
+                className={classnames(styles.player__btnNext, styles.btn)}
                 onClick={onSetNextTrack}
               >
                 <svg className={styles.player__btnNextSvg}>

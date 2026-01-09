@@ -37,9 +37,14 @@ const trackSlice = createSlice({
 
       const currentTrackIndex = playlist.findIndex((track) => track._id === state.currentTrack?._id);
 
-      if (currentTrackIndex === playlist.length - 1) {
-        state.currentTrack = playlist[0];
-      } else {
+      // if (currentTrackIndex === playlist.length - 1) {
+      //   state.currentTrack = playlist[0];
+      // } else {
+      //   const nextTrackIndex = currentTrackIndex + 1;
+      //   state.currentTrack = playlist[nextTrackIndex];
+      // }
+
+      if (currentTrackIndex !== playlist.length - 1) {
         const nextTrackIndex = currentTrackIndex + 1;
         state.currentTrack = playlist[nextTrackIndex];
       }
@@ -49,9 +54,14 @@ const trackSlice = createSlice({
 
       const currentTrackIndex = playlist.findIndex((track) => track._id === state.currentTrack?._id);
 
-      if (currentTrackIndex === 0) {
-        state.currentTrack = playlist[playlist.length - 1];
-      } else {
+      // if (currentTrackIndex === 0) {
+      //   state.currentTrack = playlist[playlist.length - 1];
+      // } else {
+      //   const prevTrackIndex = currentTrackIndex - 1;
+      //   state.currentTrack = playlist[prevTrackIndex];
+      // }
+
+      if (currentTrackIndex !== 0) {
         const prevTrackIndex = currentTrackIndex - 1;
         state.currentTrack = playlist[prevTrackIndex];
       }
