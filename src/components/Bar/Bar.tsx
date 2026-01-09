@@ -38,6 +38,7 @@ export default function Bar() {
 
 
   const [volume, setVolume] = useState(0.5);
+  console.log("volume: ", volume);
   const [isLoop, setIsLoop] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -293,7 +294,8 @@ export default function Bar() {
             <div className={styles.volume__content}>
               <div className={styles.volume__image}>
                 <svg className={styles.volume__svg}>
-                  <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
+                  {/* <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use> */}
+                  <use xlinkHref={volume > 0 ? "/img/icon/sprite.svg#icon-volume" : "/img/icon/sprite.svg#icon-mute"}></use>
                 </svg>
               </div>
               <div className={classnames(styles.volume__progress, styles.btn)}>
