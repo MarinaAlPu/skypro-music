@@ -140,17 +140,24 @@ export default function Bar() {
     //     audioRef.current.play();
     //   }
     // } else {
-      dispatch(setNextTrack());
+    dispatch(setNextTrack());
     // }
   };
 
   // const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => { // React. - вместо импорта ChangeEvent
   const onChangeProgress = (e: ChangeEvent<HTMLInputElement>) => {
+    // console.log("e: ", e);
+    // 0. получить новое время из события клика по шкале
+    const newTime = Number(e.target.value);
     if (audioRef.current) {
-      // console.log("e: ", e);
-      setProgressBarTime(Number(e.target.value));
+      // 1. сначала новое время установить в audio, чтобы аудиоплеер немедленно начал воспроизводить трек с нового времени
+      audioRef.current.currentTime = newTime;
 
-      audioRef.current.currentTime = progressBarTime;
+      // 2. обновить состояние currentTime, из него берётся время для вывода на экран. Обновляется после обновления в audio -> время в audio и на экране одинаковое. Если в обратном порядке, то м.б. ошибки
+      setCurrentTime(newTime);
+
+      // 3. обновить состояние progressBarTime после обновления currentTime, т.к. заполнение progressBarTime зависит от currentTime
+      setProgressBarTime(newTime);
     }
   };
 
@@ -188,8 +195,9 @@ export default function Bar() {
         </div>
         {/* <div className={styles.bar__playerProgress}></div> */}
         <ProgressBar
-          max={audioRef.current?.duration || 0} // если duration нет, то показывает 0 (пустая шкала)
-          value={currentTime}
+          // max={audioRef.current?.duration || 0} // если duration нет, то показывает 0 (пустая шкала)
+          max={duration || 0} // если duration нет, то показывает 0 (пустая шкала)
+          value={currentTime || 0}
           step={0.1}
           onChange={onChangeProgress}
           readOnly={!isLoadedTrack} // когда трек загрузился readOnly = true
