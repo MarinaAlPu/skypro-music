@@ -6,7 +6,15 @@ import { TrackType } from "@/sharedTypes/sharedTypes";
 export const getTracks = (): Promise<TrackType[]> => {
   return axios(BASE_URL + '/catalog/track/all/')
     .then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       return res.data.data;
     });
+}
+
+export const getCategoryTracks = (trackId: string): Promise<TrackType[]> => {
+  return axios(BASE_URL + `/catalog/selection/${trackId}/`)
+    .then((res) => {
+      // console.log(res.data.data);
+      return res.data.data;
+    })
 }
