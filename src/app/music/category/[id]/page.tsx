@@ -100,7 +100,7 @@ export default function CategoryPage() {
           }
         });
     }
-  }, [tracks]);
+  }, [tracks, isTracksLoaded, params.id]);
 
 
 
@@ -110,16 +110,16 @@ export default function CategoryPage() {
 
       {/* <div className={styles.wrapper}>
         <div className={styles.container}> */}
-          {/* <main className={styles.main}> */}
-            {/* ТУТ БУДЕТ ОШИБКА -
+      {/* <main className={styles.main}> */}
+      {/* ТУТ БУДЕТ ОШИБКА -
             {error} */}
-            {/* <Navigation /> */}
-            <Centerblock categoryName={categoryName} playlist={categoryTracks} />
-            {/* <Sidebar /> */}
-          {/* </main> */}
-          {/* <Bar />
+      {/* <Navigation /> */}
+      <Centerblock categoryName={categoryName} playlist={categoryTracks} />
+      {/* <Sidebar /> */}
+      {/* </main> */}
+      {/* <Bar />
           <footer className="footer"></footer> */}
-        {/* </div>
+      {/* </div>
       </div> */}
     </>
   )
