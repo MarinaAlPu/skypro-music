@@ -1,12 +1,12 @@
 'use client';
 
 // import './page.css';
-import styles from './page.module.css';
+// import styles from './page.module.css';
 
-import Navigation from '../../../components/Navigation/Navigation';
+// import Navigation from '../../../components/Navigation/Navigation';
 import Centerblock from '@/components/Centerblock/Centerblock';
-import Sidebar from '@/components/Sidebar/Sidebar';
-import Bar from '../../../components/Bar/Bar';
+// import Sidebar from '@/components/Sidebar/Sidebar';
+// import Bar from '../../../components/Bar/Bar';
 import { useEffect, useState } from 'react';
 import { getTracks } from '@/app/services/tracks/trackApi';
 import { TrackType } from '@/sharedTypes/sharedTypes';
@@ -51,19 +51,21 @@ export default function Home() {
 
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <main className={styles.main}>
-          {/* ТУТ БУДЕТ ОШИБКА -
+    <>
+     {/* <div className={styles.wrapper}>
+       <div className={styles.container}> */}
+          {/* <main className={styles.main}> */}
+            {/* ТУТ БУДЕТ ОШИБКА -
           {error} */}
 
-          <Navigation />
-          <Centerblock playlist={tracks}/>
-          <Sidebar />
-        </main>
-        <Bar />
-        <footer className="footer"></footer>
-      </div>
-    </div>
+            {/* <Navigation /> */}
+            <Centerblock playlist={tracks} />
+            {/* <Sidebar /> */}
+          {/* </main> */}
+          {/* <Bar />
+          <footer className="footer"></footer> */}
+      {/* </div>
+    </div> */}
+    </>
   );
 }

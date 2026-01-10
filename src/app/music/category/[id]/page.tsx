@@ -2,12 +2,12 @@
 
 import { useParams } from "next/navigation";
 // import './page.css';
-import styles from './page.module.css';
+// import styles from './page.module.css';
 
-import Navigation from '@/components/Navigation/Navigation';
+// import Navigation from '@/components/Navigation/Navigation';
 import Centerblock from '@/components/Centerblock/Centerblock';
-import Sidebar from '@/components/Sidebar/Sidebar';
-import Bar from '@/components/Bar/Bar';
+// import Sidebar from '@/components/Sidebar/Sidebar';
+// import Bar from '@/components/Bar/Bar';
 import { useEffect, useState } from 'react';
 import { getTracks, getCategoryTracks } from '@/app/services/tracks/trackApi';
 import { TrackType } from '@/sharedTypes/sharedTypes';
@@ -108,19 +108,19 @@ export default function CategoryPage() {
     <>
       {/* <h1>Категория {params.id}</h1> */}
 
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <main className={styles.main}>
+      {/* <div className={styles.wrapper}>
+        <div className={styles.container}> */}
+          {/* <main className={styles.main}> */}
             {/* ТУТ БУДЕТ ОШИБКА -
             {error} */}
-            <Navigation />
+            {/* <Navigation /> */}
             <Centerblock categoryName={categoryName} playlist={categoryTracks} />
-            <Sidebar />
-          </main>
-          <Bar />
-          <footer className="footer"></footer>
-        </div>
-      </div>
+            {/* <Sidebar /> */}
+          {/* </main> */}
+          {/* <Bar />
+          <footer className="footer"></footer> */}
+        {/* </div>
+      </div> */}
     </>
   )
 }
