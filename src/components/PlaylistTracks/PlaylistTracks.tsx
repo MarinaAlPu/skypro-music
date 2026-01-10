@@ -15,9 +15,8 @@ type PlaylistTracksProp = {
 }
 
 
-// export default function PlaylistTracks({ data }: TrackType[]) {
 export default function PlaylistTracks({ playlist }: PlaylistTracksProp) {
-  console.log("data в PlaylistTracks: ", playlist);
+  // console.log("data в PlaylistTracks: ", playlist);
   return (
     <div className={styles.content__playlist}>
       {playlist.map((track) =>

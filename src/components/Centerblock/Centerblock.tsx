@@ -12,17 +12,18 @@ type CenterblockProp = {
   // album: string,
   // time: string
   // track: TrackType,
-  playlist: TrackType[]
+  playlist: TrackType[],
+  categoryName?: string
 }
 
 
-// export default function Centerblock({ tracks }: TrackType[]) {
-export default function Centerblock({ playlist }: CenterblockProp) {
+export default function Centerblock({ playlist, categoryName }: CenterblockProp) {
+  // console.log("Отфильтрованные треки в Centerblock: ", playlist);
   return (
     <div className={styles.centerblock}>
       <Search />
-      <h2 className={styles.centerblock__h2}>Треки</h2>
-      <Filter playlist={playlist}/>
+      <h2 className={styles.centerblock__h2}>{categoryName}</h2>
+      <Filter playlist={playlist} />
       <div className={styles.centerblock__content}>
         <PlaylistTitle />
         <PlaylistTracks playlist={playlist} />
