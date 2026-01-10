@@ -16,6 +16,7 @@ type titleItemProp = {
 }
 
 export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist }: titleItemProp) {
+  // console.log("playlist в FilterItem: ", playlist);
   // console.log("title в компоненте FilterItem: ", title);
   // console.log("activeFilter в компоненте FilterItem: ", activeFilter);
   // console.log("isOpen в компоненте FilterItem: ", isOpen);
