@@ -63,7 +63,7 @@ export default function CategoryPage() {
       getCategoryTracks(params.id)
         .then((res) => {
           // console.log("params.id: ", params.id);
-          // console.log("результат запроса категории: ", res);
+          console.log("результат запроса категории: ", res);
 
           const itemsId = res.items;
           // console.log("id треков категории: ", itemsId);

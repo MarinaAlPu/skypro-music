@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
-import { TrackType } from "@/sharedTypes/sharedTypes";
+import { TrackType, CategoryType } from "@/sharedTypes/sharedTypes";
 
 
 export const getTracks = (): Promise<TrackType[]> => {
@@ -11,7 +11,7 @@ export const getTracks = (): Promise<TrackType[]> => {
     });
 }
 
-export const getCategoryTracks = (trackId: string): Promise<TrackType[]> => {
+export const getCategoryTracks = (trackId: string): Promise<CategoryType> => {
   return axios(BASE_URL + `/catalog/selection/${trackId}/`)
     .then((res) => {
       // console.log(res.data.data);
