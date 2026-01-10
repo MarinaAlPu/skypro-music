@@ -22,7 +22,7 @@ export default function Centerblock({ playlist }: CenterblockProp) {
     <div className={styles.centerblock}>
       <Search />
       <h2 className={styles.centerblock__h2}>Треки</h2>
-      <Filter />
+      <Filter playlist={playlist}/>
       <div className={styles.centerblock__content}>
         <PlaylistTitle />
         <PlaylistTracks playlist={playlist} />
