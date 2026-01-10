@@ -3,17 +3,29 @@ import Search from '../Search/Search';
 import Filter from '../Filter/Filter';
 import PlaylistTitle from '../PlaylistTitle/PlaylistTitle';
 import PlaylistTracks from '../PlaylistTracks/PlaylistTracks';
+import { TrackType } from '@/sharedTypes/sharedTypes';
 
 
-export default function Centerblock() {
+type CenterblockProp = {
+  // name: string,
+  // author: string,
+  // album: string,
+  // time: string
+  // track: TrackType,
+  playlist: TrackType[]
+}
+
+
+// export default function Centerblock({ tracks }: TrackType[]) {
+export default function Centerblock({ playlist }: CenterblockProp) {
   return (
     <div className={styles.centerblock}>
-      <Search/>
+      <Search />
       <h2 className={styles.centerblock__h2}>Треки</h2>
       <Filter />
       <div className={styles.centerblock__content}>
         <PlaylistTitle />
-        <PlaylistTracks />
+        <PlaylistTracks playlist={playlist} />
       </div>
     </div>
   )

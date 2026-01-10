@@ -1,13 +1,26 @@
 import styles from './playlistTracks.module.css';
 import PlaylistTrack from '../PlaylistTrack/PlaylistTrack';
-import { data } from '@/data';
+import { TrackType } from '@/sharedTypes/sharedTypes';
+// import { data } from '@/data';
 // import {formatTime} from '@/utils/helpers'
 
 
-export default function PlaylistTracks() {
+type PlaylistTracksProp = {
+  // name: string,
+  // author: string,
+  // album: string,
+  // time: string
+  // track: TrackType,
+  playlist: TrackType[]
+}
+
+
+// export default function PlaylistTracks({ data }: TrackType[]) {
+export default function PlaylistTracks({ playlist }: PlaylistTracksProp) {
+  console.log("data в PlaylistTracks: ", playlist);
   return (
     <div className={styles.content__playlist}>
-      {data.map((track) =>
+      {playlist.map((track) =>
         <PlaylistTrack
           key={track._id}
           // name={track.name}
@@ -15,7 +28,7 @@ export default function PlaylistTracks() {
           // album={track.album}
           // time={formatTime(track.duration_in_seconds)}
           track={track}
-          playlist={data}
+          playlist={playlist}
         />
       )}
     </div>
