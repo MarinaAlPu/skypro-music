@@ -38,12 +38,13 @@ export default function Bar() {
 
 
   const [volume, setVolume] = useState(0.5);
-  console.log("volume: ", volume);
+  // console.log("volume", volume);
   const [isLoop, setIsLoop] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isLoadedTrack, setIsLoadedTrack] = useState(false);
   const [progressBarTime, setProgressBarTime] = useState(0);
+  // const [isMuted, setIsMuted] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -136,13 +137,13 @@ export default function Bar() {
     dispatch(setIsPlay(false));
     // setIsLoadedTrack(false);
 
-    // if (isLoop) {
-    //   if (audioRef.current) {
-    //     audioRef.current.play();
-    //   }
-    // } else {
-    dispatch(setNextTrack());
-    // }
+    if (isLoop) {
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+    } else {
+      dispatch(setNextTrack());
+    }
   };
 
   // const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => { // React. - вместо импорта ChangeEvent
@@ -174,6 +175,14 @@ export default function Bar() {
     dispatch(toggleIsShuffle());
   };
 
+  // const onMute = () => {
+  //   if (audioRef.current) {
+  //     audioRef.current.muted = !isMuted;
+  //     setIsMuted(!isMuted);
+
+  //   }
+  // };
+
 
   return (
     <div className={styles.bar}>
@@ -186,6 +195,7 @@ export default function Bar() {
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={onEnded}
+        // muted={isMuted}
       >
       </audio>
       <div className={styles.bar__content}>
@@ -292,10 +302,23 @@ export default function Bar() {
           </div>
           <div className={styles.bar__volumeBlock}>
             <div className={styles.volume__content}>
-              <div className={styles.volume__image}>
+              <div
+                className={styles.volume__image}
+                // onClick={onMute}
+              >
                 <svg className={styles.volume__svg}>
-                  {/* <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use> */}
-                  <use xlinkHref={volume > 0 ? "/img/icon/sprite.svg#icon-volume" : "/img/icon/sprite.svg#icon-mute"}></use>
+                  <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
+                  {/* <use xlinkHref={isMuted ? "/img/icon/sprite.svg#icon-mute" : "/img/icon/sprite.svg#icon-volume"}></use> */}
+
+                  {/* <svg className={styles.volume__svg}
+                  width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <mask id="path-1-inside-1_8_34" fill="white">
+                    <path d="M8 18L3 13H0V5H3L8 0V18Z" />
+                  </mask>
+                  <path d="M8 18L3 13H0V5H3L8 0V18Z" fill="white" />
+                  <path d="M8 18L7.29289 18.7071L9 20.4142V18H8ZM3 13L3.70711 12.2929L3.41421 12H3V13ZM0 13H-1V14H0V13ZM0 5V4H-1V5H0ZM3 5V6H3.41421L3.70711 5.70711L3 5ZM8 0H9V-2.41421L7.29289 -0.707107L8 0ZM8 18L8.70711 17.2929L3.70711 12.2929L3 13L2.29289 13.7071L7.29289 18.7071L8 18ZM3 13V12H0V13V14H3V13ZM0 13H1V5H0H-1V13H0ZM0 5V6H3V5V4H0V5ZM3 5L3.70711 5.70711L8.70711 0.707107L8 0L7.29289 -0.707107L2.29289 4.29289L3 5ZM8 0H7V18H8H9V0H8Z" fill="white" mask="url(#path-1-inside-1_8_34)" />
+                  <path d="M9 6L15 13M9 6L15 13" stroke="white" />
+                  <path d="M15 6L9.02068 13.0177M15 6L9.02068 13.0177" stroke="white" /> */}
                 </svg>
               </div>
               <div className={classnames(styles.volume__progress, styles.btn)}>
