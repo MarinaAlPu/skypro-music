@@ -1,5 +1,5 @@
 // import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import styles from './layout.module.css';
 import Bar from "@/components/Bar/Bar";
 import Navigation from "@/components/Navigation/Navigation";
@@ -17,7 +17,10 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
         <div className={styles.container}>
           <main className={styles.main}>
             <Navigation />
-            {children}
+            {/* <Suspense fallback={<div>"Данные загружаются. Пожалуйста, подождите."</div>}> */}
+            <Suspense>
+              {children}
+            </Suspense>
             <Sidebar />
           </main>
           <Bar />

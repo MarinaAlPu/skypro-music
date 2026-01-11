@@ -22,7 +22,7 @@ export default function Home() {
       .then((res) => {
         console.log("Название первого трека: ", res[0].name);
         setTracks(res);
-        alert('данные пришли')
+        // alert('данные пришли')
       })
       .catch((error) => {
         if (error instanceof AxiosError) {
