@@ -263,8 +263,9 @@ export default function Bar() {
                 onClick={onToggleLoop}
                 className={
                   classnames(
-                    styles.player__btnRepeat, styles.btnIcon,
-                    { [styles.btnIcon__active]: isLoop, }
+                    styles.player__btnRepeat,
+                    { [styles.btnIcon__active]: isLoop, },
+                    { [styles.btnIcon]: !isLoop, },
                   )}
               >
                 <svg className={styles.player__btnRepeatSvg}>
@@ -274,8 +275,9 @@ export default function Bar() {
               <div
                 className={
                   classnames(
-                    styles.player__btnShuffle, styles.btnIcon,
-                    { [styles.btnIcon__active]: isShuffle, }
+                    styles.player__btnShuffle, 
+                    { [styles.btnIcon__active]: isShuffle, },
+                    { [styles.btnIcon]: !isShuffle, }
                   )
                 }
                 onClick={onToggleShuffle}

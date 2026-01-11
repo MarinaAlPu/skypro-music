@@ -337,7 +337,8 @@
 
 .btnIcon:active svg {
   fill: transparent;
-  stroke: #ffffff;
+  /* stroke: #ffffff; */
+  stroke: #ad61ff;
   cursor: pointer;
 }
 
@@ -352,13 +353,13 @@
   &:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 
   &:active {
     border-color: #ad61ff;
     color: #ad61ff;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 }
 
@@ -367,9 +368,15 @@
 }
 
 .btnIcon__active svg {
-  fill: transparent;
-  stroke: #ffffff;
+  fill: #ad61ff;
+  stroke: #ad61ff;
   cursor: pointer;
+  
+  &:hover {
+    fill: #cd9fff;
+    stroke: #cd9fff;
+    /* cursor: pointer; */
+  }
 }
 
 .trackPlay__timeBlock {
