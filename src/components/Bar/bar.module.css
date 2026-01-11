@@ -107,6 +107,12 @@
   fill: #d9d9d9;
 }
 
+.player__btnPrev:hover .player__btnPrevSvg,
+.player__btnPlay:hover .player__btnPlaySvg,
+.player__btnNext:hover .player__btnNextSvg {
+  filter: invert(43%) sepia(0%) saturate(0%) hue-rotate(177deg) brightness(93%) contrast(86%);
+}
+
 .player__btnNext {
   margin-right: 28px;
   fill: #a53939;
@@ -371,7 +377,7 @@
   fill: #ad61ff;
   stroke: #ad61ff;
   cursor: pointer;
-  
+
   &:hover {
     fill: #cd9fff;
     stroke: #cd9fff;
