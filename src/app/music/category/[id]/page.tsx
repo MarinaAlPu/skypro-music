@@ -14,6 +14,12 @@ import { TrackType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
 
 
+type CategoryType = {
+  items: number[],
+  name: string
+}
+
+
 export default function CategoryPage() {
   const params = useParams<{ id: string }>();
   // console.log("id из params: ", params.id);
@@ -61,7 +67,7 @@ export default function CategoryPage() {
   useEffect(() => {
     if (isTracksLoaded) {
       getCategoryTracks(params.id)
-        .then((res) => {
+        .then((res: CategoryType) => {
           // console.log("params.id: ", params.id);
           console.log("результат запроса категории: ", res);
 
