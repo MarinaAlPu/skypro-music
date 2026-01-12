@@ -40,8 +40,10 @@
 .modal__form input:first-child {
     margin-bottom: 30px;
 }
+
 .modal__btnEnter:hover {
     background-color: #3f007d;
+    cursor: pointer;
 }
 
 .modal__btnSignup:hover {
@@ -50,6 +52,7 @@
 
 .modal__btnEnter:active {
     background-color: #271a58;
+    cursor: pointer;
 }
 
 .modal__btnSignup:active {
