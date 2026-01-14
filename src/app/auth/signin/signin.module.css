@@ -164,10 +164,6 @@
     justify-content: center;
 }
 
-/* .login {
-    margin-bottom: 30px;
-} */
-
 .errorContainer {
     display: flex;
     flex-direction: column;

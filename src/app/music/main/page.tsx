@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     getTracks()
       .then((res) => {
-        console.log("Название первого трека: ", res[0].name);
+        // console.log("Название первого трека: ", res[0].name);
         setTracks(res);
         // alert('данные пришли')
       })

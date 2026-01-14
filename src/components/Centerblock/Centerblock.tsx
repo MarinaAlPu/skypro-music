@@ -4,7 +4,6 @@ import Filter from '../Filter/Filter';
 import PlaylistTitle from '../PlaylistTitle/PlaylistTitle';
 import PlaylistTracks from '../PlaylistTracks/PlaylistTracks';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import { Suspense } from 'react';
 
 
 type CenterblockProp = {
@@ -27,10 +26,7 @@ export default function Centerblock({ playlist, categoryName }: CenterblockProp)
       <Filter playlist={playlist} />
       <div className={styles.centerblock__content}>
         <PlaylistTitle />
-        {/* <Suspense fallback={<div>"Данные загружаются. Пожалуйста, подождите."</div>}> */}
-        {/* <Suspense> */}
-          <PlaylistTracks playlist={playlist} />
-        {/* </Suspense> */}
+        <PlaylistTracks playlist={playlist} />
       </div>
     </div>
   )
