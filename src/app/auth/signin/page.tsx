@@ -1,0 +1,123 @@
+// export default function Signin () {
+//   return (
+//     <h1>Авторизация</h1>
+//   )
+// }
+
+'use client';
+
+
+import { authUser } from '@/app/services/auth/authApi';
+import styles from './signin.module.css';
+import classNames from 'classnames';
+import Link from 'next/link';
+import { ChangeEvent, MouseEvent, useState } from 'react';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
+
+
+export default function Signin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const onSubmit = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    e.preventDefault();
+
+    setErrorMessage('');
+
+    if (!email.trim() || !password.trim()) {
+      return setErrorMessage('Заполните все поля');
+    };
+
+    setIsLoading(true);
+
+    authUser({ email, password })
+      .then((res) => {
+        console.log("res: ", res);
+        console.log("res: ", res.username);
+      })
+      .catch((error) => {
+        if (error instanceof AxiosError) {
+          if (error.response) {
+            // // Запрос был сделан, и сервер ответил кодом состояния, который
+            // // выходит за пределы 2xx
+            // console.log(error.response.data);
+            // console.log(error.response.status);
+            // console.log(error.response.headers);
+            setErrorMessage(error.response.data.message);
+          } else if (error.request) {
+            // // Запрос был сделан, но ответ не получен
+            // // `error.request`- это экземпляр XMLHttpRequest в браузере и экземпляр
+            // // http.ClientRequest в node.js
+            // console.log(error.request);
+            setErrorMessage("Отсутствует интернет. Попробуйте позже");
+          } else {
+            // // Произошло что-то при настройке запроса, вызвавшее ошибку
+            // console.log('Error', error.message);
+            setErrorMessage("Неизвестная ошибка");
+          }
+        }
+        console.log("error: ", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+
+        router.push('/music/main');
+      })
+  };
+
+
+  return (
+    <>
+      {/* <div className={styles.wrapper}>
+                <div className={styles.containerEnter}>
+                    <div className={styles.modal__block}>
+                        <form className={styles.modal__form}> */}
+      <a href="/music/main">
+        <div className={styles.modal__logo}>
+          <img src="/img/logo_modal.png" alt="logo" />
+        </div>
+      </a>
+      <input
+        className={styles.modal__input}
+        type="text"
+        name="login"
+        placeholder="Почта"
+        onChange={onChangeEmail}
+      />
+      <input
+        className={classNames(styles.modal__input)}
+        type="password"
+        name="password"
+        placeholder="Пароль"
+        onChange={onChangePassword}
+      />
+      <div className={styles.errorContainer}>{errorMessage}</div>
+      <button
+        disabled={isLoading}
+        onClick={onSubmit}
+        className={styles.modal__btnEnter}>
+        Войти
+      </button>
+      <Link href={'/auth/signup'} className={styles.modal__btnSignup}>
+        Зарегистрироваться
+      </Link>
+      {/* </form>
+                    </div>
+                </div>
+            </div> */}
+    </>
+  );
+}

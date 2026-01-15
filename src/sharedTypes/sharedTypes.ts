@@ -10,3 +10,9 @@ export type TrackType = {
   track_file: string,
   stared_user: string[],
 }
+
+export type CategoryType = {
+  _id: number,
+  items: [],
+  name: string,
+}
