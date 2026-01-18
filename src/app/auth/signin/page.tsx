@@ -45,8 +45,11 @@ export default function Signin() {
 
     authUser({ email, password })
       .then((res) => {
-        console.log("res: ", res);
-        console.log("res: ", res.username);
+        // console.log("res: ", res);
+        // console.log("res: ", res.data.username);
+        setIsLoading(false);
+
+        router.push('/music/main');
       })
       .catch((error) => {
         if (error instanceof AxiosError) {
@@ -71,11 +74,11 @@ export default function Signin() {
         }
         console.log("error: ", error);
       })
-      .finally(() => {
-        setIsLoading(false);
+    // .finally(() => {
+    //   setIsLoading(false);
 
-        router.push('/music/main');
-      })
+    //   router.push('/music/main');
+    // });
   };
 
 
