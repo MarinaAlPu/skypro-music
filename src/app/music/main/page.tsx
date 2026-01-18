@@ -15,9 +15,11 @@ import { AxiosError } from 'axios';
 
 export default function Home() {
   const [tracks, setTracks] = useState<TrackType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    setIsLoading(true);
     getTracks()
       .then((res) => {
         // console.log("Название первого трека: ", res[0].name);
@@ -38,7 +40,7 @@ export default function Home() {
             // // `error.request`- это экземпляр XMLHttpRequest в браузере и экземпляр http.ClientRequest в node.js
             // console.log(error.request);
 
-            setError("Отсутствует интеренет");
+            setError("Отсутствует интернет. Попробуйте позже");
           } else {
             // // Произошло что-то при настройке запроса, вызвавшее ошибку
             // console.log('Error', error.message);
@@ -46,6 +48,9 @@ export default function Home() {
             setError("Неизвестная ошибка");
           }
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -59,7 +64,7 @@ export default function Home() {
           {error} */}
 
             {/* <Navigation /> */}
-            <Centerblock playlist={tracks} />
+            <Centerblock playlist={tracks} isLoading={isLoading} error={error}/>
             {/* <Sidebar /> */}
           {/* </main> */}
           {/* <Bar />

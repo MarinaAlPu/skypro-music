@@ -30,8 +30,10 @@ export default function CategoryPage() {
   const [categoryTracks, setCategoryTracks] = useState<TrackType[]>([]);
   const [categoryName, setCategoryName] = useState("");
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getTracks()
       .then((res) => {
         // console.log("Название первого трека: ", res[0].name);
@@ -61,6 +63,9 @@ export default function CategoryPage() {
             setError("Неизвестная ошибка");
           }
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -120,7 +125,7 @@ export default function CategoryPage() {
       {/* ТУТ БУДЕТ ОШИБКА -
             {error} */}
       {/* <Navigation /> */}
-      <Centerblock categoryName={categoryName} playlist={categoryTracks} />
+      <Centerblock categoryName={categoryName} playlist={categoryTracks} isLoading={isLoading} error={error}/>
       {/* <Sidebar /> */}
       {/* </main> */}
       {/* <Bar />
