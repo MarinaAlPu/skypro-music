@@ -43,7 +43,7 @@ export default function SignUp() {
     setPasswordConfirmed(e.target.value);
   };
 
-  const onSubmit = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+  const onSubmit = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
 
     setErrorMessage('');
@@ -52,17 +52,24 @@ export default function SignUp() {
       return setErrorMessage('Заполните все поля');
     };
 
-    if(password.trim() !== passwordConfirmed.trim()) {
+    if (password.trim() !== passwordConfirmed.trim()) {
       return setErrorMessage('Пароли не совпадают. Проверьте данные');
     };
 
     setIsLoading(true);
 
-    regUser({ email, username, password, passwordConfirmed })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
+    try {
+      const res = await regUser({ email, username, password, passwordConfirmed })
+      // .then((res) => {
+        // console.log("Ответ после регистрации: ", res);
+
+        setIsLoading(false);
+        
+        router.push('/auth/signin');
+        // })
+      }   
+      catch(error) {
+        setIsLoading(false);
         if (error instanceof AxiosError) {
           if (error.response) {
             setErrorMessage(error.response.data.message);
@@ -72,13 +79,13 @@ export default function SignUp() {
             setErrorMessage("Неизвестная ошибка");
           }
         }
-        console.log("error: ", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
+        // console.log("error: ", error);
+      }
+    // .finally(() => {
+    //   setIsLoading(false);
 
-        router.push('/auth/signin');
-      })
+    //   router.push('/auth/signin');
+    // })
   };
 
 

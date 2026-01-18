@@ -32,26 +32,32 @@ export default function Signin() {
     setPassword(e.target.value);
   };
 
-  const onSubmit = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+  const onSubmit = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
 
     setErrorMessage('');
 
     if (!email.trim() || !password.trim()) {
+      setIsLoading(false);
       return setErrorMessage('Заполните все поля');
     };
 
     setIsLoading(true);
 
-    authUser({ email, password })
-      .then((res) => {
+    try {
+      const res = await authUser({ email, password })
+      // .then((res) => {
         // console.log("res: ", res);
-        // console.log("res: ", res.data.username);
+        // console.log("email: ", res.data.email);
+        // console.log("username: ", res.data.username);
+        // console.log("_id: ", res.data._id);
+
         setIsLoading(false);
 
         router.push('/music/main');
-      })
-      .catch((error) => {
+      // })
+    } catch(error) {
+      setIsLoading(false);
         if (error instanceof AxiosError) {
           if (error.response) {
             // // Запрос был сделан, и сервер ответил кодом состояния, который
@@ -72,8 +78,8 @@ export default function Signin() {
             setErrorMessage("Неизвестная ошибка");
           }
         }
-        console.log("error: ", error);
-      })
+        // console.log("error: ", error);
+      }
     // .finally(() => {
     //   setIsLoading(false);
 
