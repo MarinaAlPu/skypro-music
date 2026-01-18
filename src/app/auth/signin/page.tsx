@@ -7,7 +7,7 @@
 'use client';
 
 
-import { authUser } from '@/app/services/auth/authApi';
+import { authUser, getToken, refreshToken } from '@/app/services/auth/authApi';
 import styles from './signin.module.css';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -47,17 +47,56 @@ export default function Signin() {
     try {
       const res = await authUser({ email, password })
       // .then((res) => {
-        // console.log("res: ", res);
-        // console.log("email: ", res.data.email);
-        // console.log("username: ", res.data.username);
-        // console.log("_id: ", res.data._id);
+      // console.log("res: ", res);
+      // console.log("email: ", res.data.email);
+      // console.log("username: ", res.data.username);
+      // console.log("_id: ", res.data._id);
+      localStorage.setItem("userId", res.data._id);
 
-        setIsLoading(false);
-
-        router.push('/music/main');
-      // })
-    } catch(error) {
       setIsLoading(false);
+
+      router.push('/music/main');
+      // })
+    } catch (error) {
+      setIsLoading(false);
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          // // Запрос был сделан, и сервер ответил кодом состояния, который
+          // // выходит за пределы 2xx
+          // console.log(error.response.data);
+          // console.log(error.response.status);
+          // console.log(error.response.headers);
+          setErrorMessage(error.response.data.message);
+        } else if (error.request) {
+          // // Запрос был сделан, но ответ не получен
+          // // `error.request`- это экземпляр XMLHttpRequest в браузере и экземпляр
+          // // http.ClientRequest в node.js
+          // console.log(error.request);
+          setErrorMessage("Отсутствует интернет. Попробуйте позже");
+        } else {
+          // // Произошло что-то при настройке запроса, вызвавшее ошибку
+          // console.log('Error', error.message);
+          setErrorMessage("Неизвестная ошибка");
+        }
+      }
+      // console.log("error: ", error);
+    }
+    // .finally(() => {
+    //   setIsLoading(false);
+
+    //   router.push('/music/main');
+    // });
+
+    getToken({ email, password })
+      .then((res) => {
+        // console.log("Ответ на запрос getToken: ", res);
+        console.log("access: ", res.data.access);
+        console.log("refresh: ", res.data.refresh);
+
+        localStorage.setItem("access", res.data.access);
+        localStorage.setItem("refresh", res.data.refresh);
+      })
+      .catch((error) => {
         if (error instanceof AxiosError) {
           if (error.response) {
             // // Запрос был сделан, и сервер ответил кодом состояния, который
@@ -75,16 +114,12 @@ export default function Signin() {
           } else {
             // // Произошло что-то при настройке запроса, вызвавшее ошибку
             // console.log('Error', error.message);
-            setErrorMessage("Неизвестная ошибка");
+            setErrorMessage("Неизвестная ошибка при получении токена");
           }
         }
-        // console.log("error: ", error);
-      }
-    // .finally(() => {
-    //   setIsLoading(false);
+        console.log("error: ", error);
+      })
 
-    //   router.push('/music/main');
-    // });
   };
 
 
