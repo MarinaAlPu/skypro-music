@@ -44,13 +44,13 @@ type getTokenReturn = {
   }
 };
 
-type refreshTokenProps = {
-  refreshToken: string | null,
-};
+// type refreshTokenProps = {
+//   refreshToken: string,
+// };
 
 type refreshTokenReturn = {
   // data: {
-    accessToken: string,
+    access: string,
   // }
 };
 
@@ -87,9 +87,10 @@ export const getToken = (data: getTokenProps): Promise<getTokenReturn> => {
   );
 };
 
-export const refreshToken = (refreshToken: refreshTokenProps): Promise<refreshTokenReturn> => {
+// export const refreshToken = (refreshToken: refreshTokenProps): Promise<refreshTokenReturn> => {
+export const refreshToken = (refreshToken: string): Promise<refreshTokenReturn> => {
   return axios.post(BASE_URL + '/token/refresh/',
-    refreshToken,
+    {refresh: refreshToken},
     {
       headers: {
         "content-type": "application/json",

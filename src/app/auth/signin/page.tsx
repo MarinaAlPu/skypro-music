@@ -1,9 +1,3 @@
-// export default function Signin () {
-//   return (
-//     <h1>Авторизация</h1>
-//   )
-// }
-
 'use client';
 
 
@@ -45,32 +39,35 @@ export default function Signin() {
     setIsLoading(true);
 
     try {
-      const res = await authUser({ email, password })
-      // .then((res) => {
-      // console.log("res: ", res);
-      // console.log("email: ", res.data.email);
-      // console.log("username: ", res.data.username);
-      // console.log("_id: ", res.data._id);
-      localStorage.setItem("userId", res.data._id);
+      // авторизоваться
+      const authResp = await authUser({ email, password })
+      // console.log("authResp: ", authResp);
+      // console.log("email: ", authResp.data.email);
+      // console.log("username: ", authResp.data.username);
+      // console.log("_id: ", authResp.data._id);
+      localStorage.setItem("userId", String(authResp.data._id));
+
+      // получить токены, записать в LS
+      const tokenResp = await getToken({ email, password })
+
+      localStorage.setItem("access", tokenResp.data.access);
+      localStorage.setItem("refresh", tokenResp.data.refresh);
 
       setIsLoading(false);
 
+      // открыть главную страницу
       router.push('/music/main');
-      // })
     } catch (error) {
       setIsLoading(false);
       if (error instanceof AxiosError) {
         if (error.response) {
-          // // Запрос был сделан, и сервер ответил кодом состояния, который
-          // // выходит за пределы 2xx
+          // // Запрос был сделан, и сервер ответил кодом состояния, который, выходит за пределы 2xx
           // console.log(error.response.data);
           // console.log(error.response.status);
           // console.log(error.response.headers);
-          setErrorMessage(error.response.data.message);
+          setErrorMessage(error.response.data.message || "Ошибка авторизации");
         } else if (error.request) {
           // // Запрос был сделан, но ответ не получен
-          // // `error.request`- это экземпляр XMLHttpRequest в браузере и экземпляр
-          // // http.ClientRequest в node.js
           // console.log(error.request);
           setErrorMessage("Отсутствует интернет. Попробуйте позже");
         } else {
@@ -81,45 +78,6 @@ export default function Signin() {
       }
       // console.log("error: ", error);
     }
-    // .finally(() => {
-    //   setIsLoading(false);
-
-    //   router.push('/music/main');
-    // });
-
-    getToken({ email, password })
-      .then((res) => {
-        // console.log("Ответ на запрос getToken: ", res);
-        console.log("access: ", res.data.access);
-        console.log("refresh: ", res.data.refresh);
-
-        localStorage.setItem("access", res.data.access);
-        localStorage.setItem("refresh", res.data.refresh);
-      })
-      .catch((error) => {
-        if (error instanceof AxiosError) {
-          if (error.response) {
-            // // Запрос был сделан, и сервер ответил кодом состояния, который
-            // // выходит за пределы 2xx
-            // console.log(error.response.data);
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
-            setErrorMessage(error.response.data.message);
-          } else if (error.request) {
-            // // Запрос был сделан, но ответ не получен
-            // // `error.request`- это экземпляр XMLHttpRequest в браузере и экземпляр
-            // // http.ClientRequest в node.js
-            // console.log(error.request);
-            setErrorMessage("Отсутствует интернет. Попробуйте позже");
-          } else {
-            // // Произошло что-то при настройке запроса, вызвавшее ошибку
-            // console.log('Error', error.message);
-            setErrorMessage("Неизвестная ошибка при получении токена");
-          }
-        }
-        console.log("error: ", error);
-      })
-
   };
 
 
@@ -140,6 +98,7 @@ export default function Signin() {
         name="login"
         placeholder="Почта"
         onChange={onChangeEmail}
+        value={email}
       />
       <input
         className={classNames(styles.modal__input)}
@@ -147,6 +106,7 @@ export default function Signin() {
         name="password"
         placeholder="Пароль"
         onChange={onChangePassword}
+        value={password}
       />
       <div className={styles.errorContainer}>{errorMessage}</div>
       <button
