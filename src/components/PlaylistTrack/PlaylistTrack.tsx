@@ -5,10 +5,10 @@ import styles from './playlistTrack.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setCurrentTrack, setCurrentPlaylist, setIsPlay } from '@/store/features/trackSlice';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import { formatTime } from '@/utils/helpers';
+import { checkAccessToken, formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
-import { MouseEvent, useState } from 'react';
-import { addTrackToFavorite } from '@/app/services/tracks/trackApi';
+import { MouseEvent, useEffect, useState } from 'react';
+import { addTrackToFavorite, getFavoriteTracks, refreshAccessToken } from '@/app/services/tracks/trackApi';
 
 
 type trackTypeProp = {
@@ -25,8 +25,28 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
   const dispatch = useAppDispatch();
   // console.log("track: ", track);
 
-  const [isLikedInPlaylist, setIsLikedInPlaylist] = useState(false);
-  const [isLikedInPlayer, setIsLikedInPlayer] = useState(false);
+
+  // получить id пользователя из LS
+  const userId = Number(localStorage.getItem("userId"));
+  // console.log("Id юзера из LS: ", userId);
+
+  const usersList = track.staredUser;
+  // console.log("Список пользователей в треке: ", usersList);
+  // console.log(typeof usersList[0]);
+
+  // проверить, есть ли id пользователя в списке пользователей трека
+  const isTrackInFavorite = usersList.includes(userId);
+  // console.log("Id юзера есть в списке трека: ", isTrackInFavorite);
+
+
+  const [isLiked, setIsLiked] = useState(isTrackInFavorite);
+  // const [isLikedInPlaylist, setIsLikedInPlaylist] = useState(false);
+  // const [isLikedInPlayer, setIsLikedInPlayer] = useState(false);
+  const [error, setError] = useState('');
+  const [access, setAccess] = useState<string | null>(null);
+  const [isFavorite, setIsFavorite] = useState();
+;
+
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
@@ -34,6 +54,9 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
 
   const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
   // console.log("currentTrackId в PlaylistTrack: ", currentTrackId);
+
+  // const currentTrackStaredUser = useAppSelector((state) => state.tracks.currentTrack?.staredUser)
+  // console.log("currentTrackStaredUser в PlaylistTrack: ", currentTrackStaredUser);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
@@ -48,15 +71,59 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
     // console.log("playlist: ", playlist);
   }
 
-  const onClickLikeInPlaylist = (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => {
-    e.preventDefault();
-    // console.log("Кликнули по лайку");
-    // console.log("Содержание e: ", e);
+  const onClickLikeInPlaylist = async (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>, trackId: number, staredUser: string[]) => {
+    console.log("Кликнули по лайку");
+
+    // проверить наличие id пользователя в списке пользователей трека
 
 
-    setIsLikedInPlaylist(!isLikedInPlaylist);
+    setIsLiked(!isLiked);
 
 
+    // получить данные из localStorage
+    const accessToken = localStorage.getItem("access");
+    const refreshToken = localStorage.getItem("refresh");
+    // const userId = localStorage.getItem("userId");
+    let newAccessToken = "";
+
+    // проверить access token
+    const isAccessTokenExpired = checkAccessToken();
+
+    // если access token протух, то обновить его
+    if (isAccessTokenExpired) {
+      // console.log("Токен протух: ", isAccessTokenExpired);
+      if (typeof refreshToken === "string" && typeof accessToken === "string") {
+        newAccessToken = await refreshAccessToken(refreshToken);
+        // console.log("Новый access token: ", newAccessToken);
+
+        // текущее время в секундах
+        const currentTime = new Date().getTime() / 1000;
+
+        // обновить время получения токена в LS
+        localStorage.setItem("tokenGetTime", String(currentTime));
+
+        // обновить access token в LS
+        localStorage.setItem("access", newAccessToken);
+        // console.log("Токен обновили и записали новый в LS");
+      }
+    }
+
+
+    const accessTokenToUse = isAccessTokenExpired ? newAccessToken : accessToken;
+
+
+    console.log("accessTokenToUse перед добавлением трека в избранное: ", accessTokenToUse);
+    console.log("currentTrackId перед добавлением трека в избранное: ", currentTrackId);
+
+    if (accessTokenToUse) {
+      try {
+        await addTrackToFavorite(trackId, accessTokenToUse);
+        console.log("Добавили трек в избранное");
+        // setIsLiked(true);
+      } catch (error) {
+        console.error("Ошибка при добавлении трека в избранное: ", error);
+      }
+    }
   };
 
 
@@ -95,25 +162,14 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
         </div>
         <div className="track__time">
           <svg className={styles.track__timeSvg}
-            onClick={onClickLikeInPlaylist}
+            onClick={(e) => onClickLikeInPlaylist(e, track._id, track.staredUser)}
           >
-            {/* {
-              isLikedInPlaylist ?
-                <svg width="14" height="12" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7.52154 12.5C13.402 9 16.4673 3.70921 13.1127 1.26734C10.9125 -0.334235 8.45343 0.941754 7.52154 1.75572H7.50003H7.49997H7.47846C6.54657 0.941754 4.08746 -0.334235 1.88727 1.26734C-1.4673 3.70921 1.59797 9 7.47846 12.5H7.49997H7.50003H7.52154Z" fill="#B672FF" />
-                  <path d="M7.49997 1.75572H7.52154C8.45343 0.941754 10.9125 -0.334235 13.1127 1.26734C16.4673 3.70921 13.402 9 7.52154 12.5H7.49997M7.50003 1.75572H7.47846C6.54657 0.941754 4.08746 -0.334235 1.88727 1.26734C-1.4673 3.70921 1.59797 9 7.47846 12.5H7.50003" stroke="#B672FF" />
-                </svg>
-                :
-                <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-            } */}
-
             {
-              isLikedInPlaylist ?
+              isLiked ?
                 <use xlinkHref="/img/icon/sprite.svg#icon-like-active"></use>
                 :
                 <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
             }
-
           </svg>
           <span className={styles.track__timeText}>{formatTime(track.duration_in_seconds)}</span>
         </div>
