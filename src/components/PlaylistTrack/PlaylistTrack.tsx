@@ -27,16 +27,20 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
 
 
   // получить id пользователя из LS
-  const userId = Number(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
   // console.log("Id юзера из LS: ", userId);
 
   const usersList = track.staredUser;
   // console.log("Список пользователей в треке: ", usersList);
   // console.log(typeof usersList[0]);
 
-  // проверить, есть ли id пользователя в списке пользователей трека
-  const isTrackInFavorite = usersList.includes(userId);
-  // console.log("Id юзера есть в списке трека: ", isTrackInFavorite);
+  let isTrackInFavorite;
+
+  if (userId) {
+    // проверить, есть ли id пользователя в списке пользователей трека
+    isTrackInFavorite = usersList.includes(userId);
+    // console.log("Id юзера есть в списке трека: ", isTrackInFavorite);
+  }
 
 
   const [isLiked, setIsLiked] = useState(isTrackInFavorite);
@@ -45,7 +49,7 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
   const [error, setError] = useState('');
   const [access, setAccess] = useState<string | null>(null);
   const [isFavorite, setIsFavorite] = useState();
-;
+  ;
 
 
   // получить текущий трек
