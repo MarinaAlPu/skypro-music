@@ -20,7 +20,7 @@ type PlaylistTracksProp = {
 
 export default function PlaylistTracks({ playlist, isLoading, error }: PlaylistTracksProp) {
   // console.log("data в PlaylistTracks: ", playlist);
-  console.log("data в isLoading: ", isLoading);
+  // console.log("data в isLoading: ", isLoading);
   return (
     <div className={styles.content__playlist}>
       {error ?
