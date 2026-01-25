@@ -18,9 +18,9 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
           <main className={styles.main}>
             <Navigation />
             {/* <Suspense fallback={<div>"Данные загружаются. Пожалуйста, подождите."</div>}> */}
-            <Suspense>
+            {/* <Suspense> */}
               {children}
-            </Suspense>
+            {/* </Suspense> */}
             <Sidebar />
           </main>
           <Bar />
