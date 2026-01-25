@@ -16,3 +16,5 @@ export type CategoryType = {
   items: [],
   name: string,
 }
+
+export type FavoriteType = []
