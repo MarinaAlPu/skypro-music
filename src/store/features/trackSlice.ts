@@ -6,7 +6,10 @@ type initialStateType = {
   isPlay: boolean,
   currentPlaylist: TrackType[],
   isShuffle: boolean,
-  shuffledPlaylist: TrackType[]
+  shuffledPlaylist: TrackType[],
+  allTracks: TrackType[],
+  fetchError: null | string,
+  fetchIsLoading: boolean
 }
 
 const initialState: initialStateType = {
@@ -14,7 +17,10 @@ const initialState: initialStateType = {
   isPlay: false,
   currentPlaylist: [],
   isShuffle: false,
-  shuffledPlaylist: []
+  shuffledPlaylist: [],
+  allTracks: [],
+  fetchError: null,
+  fetchIsLoading: true
 }
 
 const trackSlice = createSlice({
@@ -68,10 +74,19 @@ const trackSlice = createSlice({
     },
     toggleIsShuffle: (state) => {
       state.isShuffle = !state.isShuffle;
+    },
+    setAllTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.allTracks = action.payload;
+    },
+    setFetchError: (state, action: PayloadAction<string>) => {
+      state.fetchError = action.payload;
+    },
+    setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.fetchIsLoading = action.payload;
     }
   }
 })
 
 
-export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle } = trackSlice.actions;
+export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle, setAllTracks, setFetchError, setFetchIsLoading } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

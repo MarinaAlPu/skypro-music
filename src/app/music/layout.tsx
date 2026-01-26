@@ -4,6 +4,7 @@ import styles from './layout.module.css';
 import Bar from "@/components/Bar/Bar";
 import Navigation from "@/components/Navigation/Navigation";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import FetchingTracks from "@/components/FetchingTracks copy/FetchingTracks";
 
 
 interface MusicLayoutProps {
@@ -16,6 +17,7 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <main className={styles.main}>
+            <FetchingTracks />
             <Navigation />
             {/* <Suspense fallback={<div>"Данные загружаются. Пожалуйста, подождите."</div>}> */}
             {/* <Suspense> */}

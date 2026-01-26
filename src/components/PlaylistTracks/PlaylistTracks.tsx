@@ -26,22 +26,23 @@ export default function PlaylistTracks({ playlist, isLoading, error }: PlaylistT
       {error ?
         <div className={styles.errorContainer}>{error}</div>
         :
-        <div className={styles.errorContainer}>{error}</div>
-      }
-      {isLoading ?
-        <Loading />
-        :
-        playlist.map((track) =>
-          <PlaylistTrack
-            key={track._id}
-            // name={track.name}
-            // author={track.author}
-            // album={track.album}
-            // time={formatTime(track.duration_in_seconds)}
-            track={track}
-            playlist={playlist}
-          />
-        )}
+        //   <div className={styles.errorContainer}>{error}</div>
+        // }
+        // {
+        isLoading ?
+          <Loading />
+          :
+          playlist.map((track) =>
+            <PlaylistTrack
+              key={track._id}
+              // name={track.name}
+              // author={track.author}
+              // album={track.album}
+              // time={formatTime(track.duration_in_seconds)}
+              track={track}
+              playlist={playlist}
+            />
+          )}
     </div>
   )
 }
