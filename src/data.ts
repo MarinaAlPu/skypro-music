@@ -1,6 +1,6 @@
 import { TrackType } from "./sharedTypes/sharedTypes";
 
-export const data:TrackType[] = [
+export const data: TrackType[] = [
   {
     _id: 8,
     name: 'Chase',
@@ -130,6 +130,62 @@ export const data:TrackType[] = [
     logo: null,
     track_file:
       'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3',
+    stared_user: [],
+  },
+];
+
+
+export const myData: TrackType[] = [
+  {
+    _id: 16,
+    name: 'Background Sensible',
+    author: 'Waltz Piano',
+    release_date: '2003-05-12',
+    genre: ['Классическая музыка'],
+    duration_in_seconds: 136, //135,
+    album: 'Background Sensible',
+    logo: null,
+    track_file:
+      'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Waltz_Piano_-_Background_Sensible.mp3',
+    stared_user: [],
+  },
+  {
+    _id: 8,
+    name: 'Chase',
+    author: 'Alexander Nakarada',
+    release_date: '2005-06-11',
+    genre: ['Классическая музыка'],
+    duration_in_seconds: 128,
+    album: 'Chase',
+    logo: null,
+    track_file:
+      'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Alexander_Nakarada_-_Chase.mp3',
+    stared_user: [],
+  },
+  {
+    _id: 9,
+    name: 'Open Sea epic',
+    author: 'Frank Schroter',
+    release_date: '2019-06-12',
+    genre: ['Классическая музыка', 'Неклассическая музыка'],
+    duration_in_seconds: 141,
+    album: 'Open Sea epic',
+    logo: null,
+    track_file:
+      'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Frank_Schroter_-_Open_Sea_epic.mp3',
+    stared_user: [],
+  },
+  {
+    _id: 10,
+    name: 'Sneaky Snitch',
+    author: 'Kevin Macleod',
+    release_date: '2022-04-16',
+    genre: ['Популярная музыка'],
+    duration_in_seconds: 136,
+    album: 'Sneaky Snitch',
+    logo: null,
+    track_file:
+      'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Kevin_Macleod_-_Sneaky_Snitch.mp3',
     stared_user: [],
   },
 ];
