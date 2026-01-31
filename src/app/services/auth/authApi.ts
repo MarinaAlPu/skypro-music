@@ -44,15 +44,6 @@ type getTokenReturn = {
   }
 };
 
-// type refreshTokenProps = {
-//   refreshToken: string,
-// };
-
-type refreshTokenReturn = {
-  // data: {
-    access: string,
-  // }
-};
 
 export const authUser = (data: authUserProps): Promise<authUserReturn> => {
   return axios.post(BASE_URL + '/user/login/',
@@ -87,18 +78,6 @@ export const getToken = (data: getTokenProps): Promise<getTokenReturn> => {
   );
 };
 
-// // export const refreshToken = (refreshToken: refreshTokenProps): Promise<refreshTokenReturn> => {
-// export const refreshToken = (refreshToken: string): Promise<refreshTokenReturn> => {
-//   return axios.post(BASE_URL + '/token/refresh/',
-//     {refresh: refreshToken},
-//     {
-//       headers: {
-//         "content-type": "application/json",
-//       }
-//     }
-//   );
-// };
-
 export const refreshAccessToken = async (userRefreshToken: string): Promise<string> => {
   try {
     const resp = await axios.post(BASE_URL + '/user/token/refresh/',
@@ -109,7 +88,6 @@ export const refreshAccessToken = async (userRefreshToken: string): Promise<stri
         }
       }
     )
-
     // console.log("Результат обновления токена: ", resp);
     // console.log("Новый access token: ", resp.data.access);
 

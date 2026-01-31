@@ -65,24 +65,3 @@ export const deleteTrackFromFavorite = async (trackId: number, accessToken: stri
     throw error;
   }
 }
-
-// export const refreshAccessToken = async (userRefreshToken: string): Promise<string> => {
-//   try {
-//     const resp = await axios.post(BASE_URL + '/user/token/refresh/',
-//       { refresh: userRefreshToken },
-//       {
-//         headers: {
-//           "content-type": "application/json",
-//         }
-//       }
-//     )
-
-//     // console.log("Результат обновления токена: ", resp);
-//     // console.log("Новый access token: ", resp.data.access);
-
-//     return resp.data.access
-//   } catch (error) {
-//     console.error("Ошибка при обновлении токена: ", error);
-//     throw error;
-//   }
-// }
