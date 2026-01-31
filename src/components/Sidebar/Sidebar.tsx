@@ -3,18 +3,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from './sidebar.module.css';
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { useRouter } from 'next/navigation';
+import { clearUser } from "@/store/features/authSlice";
 
 
 export default function Sidebar() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const username = useAppSelector((state) => state.auth.username);
   // console.log("username: ", username);
+
+  const logout = () => {
+    dispatch(clearUser());
+    router.push("/auth/signin");
+  };
 
   return (
     <div className={styles.main__sidebar}>
       <div className={styles.sidebar__personal}>
         <p className={styles.sidebar__personalName}>{username || "Авторизуйтесь"}</p>
-        <div className={styles.sidebar__icon}>
+        <div
+          className={styles.sidebar__icon}
+          onClick={logout}
+        >
           <svg>
             <use xlinkHref="/img/icon/sprite.svg#logout"></use>
           </svg>

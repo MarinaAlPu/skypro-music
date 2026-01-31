@@ -4,18 +4,41 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
 import { useState } from 'react';
+import { clearUser } from '@/store/features/authSlice';
+import { useAppDispatch } from '@/store/store';
+import { useRouter } from 'next/navigation';
 
 
 export default function Navigation() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const onOpenBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-  }
+  };
+
+  const goToMain = () => {
+    router.push("/music/main");
+  };
+
+  const logout = () => {
+    dispatch(clearUser());
+    router.push("/auth/signin");
+  };
+
+  // const login = () => {
+  //   router.push("/auth/signin");
+  // };
+
 
   return (
     <nav className={styles.main__nav}>
-      <div className={styles.nav__logo}>
+      <div
+        className={styles.nav__logo}
+        onClick={goToMain}
+      >
         <Image
           width={250}
           height={170}
@@ -45,9 +68,21 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menu__item}>
-              <Link href="/auth/signin" className={styles.menu__link}>
+              {/* <Link href="/auth/signin" className={styles.menu__link}>
                 Войти
-              </Link>
+              </Link> */}
+              {/* <p
+                className={styles.menu__link}
+                onClick={login}
+              >
+                Войти
+              </p> */}
+              <p
+                className={styles.menu__link}
+                onClick={logout}
+              >
+                Выйти
+              </p>
             </li>
             <li>
               <div>
