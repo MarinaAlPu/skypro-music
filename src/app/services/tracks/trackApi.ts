@@ -43,8 +43,8 @@ export const addTrackToFavorite = async (accessToken: string, trackId: number) =
         Authorization: `Bearer ${accessToken}`,
       }
     });
-    console.log("Лайкнули трек");
-    console.log("resp в addTrackToFavorite: ", resp.data);
+    // console.log("Лайкнули трек");
+    // console.log("resp в addTrackToFavorite: ", resp.data);
     return resp.data;
     // return resp;
   } catch (error) {
@@ -60,8 +60,8 @@ export const deleteTrackFromFavorite = async (accessToken: string, trackId: numb
         Authorization: `Bearer ${accessToken}`,
       }
     });
-    console.log("Сняли лайк с трека трек");
-    console.log("resp в deleteTrackFromFavorite: ", resp.data);
+    // console.log("Сняли лайк с трека трек");
+    // console.log("resp в deleteTrackFromFavorite: ", resp.data);
     return resp.data;
   } catch (error) {
     console.error("Ошибка при удалении трека из избранного: ", error);
