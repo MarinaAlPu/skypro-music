@@ -5,6 +5,7 @@
 
 // import Navigation from '../../../components/Navigation/Navigation';
 import Centerblock from '@/components/Centerblock/Centerblock';
+import { setFavoriteTracks } from '@/store/features/trackSlice';
 // import Sidebar from '@/components/Sidebar/Sidebar';
 // import Bar from '../../../components/Bar/Bar';
 // import { useEffect, useState } from 'react';
@@ -12,16 +13,29 @@ import Centerblock from '@/components/Centerblock/Centerblock';
 // import { TrackType } from '@/sharedTypes/sharedTypes';
 // import { AxiosError } from 'axios';
 import { useAppSelector } from '@/store/store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 
 export default function Home() {
+  const dispatch = useDispatch();
+
   // const [tracks, setTracks] = useState<TrackType[]>([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState('');
 
-  const {fetchError, fetchIsLoading, allTracks} = useAppSelector((state) => state.tracks);
+  const { fetchError, fetchIsLoading, allTracks } = useAppSelector((state) => state.tracks);
 
   // console.log("favoriteTracks из state в main: ", favoriteTracks);
+
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('favoriteTracks');
+    const favoriteTracks = savedFavorites ? JSON.parse(savedFavorites) : []
+    // const savedFavorites = getFavoriteTracksFromLocalStorage();
+    dispatch(setFavoriteTracks(favoriteTracks)); // Устанавливаем избранные треки в Redux
+  }, [dispatch]);
+
+
 
   // useEffect(() => {
   //   setIsLoading(true);
@@ -62,21 +76,21 @@ export default function Home() {
 
   return (
     <>
-     {/* <div className={styles.wrapper}>
+      {/* <div className={styles.wrapper}>
        <div className={styles.container}> */}
-          {/* <main className={styles.main}> */}
-            {/* ТУТ БУДЕТ ОШИБКА -
+      {/* <main className={styles.main}> */}
+      {/* ТУТ БУДЕТ ОШИБКА -
           {error} */}
 
-            {/* <Navigation /> */}
-            {/* <Centerblock playlist={tracks} isLoading={isLoading} error={error}/> */}
-            <Centerblock
-            playlist={allTracks}
-            isLoading={fetchIsLoading}
-            error={fetchError? fetchError : ''}/>
-            {/* <Sidebar /> */}
-          {/* </main> */}
-          {/* <Bar />
+      {/* <Navigation /> */}
+      {/* <Centerblock playlist={tracks} isLoading={isLoading} error={error}/> */}
+      <Centerblock
+        playlist={allTracks}
+        isLoading={fetchIsLoading}
+        error={fetchError ? fetchError : ''} />
+      {/* <Sidebar /> */}
+      {/* </main> */}
+      {/* <Bar />
           <footer className="footer"></footer> */}
       {/* </div>
     </div> */}
