@@ -1,3 +1,5 @@
+'use client';
+
 // import Link from "next/link";
 import { ReactNode, Suspense } from "react";
 import styles from './layout.module.css';
@@ -5,6 +7,7 @@ import Bar from "@/components/Bar/Bar";
 import Navigation from "@/components/Navigation/Navigation";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import FetchingTracks from "@/components/FetchingTracks copy/FetchingTracks";
+import { useInitAuth } from "@/hooks/useInitAuth";
 
 
 interface MusicLayoutProps {
@@ -12,6 +15,8 @@ interface MusicLayoutProps {
 };
 
 export default function MusicLayout({ children }: MusicLayoutProps) {
+  useInitAuth();
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -21,7 +26,7 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
             <Navigation />
             {/* <Suspense fallback={<div>"Данные загружаются. Пожалуйста, подождите."</div>}> */}
             {/* <Suspense> */}
-              {children}
+            {children}
             {/* </Suspense> */}
             <Sidebar />
           </main>
