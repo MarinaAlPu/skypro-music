@@ -8,9 +8,13 @@ import Link from 'next/link';
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/store/store';
+import { setAccessToken, setRefreshToken, setUsername } from '@/store/features/authSlice';
 
 
 export default function Signin() {
+  const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -45,7 +49,7 @@ export default function Signin() {
       // console.log("email: ", authResp.data.email);
       // console.log("username: ", authResp.data.username);
       // console.log("_id: ", authResp.data._id);
-      localStorage.setItem("userId", String(authResp.data._id));
+      // localStorage.setItem("userId", String(authResp.data._id));
 
       // получить время получения токена в секундах и записать в LS
       const tokenGetTime = String(new Date().getTime() / 1000);
@@ -55,13 +59,21 @@ export default function Signin() {
       // получить токены, записать в LS
       const tokenResp = await getToken({ email, password })
 
-      localStorage.setItem("access", tokenResp.data.access);
-      localStorage.setItem("refresh", tokenResp.data.refresh);
+      // localStorage.setItem("access", tokenResp.data.access);
+      // localStorage.setItem("refresh", tokenResp.data.refresh);
+
+      dispatch(setAccessToken(tokenResp.data.access));
+      dispatch(setRefreshToken(tokenResp.data.refresh));
+
 
       setIsLoading(false);
 
       // открыть главную страницу
       router.push('/music/main');
+
+      dispatch(setUsername(email));
+
+      // return tokenResp;
     } catch (error) {
       setIsLoading(false);
       if (error instanceof AxiosError) {
