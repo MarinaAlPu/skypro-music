@@ -43,6 +43,7 @@ export default function Sidebar() {
                 alt="day's playlist"
                 width={250}
                 height={150}
+                loading="eager"
               />
             </Link>
           </div>
