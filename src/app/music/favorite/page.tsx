@@ -4,8 +4,9 @@ import Centerblock from '@/components/Centerblock/Centerblock';
 import { useEffect, useState } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
-import { getFavoriteTracks, refreshAccessToken } from '@/app/services/tracks/trackApi';
+import { getFavoriteTracks } from '@/app/services/tracks/trackApi';
 import { checkAccessToken } from '@/utils/helpers';
+import { refreshAccessToken } from '@/app/services/auth/authApi';
 
 
 export default function FavoritePage() {

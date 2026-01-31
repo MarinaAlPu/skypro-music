@@ -8,7 +8,8 @@ import { TrackType } from '@/sharedTypes/sharedTypes';
 import { checkAccessToken, formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
 import { MouseEvent, useEffect, useState } from 'react';
-import { addTrackToFavorite, getFavoriteTracks, refreshAccessToken } from '@/app/services/tracks/trackApi';
+import { addTrackToFavorite, getFavoriteTracks } from '@/app/services/tracks/trackApi';
+import { refreshAccessToken } from '@/app/services/auth/authApi';
 
 
 type trackTypeProp = {
