@@ -8,16 +8,23 @@ import { useEffect, useRef, useState, ChangeEvent } from 'react';
 import { setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle } from '@/store/features/trackSlice';
 import { getTimePanel } from '@/utils/helpers';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { useLikeTrack } from '@/hooks/useLikeTrack';
 
 
 export default function Bar() {
   const dispatch = useAppDispatch();
+
+  const { favoriteTracks } = useAppSelector((state) => state.tracks);
+  // console.log("Избранное в плеере: ", favoriteTracks);
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // console.log("currentTrack в Bar: ", currentTrack);
   const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
   const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
+
+  // const isLike = favoriteTracks.some((t) => t._id === currentTrack?._id);
+  // console.log("Трек в плеере лайкнут: ", isLike);
 
   // // получить текущий плейлист
   // const currentPlaylist = useAppSelector((state) => state.tracks.currentPlaylist);
@@ -49,6 +56,8 @@ export default function Bar() {
   // console.log("currentVolume: ", currentVolume);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const { toggleLike, isLike } = useLikeTrack(currentTrack);
 
   // const playlist = isShuffle ? shaffledPlaylist : currentPlaylist;
   // const trackIndex = isShuffle ? shuffledTrackIndex : currentTrackIndex;
@@ -275,7 +284,7 @@ export default function Bar() {
               <div
                 className={
                   classnames(
-                    styles.player__btnShuffle, 
+                    styles.player__btnShuffle,
                     { [styles.btnIcon__active]: isShuffle, },
                     { [styles.btnIcon]: !isShuffle, }
                   )
@@ -307,17 +316,25 @@ export default function Bar() {
                 </div>
               </div>
 
-              <div className={styles.trackPlay__dislike}>
-                <div className={classnames(styles.player__btnShuffle, styles.btnIcon)}>
+              {/* <div className={styles.trackPlay__dislike}> */}
+              <div className={styles.trackPlay__like}>
+
+                {/* <div className={classnames(styles.player__btnShuffle, styles.btnIcon)}> */}
+                <div
+                  className={classnames(styles.player__btnLike, styles.btnIcon)}
+                  onClick={toggleLike}
+                >
                   <svg className={styles.trackPlay__likeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
+                    <use xlinkHref={`/img/icon/sprite.svg#${isLike ? "icon-like-active" : "icon-like"}`}></use>
                   </svg>
                 </div>
-                <div className={classnames(styles.trackPlay__dislike, styles.btnIcon)}>
+
+                {/* <div className={classnames(styles.trackPlay__dislike, styles.btnIcon)}>
                   <svg className={styles.trackPlay__dislikeSvg}>
                     <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
                   </svg>
-                </div>
+                </div> */}
+
               </div>
             </div>
           </div>
