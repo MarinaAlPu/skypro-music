@@ -86,11 +86,13 @@ const trackSlice = createSlice({
     addLikedTracks: (state, action: PayloadAction<TrackType>) => {
       state.favoriteTracks = [...state.favoriteTracks, action.payload];
       // console.log("Добавили трек в избранное");
+      localStorage.setItem("favoriteTracks", JSON.stringify(state.favoriteTracks));
     },
     removeLikedTracks: (state, action: PayloadAction<TrackType>) => {
       // console.log("Удаляем из избранного трек:", action.payload._id);
       state.favoriteTracks = state.favoriteTracks.filter((track) => track._id !== action.payload._id);
       // console.log("Удалили трек из избранного");
+      localStorage.setItem("favoriteTracks", JSON.stringify(state.favoriteTracks));
     },
     setFetchError: (state, action: PayloadAction<string>) => {
       state.fetchError = action.payload;
