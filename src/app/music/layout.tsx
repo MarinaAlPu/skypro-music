@@ -1,7 +1,6 @@
 'use client';
 
-// import Link from "next/link";
-import { ReactNode, Suspense } from "react";
+import { ReactNode } from "react";
 import styles from './layout.module.css';
 import Bar from "@/components/Bar/Bar";
 import Navigation from "@/components/Navigation/Navigation";
@@ -24,10 +23,7 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
           <main className={styles.main}>
             <FetchingTracks />
             <Navigation />
-            {/* <Suspense fallback={<div>"Данные загружаются. Пожалуйста, подождите."</div>}> */}
-            {/* <Suspense> */}
             {children}
-            {/* </Suspense> */}
             <Sidebar />
           </main>
           <Bar />

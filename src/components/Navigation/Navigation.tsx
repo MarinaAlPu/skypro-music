@@ -84,9 +84,6 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menu__item}>
-              {/* <Link href="/auth/signin" className={styles.menu__link}>
-                Войти
-              </Link> */}
               {isAuth ?
                 <p
                   className={styles.menu__link}

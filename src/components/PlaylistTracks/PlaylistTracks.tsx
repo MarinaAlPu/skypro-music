@@ -2,8 +2,6 @@ import styles from './playlistTracks.module.css';
 import PlaylistTrack from '../PlaylistTrack/PlaylistTrack';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import Loading from '../Loading/Loading';
-// import { data } from '@/data';
-// import {formatTime} from '@/utils/helpers'
 
 
 type PlaylistTracksProp = {
@@ -26,9 +24,6 @@ export default function PlaylistTracks({ playlist, isLoading, error }: PlaylistT
       {error ?
         <div className={styles.errorContainer}>{error}</div>
         :
-        //   <div className={styles.errorContainer}>{error}</div>
-        // }
-        // {
         isLoading ?
           <Loading />
           :

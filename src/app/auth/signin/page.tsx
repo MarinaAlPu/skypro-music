@@ -100,10 +100,6 @@ export default function Signin() {
 
   return (
     <>
-      {/* <div className={styles.wrapper}>
-                <div className={styles.containerEnter}>
-                    <div className={styles.modal__block}>
-                        <form className={styles.modal__form}> */}
       <a href="/music/main">
         <div className={styles.modal__logo}>
           <img src="/img/logo_modal.png" alt="logo" />
@@ -135,10 +131,6 @@ export default function Signin() {
       <Link href={'/auth/signup'} className={styles.modal__btnSignup}>
         Зарегистрироваться
       </Link>
-      {/* </form>
-                    </div>
-                </div>
-            </div> */}
     </>
   );
 }
