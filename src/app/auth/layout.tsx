@@ -10,9 +10,9 @@ interface AuthLayoutProps {
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <>
-      <h1>Layout</h1>
+      {/* <h1>Layout</h1>
       <Link href={'/auth/signin'}>Авторизоваться</Link>
-      <Link href={'/auth/signup'}>Зарегистрироваться</Link>
+      <Link href={'/auth/signup'}>Зарегистрироваться</Link> */}
 
       <div className={styles.wrapper}>
         <div className={styles.containerEnter}>

@@ -19,7 +19,7 @@ export const reAuth = async <T>(
     if (axiosError.response?.status === 401) {
       try {
         const newAccessToken = await refreshAccessToken(refresh); // Обновляем токен
-        console.log("newAccessToken: ", newAccessToken);
+        // console.log("newAccessToken: ", newAccessToken);
         // dispatch(setAccessToken(newAccessToken.access));
         dispatch(setAccessToken(newAccessToken));
         // Повторяем исходный запрос
