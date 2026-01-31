@@ -61,31 +61,37 @@ export default function SignUp() {
     try {
       const res = await regUser({ email, username, password, passwordConfirmed })
       // .then((res) => {
-        // console.log("Ответ после регистрации: ", res);
+      // console.log("Ответ после регистрации: ", res);
 
-        setIsLoading(false);
-        
-        router.push('/auth/signin');
-        // })
-      }   
-      catch(error) {
-        setIsLoading(false);
-        if (error instanceof AxiosError) {
-          if (error.response) {
-            setErrorMessage(error.response.data.message);
-          } else if (error.request) {
-            setErrorMessage("Отсутствует интернет. Попробуйте позже");
-          } else {
-            setErrorMessage("Неизвестная ошибка");
-          }
+      setIsLoading(false);
+
+      router.push('/auth/signin');
+      // })
+    }
+    catch (error) {
+      setIsLoading(false);
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          setErrorMessage(error.response.data.message);
+        } else if (error.request) {
+          setErrorMessage("Отсутствует интернет. Попробуйте позже");
+        } else {
+          setErrorMessage("Неизвестная ошибка");
         }
-        // console.log("error: ", error);
       }
+      // console.log("error: ", error);
+    }
     // .finally(() => {
     //   setIsLoading(false);
 
     //   router.push('/auth/signin');
     // })
+  };
+
+  const onRedirect = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    e.preventDefault();
+
+    router.push('/auth/signin/');
   };
 
 
@@ -135,6 +141,12 @@ export default function SignUp() {
         className={styles.modal__btnSignupEnt}
       >
         Зарегистрироваться
+      </button>
+      <button
+        disabled={isLoading}
+        onClick={onRedirect}
+        className={styles.modal__btnEnter}>
+        Войти
       </button>
       {/* </form>
                     </div>
