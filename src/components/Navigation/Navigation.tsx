@@ -13,7 +13,7 @@ export default function Navigation() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const isAccessToken = useAppSelector((state) => state.auth.access);
-  console.log("isAccessToken: ", isAccessToken);
+  // console.log("isAccessToken: ", isAccessToken);
 
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
