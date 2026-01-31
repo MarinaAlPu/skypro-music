@@ -21,6 +21,8 @@ export default function Home() {
 
   const {fetchError, fetchIsLoading, allTracks} = useAppSelector((state) => state.tracks);
 
+  // console.log("favoriteTracks из state в main: ", favoriteTracks);
+
   // useEffect(() => {
   //   setIsLoading(true);
   //   getTracks()

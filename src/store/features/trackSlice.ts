@@ -1,6 +1,13 @@
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+
+const getFavoriteTracksFromLocalStorage = () => {
+  const savedFavorites = localStorage.getItem('favoriteTracks');
+  return savedFavorites ? JSON.parse(savedFavorites) : [];
+};
+
+
 type initialStateType = {
   currentTrack: null | TrackType,
   isPlay: boolean,
@@ -20,10 +27,11 @@ const initialState: initialStateType = {
   isShuffle: false,
   shuffledPlaylist: [],
   allTracks: [],
-  favoriteTracks: [],
+  favoriteTracks: getFavoriteTracksFromLocalStorage(),
   fetchError: null,
   fetchIsLoading: true
 }
+
 
 const trackSlice = createSlice({
   name: 'tracks',
