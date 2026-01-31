@@ -3,17 +3,33 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { clearUser } from '@/store/features/authSlice';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useRouter } from 'next/navigation';
 
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const isAccessToken = useAppSelector((state) => state.auth.access);
+  console.log("isAccessToken: ", isAccessToken);
 
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+    if (!isAccessToken) {
+      setIsAuth(false);
+      setIsLoading(false);
+      return;
+    } else if (isAccessToken) {
+      setIsAuth(true);
+      setIsLoading(false);
+    }
+  }, [isAccessToken]);
 
   const onOpenBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
@@ -28,9 +44,9 @@ export default function Navigation() {
     router.push("/auth/signin");
   };
 
-  // const login = () => {
-  //   router.push("/auth/signin");
-  // };
+  const login = () => {
+    router.push("/auth/signin");
+  };
 
 
   return (
@@ -71,18 +87,21 @@ export default function Navigation() {
               {/* <Link href="/auth/signin" className={styles.menu__link}>
                 Войти
               </Link> */}
-              {/* <p
-                className={styles.menu__link}
-                onClick={login}
-              >
-                Войти
-              </p> */}
-              <p
-                className={styles.menu__link}
-                onClick={logout}
-              >
-                Выйти
-              </p>
+              {isAuth ?
+                <p
+                  className={styles.menu__link}
+                  onClick={logout}
+                >
+                  Выйти
+                </p>
+                :
+                <p
+                  className={styles.menu__link}
+                  onClick={login}
+                >
+                  Войти
+                </p>
+              }
             </li>
             <li>
               <div>
