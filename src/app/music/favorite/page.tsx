@@ -5,16 +5,14 @@ import { useAppSelector } from '@/store/store';
 
 
 export default function FavoritePage() {
-  const { favoriteTracks, fetchIsLoading, fetchError } = useAppSelector((state) => state.tracks);
-
-  const isAccessToken = useAppSelector((state) => state.auth.access);
+    const { favoriteTracks, fetchIsLoading, fetchError } = useAppSelector((state) => state.tracks);
 
 
   return (
     <>
       <Centerblock
         categoryName="Мои треки"
-        playlist={isAccessToken ? favoriteTracks : []}
+        playlist={favoriteTracks}
         isLoading={fetchIsLoading}
         error={fetchError || ''} />
     </>
