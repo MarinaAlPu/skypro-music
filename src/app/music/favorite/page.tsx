@@ -5,8 +5,9 @@ import { useAppSelector } from '@/store/store';
 
 
 export default function FavoritePage() {
-    const { favoriteTracks, fetchIsLoading, fetchError } = useAppSelector((state) => state.tracks);
+  const { favoriteTracks, fetchIsLoading, fetchError } = useAppSelector((state) => state.tracks);
 
+  const isAuthRequired = true;
 
   return (
     <>
@@ -14,7 +15,9 @@ export default function FavoritePage() {
         categoryName="Мои треки"
         playlist={favoriteTracks}
         isLoading={fetchIsLoading}
-        error={fetchError || ''} />
+        error={fetchError || ''}
+        isAuthRequired={isAuthRequired}
+      />
     </>
   )
 }

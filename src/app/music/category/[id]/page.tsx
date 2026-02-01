@@ -19,6 +19,8 @@ export default function CategoryPage() {
   const params = useParams<{ id: string }>();
   // console.log("id из params: ", params.id);
 
+  const isAuthRequired = false;
+
   const { fetchIsLoading, allTracks, fetchError } = useAppSelector((state) => state.tracks);
 
   const [tracks, setTracks] = useState<TrackType[]>([]);
@@ -77,7 +79,6 @@ export default function CategoryPage() {
   }, [tracks, fetchIsLoading, params.id]);
 
 
-
   return (
     <>
       <Centerblock
@@ -85,6 +86,7 @@ export default function CategoryPage() {
         playlist={categoryTracks}
         isLoading={isLoading}
         error={fetchError || error}
+        isAuthRequired={isAuthRequired}
       />
     </>
   )

@@ -13,6 +13,8 @@ export default function Home() {
 
   const { fetchError, fetchIsLoading, allTracks } = useAppSelector((state) => state.tracks);
 
+  const isAuthRequired = false;
+
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem('favoriteTracks');
@@ -26,7 +28,9 @@ export default function Home() {
       <Centerblock
         playlist={allTracks}
         isLoading={fetchIsLoading}
-        error={fetchError ? fetchError : ''} />
+        error={fetchError ? fetchError : ''}
+        isAuthRequired={isAuthRequired}
+      />
     </>
   );
 }
