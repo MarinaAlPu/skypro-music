@@ -22,7 +22,9 @@ type trackTypeProp = {
 export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
   const dispatch = useAppDispatch();
   // console.log("track: ", track);
-  
+
+  const isAccessToken = useAppSelector((state) => state.auth.access);
+
   const { toggleLike, isLike } = useLikeTrack(track);
 
 
@@ -83,7 +85,7 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
             onClick={toggleLike}
           >
             {
-              isLike ?
+              isLike && isAccessToken ?
                 <use xlinkHref="/img/icon/sprite.svg#icon-like-active"></use>
                 :
                 <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>

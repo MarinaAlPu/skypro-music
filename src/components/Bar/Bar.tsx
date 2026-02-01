@@ -14,6 +14,8 @@ import { useLikeTrack } from '@/hooks/useLikeTrack';
 export default function Bar() {
   const dispatch = useAppDispatch();
 
+  const isAccessToken = useAppSelector((state) => state.auth.access);
+
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // console.log("currentTrack в Bar: ", currentTrack);
@@ -292,7 +294,7 @@ export default function Bar() {
                   onClick={toggleLike}
                 >
                   <svg className={styles.trackPlay__likeSvg}>
-                    <use xlinkHref={`/img/icon/sprite.svg#${isLike ? "icon-like-active" : "icon-like"}`}></use>
+                    <use xlinkHref={`/img/icon/sprite.svg#${isLike && isAccessToken ? "icon-like-active" : "icon-like"}`}></use>
                   </svg>
                 </div>
 
