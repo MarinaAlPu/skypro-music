@@ -10,11 +10,14 @@ type titleItemProp = {
   title: string,
   onClick: () => void,
   isOpen: boolean,
-  activeFilter: string
-  playlist: TrackType[]
+  activeFilter: string,
+  playlist: TrackType[],
+  filterName: string,
+  list: string[],
+  onSelect: (value: string) => void,
 }
 
-export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist }: titleItemProp) {
+export default function FilterItem({ title, onClick, isOpen, activeFilter, playlist, filterName, list, onSelect }: titleItemProp) {
 
   const uniqueAuthors = [...new Set(playlist.map(track => track.author))];
   // console.log("uniqueAuthors", uniqueAuthors);
@@ -45,21 +48,34 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
 
               {title === "исполнителю" &&
                 uniqueAuthors.map((author) => (
-                  <li className={styles.filter__item} key={author}>
+                  <li
+                    className={styles.filter__item}
+                    key={author}
+                    onClick={() => onSelect(author)}
+                  >
                     {author}
                   </li>
                 ))}
 
               {title === "году выпуска" &&
-                uniqueReleaseYears.map((year) => (
-                  <li className={styles.filter__item} key={year}>
+                // uniqueReleaseYears.map((year) => (
+                list.map((year) => (
+                  <li
+                    className={styles.filter__item}
+                    key={year}
+                    onClick={() => onSelect(String(year))}
+                  >
                     {year}
                   </li>
                 ))}
 
               {title === "жанру" &&
                 uniqueGenres.map((genre) => (
-                  <li className={styles.filter__item} key={genre}>
+                  <li
+                    className={styles.filter__item}
+                    key={genre}
+                    onClick={() => onSelect(genre)}
+                  >
                     {genre}
                   </li>
                 ))}
