@@ -51,7 +51,10 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
                   <li
                     className={styles.filter__item}
                     key={author}
-                    onClick={() => onSelect(author)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(author)
+                    }}
                   >
                     {author}
                   </li>
@@ -63,7 +66,10 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
                   <li
                     className={styles.filter__item}
                     key={year}
-                    onClick={() => onSelect(String(year))}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(String(year))
+                    }}
                   >
                     {year}
                   </li>
@@ -74,7 +80,10 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
                   <li
                     className={styles.filter__item}
                     key={genre}
-                    onClick={() => onSelect(genre)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(genre)
+                    }}
                   >
                     {genre}
                   </li>
