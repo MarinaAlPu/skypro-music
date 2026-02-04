@@ -16,7 +16,9 @@ type initialStateType = {
     authors: string[],
     years: string,
     genres: string[]
-  }
+  },
+  pagePlaylist: TrackType[],
+  filtredTracks: TrackType[],
 }
 
 const initialState: initialStateType = {
@@ -33,7 +35,9 @@ const initialState: initialStateType = {
     authors: [],
     years: 'По умолчанию',
     genres: []
-  }
+  },
+  pagePlaylist: [],
+  filtredTracks: [],
 }
 
 
@@ -114,11 +118,18 @@ const trackSlice = createSlice({
     },
     setFilterAuthors: (state, action: PayloadAction<string>) => {
       const author = action.payload;
-      if(state.filters.authors.includes(author)) {
+
+      if (state.filters.authors.includes(author)) {
         state.filters.authors = state.filters.authors.filter((el) => el !== author);
       } else {
         state.filters.authors = [...state.filters.authors, author];
-      }
+      };
+
+      if (state.filters.authors.length) {
+        state.filtredTracks = state.pagePlaylist.filter((track) => {
+          return track.author === author;
+        })
+      };
     },
     setFilterYears: (state, action: PayloadAction<string>) => {
       // const year = action.payload;
@@ -131,15 +142,19 @@ const trackSlice = createSlice({
     },
     setFilterGenres: (state, action: PayloadAction<string>) => {
       const genre = action.payload;
-      if(state.filters.genres.includes(genre)) {
+
+      if (state.filters.genres.includes(genre)) {
         state.filters.genres = state.filters.genres.filter((el) => el !== genre);
       } else {
         state.filters.genres = [...state.filters.genres, genre];
       }
     },
+    setPagePlaylist: (state, action: PayloadAction<TrackType[]>) => {
+      state.pagePlaylist = action.payload;
+    },
   }
 })
 
 
-export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading, setFilterAuthors, setFilterYears, setFilterGenres } = trackSlice.actions;
+export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading, setFilterAuthors, setFilterYears, setFilterGenres, setPagePlaylist } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

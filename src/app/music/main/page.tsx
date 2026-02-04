@@ -2,18 +2,29 @@
 
 
 import Centerblock from '@/components/Centerblock/Centerblock';
-import { setFavoriteTracks } from '@/store/features/trackSlice';
+import { TrackType } from '@/sharedTypes/sharedTypes';
+import { setFavoriteTracks, setPagePlaylist } from '@/store/features/trackSlice';
 import { useAppSelector } from '@/store/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  const { fetchError, fetchIsLoading, allTracks } = useAppSelector((state) => state.tracks);
+  const { fetchError, fetchIsLoading, allTracks, filters, filtredTracks } = useAppSelector((state) => state.tracks);
+  // const { fetchError, fetchIsLoading, allTracks } = useAppSelector((state) => state.tracks);
 
   const isAuthRequired = false;
+
+  // получить плэйлист текущей страницы
+  const [playlist, setPlaylist] = useState<TrackType[]>([]);
+
+  // получить плэйлист текущей страницы в зависимости от ипользования фильтров, поиска
+  useEffect(() => {
+    const currentPlaylist = filters.authors.length ? filtredTracks : allTracks;
+    setPlaylist(currentPlaylist);
+  }, [allTracks, filtredTracks]);
 
 
   useEffect(() => {
@@ -26,7 +37,10 @@ export default function Home() {
   return (
     <>
       <Centerblock
-        playlist={allTracks}
+      pagePlaylist={allTracks}
+        // playlist={allTracks}
+        playlist={playlist}
+        // playlist={filtredTracks}
         isLoading={fetchIsLoading}
         error={fetchError ? fetchError : ''}
         isAuthRequired={isAuthRequired}
