@@ -33,6 +33,7 @@ export default function Filter({ playlist }: FilterProp) {
 
   const uniqAuthors = getUniqueValuesByKey(playlist, 'author');
   const uniqGenres = getUniqueValuesByKey(playlist, 'genre');
+  // console.log("uniqGenres: ", uniqGenres);
   const years = ['По умолчанию', 'Сначала новые', 'Сначала старые'];
 
   const onSelectAuthor = (author: string) => {

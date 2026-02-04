@@ -127,7 +127,9 @@ const trackSlice = createSlice({
 
       if (state.filters.authors.length) {
         state.filtredTracks = state.pagePlaylist.filter((track) => {
-          return track.author === author;
+          // return track.author === author;
+          // чтобы выбор каждого следующего автора в выпадашке не затирал предыдущий выбор нужно сравнивать не с автором, а с массивом авторов, который хранится в списке
+          return state.filters.authors.includes(track.author);
         })
       };
     },
@@ -141,13 +143,19 @@ const trackSlice = createSlice({
       state.filters.years = action.payload;
     },
     setFilterGenres: (state, action: PayloadAction<string>) => {
-      const genre = action.payload;
+      const genres = action.payload;
 
-      if (state.filters.genres.includes(genre)) {
-        state.filters.genres = state.filters.genres.filter((el) => el !== genre);
+      if (state.filters.genres.includes(genres)) {
+        state.filters.genres = state.filters.genres.filter((el) => el !== genres);
       } else {
-        state.filters.genres = [...state.filters.genres, genre];
-      }
+        state.filters.genres = [...state.filters.genres, genres];
+      };
+
+      if (state.filters.genres.length) {
+        state.filtredTracks = state.pagePlaylist.filter((track) => {
+          return state.filters.genres.some((el) => el.includes(track.author));
+        })
+      };
     },
     setPagePlaylist: (state, action: PayloadAction<TrackType[]>) => {
       state.pagePlaylist = action.payload;

@@ -42,7 +42,8 @@ export default function Centerblock({ pagePlaylist, playlist, categoryName, isLo
     <div className={styles.centerblock}>
       <Search />
       <h2 className={styles.centerblock__h2}>{categoryName || 'Треки'}</h2>
-      <Filter playlist={playlist} />
+      {/* <Filter playlist={playlist} /> */}
+      <Filter playlist={pagePlaylist} />
       <div className={styles.centerblock__content}>
         <PlaylistTitle />
         <PlaylistTracks playlist={playlist} isLoading={isLoading} error={error} isAuthRequired={isAuthRequired} />
