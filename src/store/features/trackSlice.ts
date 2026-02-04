@@ -152,8 +152,8 @@ const trackSlice = createSlice({
       };
 
       if (state.filters.genres.length) {
-        state.filtredTracks = state.pagePlaylist.filter((track) => {
-          return state.filters.genres.some((el) => el.includes(track.author));
+        state.filtredTracks = state.filtredTracks.filter((track) => {
+          return state.filters.genres.some((el) => track.genre.includes(el));
         })
       };
     },
