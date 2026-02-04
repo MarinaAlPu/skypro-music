@@ -1,8 +1,9 @@
 import { TrackType } from '@/sharedTypes/sharedTypes';
+import { applyFilters } from '@/utils/applyFilters';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
-type initialStateType = {
+export type initialStateType = {
   currentTrack: null | TrackType,
   isPlay: boolean,
   currentPlaylist: TrackType[],
@@ -118,20 +119,33 @@ const trackSlice = createSlice({
     },
     setFilterAuthors: (state, action: PayloadAction<string>) => {
       const author = action.payload;
-
+      
       if (state.filters.authors.includes(author)) {
         state.filters.authors = state.filters.authors.filter((el) => el !== author);
       } else {
         state.filters.authors = [...state.filters.authors, author];
       };
+      
 
-      if (state.filters.authors.length) {
-        state.filtredTracks = state.pagePlaylist.filter((track) => {
-          // return track.author === author;
-          // чтобы выбор каждого следующего автора в выпадашке не затирал предыдущий выбор нужно сравнивать не с автором, а с массивом авторов, который хранится в списке
-          return state.filters.authors.includes(track.author);
-        })
-      };
+      // let filteredPlaylist = state.pagePlaylist;
+
+      // if (state.filters.authors.length) {
+      //   filteredPlaylist = filteredPlaylist.filter((track) => {
+      //     // return track.author === author;
+      //     // чтобы выбор каждого следующего автора в выпадашке не затирал предыдущий выбор нужно сравнивать не с автором, а с массивом авторов, который хранится в списке
+      //     return state.filters.authors.includes(track.author);
+      //   })
+      // };
+
+      // if (state.filters.genres.length) {
+      //   filteredPlaylist = filteredPlaylist.filter((track) => {
+      //     return state.filters.genres.some((el) => track.genre.includes(el));
+      //   })
+      // };
+
+      // state.filtredTracks = filteredPlaylist;
+
+      state.filtredTracks = applyFilters(state);
     },
     setFilterYears: (state, action: PayloadAction<string>) => {
       // const year = action.payload;
@@ -144,18 +158,31 @@ const trackSlice = createSlice({
     },
     setFilterGenres: (state, action: PayloadAction<string>) => {
       const genres = action.payload;
-
+      
       if (state.filters.genres.includes(genres)) {
         state.filters.genres = state.filters.genres.filter((el) => el !== genres);
       } else {
         state.filters.genres = [...state.filters.genres, genres];
       };
+      
 
-      if (state.filters.genres.length) {
-        state.filtredTracks = state.filtredTracks.filter((track) => {
-          return state.filters.genres.some((el) => track.genre.includes(el));
-        })
-      };
+      // let filteredPlaylist = state.pagePlaylist;
+
+      // if (state.filters.authors.length) {
+      //   filteredPlaylist = filteredPlaylist.filter((track) => {
+      //     return state.filters.authors.includes(track.author);
+      //   })
+      // };
+
+      // if (state.filters.genres.length) {
+      //   filteredPlaylist = filteredPlaylist.filter((track) => {
+      //     return state.filters.genres.some((el) => track.genre.includes(el));
+      //   })
+      // };
+
+      // state.filtredTracks = filteredPlaylist;
+
+      state.filtredTracks = applyFilters(state);
     },
     setPagePlaylist: (state, action: PayloadAction<TrackType[]>) => {
       state.pagePlaylist = action.payload;
