@@ -119,13 +119,13 @@ const trackSlice = createSlice({
     },
     setFilterAuthors: (state, action: PayloadAction<string>) => {
       const author = action.payload;
-      
+
       if (state.filters.authors.includes(author)) {
         state.filters.authors = state.filters.authors.filter((el) => el !== author);
       } else {
         state.filters.authors = [...state.filters.authors, author];
       };
-      
+
 
       // let filteredPlaylist = state.pagePlaylist;
 
@@ -143,7 +143,7 @@ const trackSlice = createSlice({
       //   })
       // };
 
-      // state.filtredTracks = filteredPlaylist;
+      // state.filtredTracks = filteredPlaylist;a
 
       state.filtredTracks = applyFilters(state);
     },
@@ -155,16 +155,35 @@ const trackSlice = createSlice({
       //   state.filters.years = [...state.filters.years, year];
       // }
       state.filters.years = action.payload;
+
+      state.filtredTracks = applyFilters(state);
+      // console.log("Отфильтрованный массив: ", state.filtredTracks);
+
+
+      if (state.filters.years === 'Сначала новые') {
+        state.filtredTracks = [...state.filtredTracks].sort((a, b) => {
+          return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+        })
+      } else if (state.filters.years === 'Сначала старые') {
+        state.filtredTracks = [...state.filtredTracks].sort((a, b) => {
+          return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
+        })
+      } else if (state.filters.years === 'По умолчанию') {
+        // state.filtredTracks = state.filtredTracks;
+        return
+      }
+
+      // console.log("Отсортированный массив: ", state.filtredTracks);
     },
     setFilterGenres: (state, action: PayloadAction<string>) => {
       const genres = action.payload;
-      
+
       if (state.filters.genres.includes(genres)) {
         state.filters.genres = state.filters.genres.filter((el) => el !== genres);
       } else {
         state.filters.genres = [...state.filters.genres, genres];
       };
-      
+
 
       // let filteredPlaylist = state.pagePlaylist;
 
