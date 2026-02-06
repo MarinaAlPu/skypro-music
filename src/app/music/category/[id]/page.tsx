@@ -21,7 +21,7 @@ export default function CategoryPage() {
 
   const isAuthRequired = false;
 
-  const { fetchIsLoading, allTracks, fetchError } = useAppSelector((state) => state.tracks);
+  const { fetchIsLoading, allTracks, fetchError, filters, filtredTracks } = useAppSelector((state) => state.tracks);
 
   const [tracks, setTracks] = useState<TrackType[]>([]);
   const [categoryTracks, setCategoryTracks] = useState<TrackType[]>([]);
@@ -79,11 +79,22 @@ export default function CategoryPage() {
   }, [tracks, fetchIsLoading, params.id]);
 
 
+    // получить плэйлист текущей страницы
+  const [playlist, setPlaylist] = useState<TrackType[]>([]);
+
+  // получить плэйлист текущей страницы в зависимости от ипользования фильтров, поиска
+  useEffect(() => {
+    const currentPlaylist = filters.authors.length ? filtredTracks : categoryTracks;
+    setPlaylist(currentPlaylist);
+  }, [categoryTracks, filtredTracks]);
+
+
   return (
     <>
       <Centerblock
         categoryName={categoryName}
-        playlist={categoryTracks}
+        pagePlaylist={categoryTracks}
+        playlist={playlist}
         isLoading={isLoading}
         error={fetchError || error}
         isAuthRequired={isAuthRequired}
