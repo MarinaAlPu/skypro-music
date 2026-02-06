@@ -27,8 +27,9 @@ export default function FavoritePage() {
 
     if (favoritePlaylist) {
       setMyTracks(favoritePlaylist);
+      dispatch(setFavoriteTracks(favoritePlaylist));
     }
-  }, []);
+  }, [dispatch]);
 
   // получить плэйлист текущей страницы в зависимости от ипользования фильтров, поиска
   useEffect(() => {
