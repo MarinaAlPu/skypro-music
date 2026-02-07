@@ -1,5 +1,6 @@
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { applyFilters } from '@/utils/applyFilters';
+import { sortByReleaseDate } from '@/utils/helpers';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
@@ -159,19 +160,22 @@ const trackSlice = createSlice({
       state.filtredTracks = applyFilters(state);
       // console.log("Отфильтрованный массив: ", state.filtredTracks);
 
+      // if (state.filters.years === 'Сначала новые') {
+      //   // state.filtredTracks = [...state.filtredTracks].sort((a, b) => {
+      //   //   return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
+      //   // })
+      //   state.filtredTracks = sortByReleaseDateAsc(state.filtredTracks);
+      // } else if (state.filters.years === 'Сначала старые') {
+      //   // state.filtredTracks = [...state.filtredTracks].sort((a, b) => {
+      //   //   return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
+      //   // })
+      //   state.filtredTracks = sortByReleaseDateDesc(state.filtredTracks);
+      // } else if (state.filters.years === 'По умолчанию') {
+      //   // state.filtredTracks = state.filtredTracks;
+      //   return
+      // }
 
-      if (state.filters.years === 'Сначала новые') {
-        state.filtredTracks = [...state.filtredTracks].sort((a, b) => {
-          return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
-        })
-      } else if (state.filters.years === 'Сначала старые') {
-        state.filtredTracks = [...state.filtredTracks].sort((a, b) => {
-          return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
-        })
-      } else if (state.filters.years === 'По умолчанию') {
-        // state.filtredTracks = state.filtredTracks;
-        return
-      }
+      state.filtredTracks = sortByReleaseDate(state.filtredTracks, state.filters.years);
 
       // console.log("Отсортированный массив: ", state.filtredTracks);
     },
