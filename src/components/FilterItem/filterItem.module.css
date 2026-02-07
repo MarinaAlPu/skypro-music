@@ -78,3 +78,12 @@
   top: -9px;
   right: -8px;
 } */
+
+/* .filter__item {} */
+
+.filter__item_selected {
+  color: #B672FF;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3.5px;
+}
