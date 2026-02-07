@@ -29,7 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem('favoriteTracks');
-    const favoriteTracks = savedFavorites ? JSON.parse(savedFavorites) : []
+    const favoriteTracks = savedFavorites ? JSON.parse(savedFavorites) : [];
     dispatch(setFavoriteTracks(favoriteTracks));
   }, [dispatch]);
 
