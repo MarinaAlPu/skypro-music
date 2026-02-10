@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 export default function Home() {
   const dispatch = useDispatch();
 
-  const { fetchError, fetchIsLoading, allTracks, filters, filtredTracks } = useAppSelector((state) => state.tracks);
+  const { fetchError, fetchIsLoading, allTracks, filters, filtredTracks, searchString } = useAppSelector((state) => state.tracks);
   // const { fetchError, fetchIsLoading, allTracks } = useAppSelector((state) => state.tracks);
 
   const isAuthRequired = false;
@@ -33,11 +33,21 @@ export default function Home() {
     dispatch(setFavoriteTracks(favoriteTracks));
   }, [dispatch]);
 
+  useEffect(() => {
+    const searchedTracks = allTracks.filter((track) => track.name.includes(searchString));
+
+    if (searchedTracks) {
+      setPlaylist(searchedTracks);
+    } else {
+      setPlaylist(allTracks);
+    }
+  }, [searchString]);
+  
 
   return (
     <>
       <Centerblock
-      pagePlaylist={allTracks}
+        pagePlaylist={allTracks}
         // playlist={allTracks}
         playlist={playlist}
         // playlist={filtredTracks}
