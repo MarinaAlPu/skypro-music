@@ -219,7 +219,8 @@ const trackSlice = createSlice({
 
       // state.filtredTracks = state.allTracks.filter((track) => track.name.toLowerCase().includes(state.filters.searchString.toLowerCase()));
 
-      state.filtredTracks = searchTracks(state.filters.searchString, state.allTracks);
+      const filtredTracks = applyFilters(state);
+      state.filtredTracks = searchTracks(state.filters.searchString, filtredTracks);
     },
   }
 })
