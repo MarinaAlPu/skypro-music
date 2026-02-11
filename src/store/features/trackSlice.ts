@@ -1,6 +1,6 @@
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { applyFilters } from '@/utils/applyFilters';
-import { sortByReleaseDate } from '@/utils/helpers';
+import { searchTracks, sortByReleaseDate } from '@/utils/helpers';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
@@ -216,7 +216,10 @@ const trackSlice = createSlice({
       state.filters.searchString = action.payload;
 
       // state.filtredTracks = state.allTracks.filter((track) => track.name.startsWith(state.searchString));
-      state.filtredTracks = state.allTracks.filter((track) => track.name.toLowerCase().includes(state.filters.searchString.toLowerCase()));
+
+      // state.filtredTracks = state.allTracks.filter((track) => track.name.toLowerCase().includes(state.filters.searchString.toLowerCase()));
+
+      state.filtredTracks = searchTracks(state.filters.searchString, state.allTracks);
     },
   }
 })
