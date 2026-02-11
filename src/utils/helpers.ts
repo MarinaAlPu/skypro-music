@@ -83,3 +83,6 @@ export function sortByReleaseDate(arr: TrackType[], type: string): TrackType[] {
   return arr;
 };
 
+export function searchTracks(data: string, arr: TrackType[]): TrackType[] {
+  return arr.filter((track) => track.name.toLowerCase().includes(data.toLowerCase()));
+}
