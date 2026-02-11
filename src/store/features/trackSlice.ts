@@ -17,11 +17,11 @@ export type initialStateType = {
   filters: {
     authors: string[],
     years: string,
-    genres: string[]
+    genres: string[],
+    searchString: string,
   },
   pagePlaylist: TrackType[],
   filtredTracks: TrackType[],
-  searchString: string,
 }
 
 const initialState: initialStateType = {
@@ -37,11 +37,11 @@ const initialState: initialStateType = {
   filters: {
     authors: [],
     years: 'По умолчанию',
-    genres: []
+    genres: [],
+    searchString: '',
   },
   pagePlaylist: [],
   filtredTracks: [],
-  searchString: '',
 }
 
 
@@ -213,9 +213,10 @@ const trackSlice = createSlice({
       state.pagePlaylist = action.payload;
     },
     setSearchString: (state, action: PayloadAction<string>) => {
-      state.searchString = action.payload;
+      state.filters.searchString = action.payload;
 
-      state.filtredTracks = state.allTracks.filter((track) => track.name.includes(state.searchString));
+      // state.filtredTracks = state.allTracks.filter((track) => track.name.startsWith(state.searchString));
+      state.filtredTracks = state.allTracks.filter((track) => track.name.toLowerCase().includes(state.filters.searchString.toLowerCase()));
     },
   }
 })
