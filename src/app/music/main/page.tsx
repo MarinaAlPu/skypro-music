@@ -3,7 +3,7 @@
 
 import Centerblock from '@/components/Centerblock/Centerblock';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import { setFavoriteTracks } from '@/store/features/trackSlice';
+import { resetFilters, setFavoriteTracks } from '@/store/features/trackSlice';
 import { useAppSelector } from '@/store/store';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -18,6 +18,10 @@ export default function Home() {
 
   // получить плэйлист текущей страницы
   const [playlist, setPlaylist] = useState<TrackType[]>([]);
+
+  useEffect (() => {
+    dispatch(resetFilters());
+  }, []);
 
   // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска
   useEffect(() => {

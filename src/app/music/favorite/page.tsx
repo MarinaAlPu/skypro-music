@@ -2,7 +2,7 @@
 
 import Centerblock from '@/components/Centerblock/Centerblock';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import { setFavoriteTracks } from '@/store/features/trackSlice';
+import { resetFilters, setFavoriteTracks } from '@/store/features/trackSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useState } from 'react';
 
@@ -17,6 +17,10 @@ export default function FavoritePage() {
   // получить плэйлист текущей страницы
   const [playlist, setPlaylist] = useState<TrackType[]>([]);
   const [myTracks, setMyTracks] = useState<TrackType[]>([]);
+
+  useEffect(() => {
+    dispatch(resetFilters());
+  }, []);
 
   useEffect(() => {
     const savedFavorites = localStorage.getItem('favoriteTracks');
@@ -39,7 +43,7 @@ export default function FavoritePage() {
 
   useEffect(() => {
     const isFiltersEnabled = Object.entries(filters).map(([key, value]) => {
-      if(key === 'years') { 
+      if (key === 'years') {
         return value !== 'По умолчанию';
       };
 

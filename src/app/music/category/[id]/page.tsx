@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { getTracks, getCategoryTracks } from '@/app/services/tracks/trackApi';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { resetFilters } from "@/store/features/trackSlice";
 
 
 type CategoryType = {
@@ -19,6 +20,8 @@ export default function CategoryPage() {
   const params = useParams<{ id: string }>();
   // console.log("id из params: ", params.id);
 
+  const dispatch = useAppDispatch();
+
   const isAuthRequired = false;
 
   const { fetchIsLoading, allTracks, fetchError, filters, filtredTracks } = useAppSelector((state) => state.tracks);
@@ -29,6 +32,9 @@ export default function CategoryPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    dispatch(resetFilters());
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
