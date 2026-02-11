@@ -31,11 +31,25 @@ export default function FavoritePage() {
     }
   }, [dispatch]);
 
-  // получить плэйлист текущей страницы в зависимости от ипользования фильтров, поиска
+  // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска
+  // useEffect(() => {
+  //   const currentPlaylist = filters.authors.length ? filtredTracks : myTracks;
+  //   setPlaylist(currentPlaylist);
+  // }, [myTracks, filtredTracks]);
+
   useEffect(() => {
-    const currentPlaylist = filters.authors.length ? filtredTracks : myTracks;
+    const isFiltersEnabled = Object.entries(filters).map(([key, value]) => {
+      if(key === 'years') { 
+        return value !== 'По умолчанию';
+      };
+
+      return !!value.length;
+    }).some(Boolean);
+
+    const currentPlaylist = isFiltersEnabled ? filtredTracks : myTracks;
     setPlaylist(currentPlaylist);
-  }, [myTracks, filtredTracks]);
+  }, [myTracks, filtredTracks, filters]);
+
 
 
   return (
