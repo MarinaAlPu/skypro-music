@@ -222,9 +222,12 @@ const trackSlice = createSlice({
       const filtredTracks = applyFilters(state);
       state.filtredTracks = searchTracks(state.filters.searchString, filtredTracks);
     },
+    resetFilters: (state) => {
+      state.filters = initialState.filters;
+    },
   }
 })
 
 
-export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading, setFilterAuthors, setFilterYears, setFilterGenres, setPagePlaylist, setSearchString } = trackSlice.actions;
+export const { setCurrentTrack, setCurrentPlaylist, setIsPlay, setNextTrack, setPrevTrack, toggleIsShuffle, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading, setFilterAuthors, setFilterYears, setFilterGenres, setPagePlaylist, setSearchString, resetFilters } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;
