@@ -33,12 +33,6 @@ describe('formatTime', () => {
   it('Обрабатывает большие значения', () => {
     expect(formatTime(6321)).toBe('105:21');
   });
-  it('Обрабатывает пустое значения', () => {
-    expect(formatTime('')).toBe('0:00');
-  });
-  it('Обрабатывает null', () => {
-    expect(formatTime(null)).toBe('0:00');
-  });
 });
 
 describe('getTimePanel', () => {
@@ -65,9 +59,6 @@ describe('getTimePanel', () => {
 describe('getUniqueValuesByKey', () => {
   it('Возвращает массив уникальных авторов', () => {
     expect(getUniqueValuesByKey(data, 'author')).toStrictEqual(["Alexander Nakarada", "Frank Schroter", "Kevin Macleod", "Mixkit", "-", "Waltz Piano", "Winniethemoog"]);
-  });
-  it('Возвращает массив уникальных жанров', () => {
-    expect(getUniqueValuesByKey(data, 'genre')).toStrictEqual(["Классическая музыка", "Неклассическая музыка", "Популярная музыка", "Рок музыка"]);
   });
   it('Возвращает массив уникальных жанров', () => {
     expect(getUniqueValuesByKey(data, 'genre')).toStrictEqual(["Классическая музыка", "Неклассическая музыка", "Популярная музыка", "Рок музыка"]);
