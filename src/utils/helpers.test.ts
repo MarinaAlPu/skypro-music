@@ -1,5 +1,5 @@
 import { data, myData } from '@/data';
-import { formatTime, getTimePanel, getUniqueValuesByKey, sortByReleaseDate } from './helpers';
+import { formatTime, getTimePanel, getUniqueValuesByKey, searchTracks, sortByReleaseDate } from './helpers';
 
 
 describe('formatTime', () => {
@@ -243,5 +243,130 @@ describe('sortByReleaseDate', () => {
         stared_user: [],
       },
     ]);
+  });
+});
+
+describe('searchTracks', () => {
+  it('Находит треки по введённому значению в соответствии с регистром', () => {
+    expect(searchTracks('Ma', data)).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        _id: 14,
+        name: 'The March OF The Final Battle',
+        author: '-',
+        release_date: '2011-11-02',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 135,
+        album: 'The March OF The Final Battle',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/musiclfiles_-_The_March_Of_The_Final_Battle.mp3',
+        staredUser: [],
+      }),
+      expect.objectContaining({
+        _id: 17,
+        name: 'Cinematic',
+        author: 'Winniethemoog',
+        release_date: '2004-10-01',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 109,
+        album: 'Cinematic',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3',
+        staredUser: [],
+      }),
+    ]));
+  });
+
+  it('Находит треки по введённому значению без учёта регистра: маленькие буквы', () => {
+    expect(searchTracks('ma', data)).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        _id: 14,
+        name: 'The March OF The Final Battle',
+        author: '-',
+        release_date: '2011-11-02',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 135,
+        album: 'The March OF The Final Battle',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/musiclfiles_-_The_March_Of_The_Final_Battle.mp3',
+        staredUser: [],
+      }),
+      expect.objectContaining({
+        _id: 17,
+        name: 'Cinematic',
+        author: 'Winniethemoog',
+        release_date: '2004-10-01',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 109,
+        album: 'Cinematic',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3',
+        staredUser: [],
+      }),
+    ]));
+  });
+
+  it('Находит треки по введённому значению без учёта регистра: большие буквы', () => {
+    expect(searchTracks('MA', data)).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        _id: 14,
+        name: 'The March OF The Final Battle',
+        author: '-',
+        release_date: '2011-11-02',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 135,
+        album: 'The March OF The Final Battle',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/musiclfiles_-_The_March_Of_The_Final_Battle.mp3',
+        staredUser: [],
+      }),
+      expect.objectContaining({
+        _id: 17,
+        name: 'Cinematic',
+        author: 'Winniethemoog',
+        release_date: '2004-10-01',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 109,
+        album: 'Cinematic',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3',
+        staredUser: [],
+      }),
+    ]));
+  });
+
+  it('Находит треки по цифрам', () => {
+    expect(searchTracks('4', data)).toStrictEqual([
+      {
+        _id: 7,
+        name: 'Song № 4',
+        author: 'Alexander Nakarada',
+        release_date: '2005-06-11',
+        genre: ['Классическая музыка'],
+        duration_in_seconds: 128,
+        album: 'Chase',
+        logo: null,
+        track_file:
+          'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Alexander_Nakarada_-_Chase.mp3',
+        staredUser: [],
+      },
+    ]);
+  });
+
+  it.skip('Находит треки по латинице', () => {
+
+  });
+
+  it.skip('Находит треки по кириллице', () => {
+
+  });
+
+  it.skip('Находит треки по спецсимволам', () => {
+
   });
 });
