@@ -3,7 +3,7 @@
 
 import Centerblock from '@/components/Centerblock/Centerblock';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import { setFavoriteTracks, setPagePlaylist } from '@/store/features/trackSlice';
+import { setFavoriteTracks } from '@/store/features/trackSlice';
 import { useAppSelector } from '@/store/store';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -12,19 +12,26 @@ import { useDispatch } from 'react-redux';
 export default function Home() {
   const dispatch = useDispatch();
 
-  const { fetchError, fetchIsLoading, allTracks, filters, filtredTracks, searchString } = useAppSelector((state) => state.tracks);
-  // const { fetchError, fetchIsLoading, allTracks } = useAppSelector((state) => state.tracks);
+  const { fetchError, fetchIsLoading, allTracks, filters, filtredTracks } = useAppSelector((state) => state.tracks);
 
   const isAuthRequired = false;
 
   // получить плэйлист текущей страницы
   const [playlist, setPlaylist] = useState<TrackType[]>([]);
 
-  // получить плэйлист текущей страницы в зависимости от ипользования фильтров, поиска
+  // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска
   useEffect(() => {
-    const currentPlaylist = filters.authors.length ? filtredTracks : allTracks;
+    const isFiltersEnabled = Object.entries(filters).map(([key, value]) => {
+      if(key === 'years') { 
+        return value !== 'По умолчанию';
+      };
+
+      return !!value.length;
+    }).some(Boolean);
+
+    const currentPlaylist = isFiltersEnabled ? filtredTracks : allTracks;
     setPlaylist(currentPlaylist);
-  }, [allTracks, filtredTracks]);
+  }, [allTracks, filtredTracks, filters]);
 
 
   useEffect(() => {
@@ -33,24 +40,12 @@ export default function Home() {
     dispatch(setFavoriteTracks(favoriteTracks));
   }, [dispatch]);
 
-  useEffect(() => {
-    const searchedTracks = allTracks.filter((track) => track.name.includes(searchString));
-
-    if (searchedTracks) {
-      setPlaylist(searchedTracks);
-    } else {
-      setPlaylist(allTracks);
-    }
-  }, [searchString]);
-  
 
   return (
     <>
       <Centerblock
         pagePlaylist={allTracks}
-        // playlist={allTracks}
         playlist={playlist}
-        // playlist={filtredTracks}
         isLoading={fetchIsLoading}
         error={fetchError ? fetchError : ''}
         isAuthRequired={isAuthRequired}
