@@ -79,7 +79,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Sneaky Snitch",
         "release_date": "2022-04-16",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Kevin_Macleod_-_Sneaky_Snitch.mp3",
       },
       {
@@ -94,7 +94,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Open Sea epic",
         "release_date": "2019-06-12",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Frank_Schroter_-_Open_Sea_epic.mp3",
       },
       {
@@ -108,7 +108,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Chase",
         "release_date": "2005-06-11",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Alexander_Nakarada_-_Chase.mp3",
       },
       {
@@ -122,7 +122,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Background Sensible",
         "release_date": "2003-05-12",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Waltz_Piano_-_Background_Sensible.mp3",
       },
     ]);
@@ -140,7 +140,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Background Sensible",
         "release_date": "2003-05-12",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Waltz_Piano_-_Background_Sensible.mp3",
       },
       {
@@ -154,7 +154,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Chase",
         "release_date": "2005-06-11",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Alexander_Nakarada_-_Chase.mp3",
       },
       {
@@ -169,7 +169,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Open Sea epic",
         "release_date": "2019-06-12",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Frank_Schroter_-_Open_Sea_epic.mp3",
       },
       {
@@ -183,7 +183,7 @@ describe('sortByReleaseDate', () => {
         "logo": null,
         "name": "Sneaky Snitch",
         "release_date": "2022-04-16",
-        "stared_user": [],
+        "staredUser": [],
         "track_file": "https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Kevin_Macleod_-_Sneaky_Snitch.mp3",
       },
     ]);
@@ -201,7 +201,7 @@ describe('sortByReleaseDate', () => {
         logo: null,
         track_file:
           'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Waltz_Piano_-_Background_Sensible.mp3',
-        stared_user: [],
+        staredUser: [],
       },
       {
         _id: 8,
@@ -214,7 +214,7 @@ describe('sortByReleaseDate', () => {
         logo: null,
         track_file:
           'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Alexander_Nakarada_-_Chase.mp3',
-        stared_user: [],
+        staredUser: [],
       },
       {
         _id: 10,
@@ -227,7 +227,7 @@ describe('sortByReleaseDate', () => {
         logo: null,
         track_file:
           'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Kevin_Macleod_-_Sneaky_Snitch.mp3',
-        stared_user: [],
+        staredUser: [],
       },
       {
         _id: 9,
@@ -240,7 +240,7 @@ describe('sortByReleaseDate', () => {
         logo: null,
         track_file:
           'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Frank_Schroter_-_Open_Sea_epic.mp3',
-        stared_user: [],
+        staredUser: [],
       },
     ]);
   });
