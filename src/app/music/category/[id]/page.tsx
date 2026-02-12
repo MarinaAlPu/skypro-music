@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { getTracks, getCategoryTracks } from '@/app/services/tracks/trackApi';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { resetFilters } from "@/store/features/trackSlice";
 
 
 type CategoryType = {
@@ -19,9 +20,11 @@ export default function CategoryPage() {
   const params = useParams<{ id: string }>();
   // console.log("id из params: ", params.id);
 
+  const dispatch = useAppDispatch();
+
   const isAuthRequired = false;
 
-  const { fetchIsLoading, allTracks, fetchError } = useAppSelector((state) => state.tracks);
+  const { fetchIsLoading, allTracks, fetchError, filters, filtredTracks } = useAppSelector((state) => state.tracks);
 
   const [tracks, setTracks] = useState<TrackType[]>([]);
   const [categoryTracks, setCategoryTracks] = useState<TrackType[]>([]);
@@ -29,6 +32,9 @@ export default function CategoryPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    dispatch(resetFilters());
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -79,11 +85,36 @@ export default function CategoryPage() {
   }, [tracks, fetchIsLoading, params.id]);
 
 
+    // получить плэйлист текущей страницы
+  const [playlist, setPlaylist] = useState<TrackType[]>([]);
+
+  // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска
+  // useEffect(() => {
+  //   const currentPlaylist = filters.authors.length ? filtredTracks : categoryTracks;
+  //   setPlaylist(currentPlaylist);
+  // }, [categoryTracks, filtredTracks]);
+
+  useEffect(() => {
+    const isFiltersEnabled = Object.entries(filters).map(([key, value]) => {
+      if(key === 'years') { 
+        return value !== 'По умолчанию';
+      };
+
+      return !!value.length;
+    }).some(Boolean);
+
+    const currentPlaylist = isFiltersEnabled ? filtredTracks : categoryTracks;
+    setPlaylist(currentPlaylist);
+  }, [categoryTracks, filtredTracks, filters]);
+
+
+
   return (
     <>
       <Centerblock
         categoryName={categoryName}
-        playlist={categoryTracks}
+        pagePlaylist={categoryTracks}
+        playlist={playlist}
         isLoading={isLoading}
         error={fetchError || error}
         isAuthRequired={isAuthRequired}
