@@ -93,7 +93,7 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
             {track.album}
           </Link>
         </div>
-        <div className="track__time">
+        <div className={styles.track__time}>
           {/* <svg className={styles.track__timeSvgLike}
             onClick={toggleLike}
           > */}
