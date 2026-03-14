@@ -3,9 +3,10 @@ import PlaylistTrack from '../PlaylistTrack/PlaylistTrack';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import Loading from '../Loading/Loading';
 import { useAppSelector } from '@/store/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Skeleton from "react-loading-skeleton";
 import trackStyles from '../PlaylistTrack/playlistTrack.module.css';
+import { toast } from 'react-toastify';
 
 
 type PlaylistTracksProp = {
@@ -26,15 +27,33 @@ export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequi
   // console.log("data в isLoading: ", isLoading);
   const isAccessToken = useAppSelector((state) => state.auth.access);
 
+  const lastErrorRef = useRef<string | null>(null);
+
+
+  useEffect(() => {
+    if (!isAccessToken && isAuthRequired) {
+      toast.error("Авторизуйтесь чтобы посмотреть избранные треки", {
+        toastId: "auth-error",
+      });
+    }
+
+    if (error && error !== lastErrorRef.current) {
+      toast.error(error);
+      lastErrorRef.current = error;
+    }
+  }, [isAccessToken, isAuthRequired, error]);
+
 
   return (
     <div className={styles.content__playlist}>
       {
         !isAccessToken && isAuthRequired ?
-          <div className={styles.messageContainer}>Авторизуйтесь чтобы посмотреть избранные треки</div>
+          // <div className={styles.messageContainer}>Авторизуйтесь чтобы посмотреть избранные треки</div>
+          null
           :
           error ?
-            <div className={styles.errorContainer}>{error}</div>
+            // <div className={styles.errorContainer}>{error}</div>
+            null
             :
             isLoading ?
               // <Loading />
