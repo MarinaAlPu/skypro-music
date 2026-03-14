@@ -6,6 +6,7 @@ import styles from './sidebar.module.css';
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useRouter } from 'next/navigation';
 import { clearUser } from "@/store/features/authSlice";
+import Skeleton from "react-loading-skeleton";
 
 
 export default function Sidebar() {
@@ -15,10 +16,36 @@ export default function Sidebar() {
   const username = useAppSelector((state) => state.auth.username);
   // console.log("username: ", username);
 
+  const isLoading = useAppSelector((state) => state.tracks.fetchIsLoading);
+
   const logout = () => {
     dispatch(clearUser());
     router.push("/auth/signin");
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.main__sidebar}>
+        {/* пользователь */}
+        <div className={styles.sidebar__personal}>
+          <Skeleton width={100} height={20} style={{ marginRight: '16px' }} />
+          <Skeleton circle width={40} height={40} />
+        </div>
+
+        {/* карточки плейлистов */}
+        <div className={styles.sidebar__block}>
+          <div className={styles.sidebar__list}>
+            {[1, 2, 3].map((item) => (
+              <div key={item} className={styles.sidebar__item}>
+                <Skeleton width={250} height={150} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className={styles.main__sidebar}>

@@ -9,6 +9,7 @@ import { TrackType } from '@/sharedTypes/sharedTypes';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/store/store';
 import { setPagePlaylist } from '@/store/features/trackSlice';
+import Skeleton from "react-loading-skeleton";
 
 
 type CenterblockProp = {
@@ -31,6 +32,7 @@ export default function Centerblock({ pagePlaylist, playlist, categoryName, isLo
 
   const dispatch = useAppDispatch();
 
+
   useEffect(() => {
     if (!isLoading && !error) {
       dispatch(setPagePlaylist(pagePlaylist));
@@ -41,7 +43,10 @@ export default function Centerblock({ pagePlaylist, playlist, categoryName, isLo
   return (
     <div className={styles.centerblock}>
       <Search />
-      <h2 className={styles.centerblock__h2}>{categoryName || 'Треки'}</h2>
+      <h2 className={styles.centerblock__h2}>
+        {/* {categoryName || 'Треки'} */}
+        {isLoading ? <Skeleton width={240} height={72} /> : (categoryName || 'Треки')}
+      </h2>
       {/* <Filter playlist={playlist} /> */}
       <Filter playlist={pagePlaylist} />
       <div className={styles.centerblock__content}>
