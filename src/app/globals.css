@@ -39,6 +39,8 @@ ul {
   --bg-primary: #181818;
   --bg-secondary: #4E4E4E;
   --bg-tertiary: #313131;
+  --bg-scroll: #FFFFFF;
+  --bg-scroll-track: rgba(75, 73, 73, 1);
   --text-primary: #FFFFFF;
   --bm-button: #d3d3d3;
   --skeleton-baseColor: #313131;
@@ -50,6 +52,8 @@ ul {
   --bg-primary: #FFFFFF;
   --bg-secondary: #F6F4F4;
   --bg-tertiary: #F6F4F4;
+  --bg-scroll: #FFFFFF;
+  --bg-scroll-track: #E0E0E0;
   --text-primary: #000000;
   --bm-button: #000000;
   --skeleton-baseColor: #F6F4F4;
