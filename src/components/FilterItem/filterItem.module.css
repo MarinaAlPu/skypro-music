@@ -4,10 +4,10 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--text-primary);
   border-radius: 60px;
   padding: 6px 20px;
-  color: #FFFFFF;
+  color: var(--text-primary);
   cursor: pointer;
   position: relative;
 }
@@ -30,7 +30,7 @@
   /* width: 248px; */
   /* height: 305px; */
   padding: 34px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   border-radius: 12px;
   position: absolute;
   top: 49px;
@@ -38,7 +38,7 @@
 }
 
 .filter__list {
-  color: white;
+  color: var(--text-primary);
   display: flex;
   gap: 28px;
   height: max-content;
@@ -57,7 +57,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: white;
+    background-color: var(--bg-primary);
   }
 }
 

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useRouter } from 'next/navigation';
 import { clearUser } from "@/store/features/authSlice";
 import Skeleton from "react-loading-skeleton";
+import { useEffect, useState } from "react";
 
 
 export default function Sidebar() {
@@ -17,6 +18,17 @@ export default function Sidebar() {
   // console.log("username: ", username);
 
   const isLoading = useAppSelector((state) => state.tracks.fetchIsLoading);
+
+  const currentTheme = useAppSelector((state) => state.theme.theme);
+
+  // состояние для отслеживания смонтированности компонента
+  const [mounted, setMounted] = useState(false);
+
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
 
   const logout = () => {
     dispatch(clearUser());
@@ -56,7 +68,8 @@ export default function Sidebar() {
           onClick={logout}
         >
           <svg>
-            <use xlinkHref="/img/icon/sprite.svg#logout"></use>
+            {/* <use xlinkHref={!mounted || currentTheme === 'dark' ? "/img/icon/sprite.svg#logout" : "/img/icon/sprite.svg#logout-dark"}></use> */}
+            <use xlinkHref={currentTheme === 'dark' ? "/img/icon/sprite.svg#logout" : "/img/icon/sprite.svg#logout-dark"}></use>
           </svg>
         </div>
       </div>

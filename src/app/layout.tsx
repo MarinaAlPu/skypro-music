@@ -23,12 +23,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeCode = `
+    (function() {
+      try {
+        var theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.classList.add(theme);
+      } catch (e) {}
+    })();
+  `;
+
   return (
     <ReduxProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <script dangerouslySetInnerHTML={{ __html: themeCode }} />
+        </head>
         <body className={`${montserrat.variable}`}>
           {/* <SkeletonTheme baseColor="#313131" highlightColor="#444444"> */}
-            {children}
+          {children}
           {/* </SkeletonTheme>
           <ToastContainer /> */}
         </body>

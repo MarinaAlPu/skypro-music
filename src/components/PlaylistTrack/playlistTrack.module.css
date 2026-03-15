@@ -38,7 +38,7 @@
   width: 51px;
   height: 51px;
   /* padding: 16px; */
-  background: #313131;
+  background: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,7 +63,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .track__titleSpan {
@@ -89,7 +89,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
   text-align: left;
 }
 

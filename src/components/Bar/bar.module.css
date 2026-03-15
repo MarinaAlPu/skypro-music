@@ -187,7 +187,7 @@
 .trackPlay__image {
   width: 51px;
   height: 51px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -223,7 +223,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
@@ -239,7 +239,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 /* .trackPlay__likeDis {
@@ -335,7 +335,7 @@
   width: 16px;
   height: 16px;
   background: #1a1a1a;
-  border: 2px solid white;
+  border: 2px solid var(--text-primary);
   border-radius: 50%;
   position: relative;
   margin-top: -7px;
@@ -408,7 +408,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: right;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .trackPlay__like {

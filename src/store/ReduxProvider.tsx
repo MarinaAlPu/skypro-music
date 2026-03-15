@@ -23,7 +23,7 @@ export default function ReduxProvider({
     // <Provider store={storeRef.current}>{children}</Provider>
 
     <Provider store={storeRef.current}>
-      <SkeletonTheme baseColor="#313131" highlightColor="#444444">
+      <SkeletonTheme baseColor="#313131" highlightColor="#4E4E4E">
         {children}
         <ToastContainer
           position="top-center"

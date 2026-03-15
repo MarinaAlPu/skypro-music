@@ -24,7 +24,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
-    if (savedTheme) {
+    if (savedTheme && savedTheme !== currentTheme) {
       dispatch(setTheme(savedTheme));
     }
   }, [dispatch]);
