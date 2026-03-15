@@ -2,7 +2,7 @@
 
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { getUniqueValuesByKey } from '@/utils/helpers';
 import { useAppDispatch } from '@/store/store';
@@ -33,9 +33,14 @@ export default function Filter({ playlist }: FilterProp) {
     // console.log("Открыть список: ", title);
   };
 
-  const uniqAuthors = getUniqueValuesByKey(playlist, 'author');
-  const uniqGenres = getUniqueValuesByKey(playlist, 'genre');
-  // console.log("uniqGenres: ", uniqGenres);
+  const uniqAuthors = useMemo(() => {
+    return getUniqueValuesByKey(playlist, 'author');
+  }, [playlist]);
+
+  const uniqGenres = useMemo(() => {
+    return getUniqueValuesByKey(playlist, 'genre');
+  }, [playlist]);
+
   const years = ['По умолчанию', 'Сначала новые', 'Сначала старые'];
 
   const onSelectAuthor = useCallback((author: string) => {
