@@ -27,6 +27,8 @@ export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequi
   // console.log("data в isLoading: ", isLoading);
   const isAccessToken = useAppSelector((state) => state.auth.access);
 
+  const [mounted, setMounted] = useState(false);
+
   const lastErrorRef = useRef<string | null>(null);
 
 
@@ -43,6 +45,14 @@ export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequi
     }
   }, [isAccessToken, isAuthRequired, error]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+  if (!mounted) {
+    return <div className={styles.content__playlist} />;
+  };
 
   return (
     <div className={styles.content__playlist}>
