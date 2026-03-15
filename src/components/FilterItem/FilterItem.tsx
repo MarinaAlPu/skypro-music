@@ -34,6 +34,16 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
   // console.log("uniqueGenres", uniqueGenres);
 
 
+  let count: number = 0;
+  if (title === "исполнителю") {
+    count = selectedAuthor.length;
+  // } else if (title === "году выпуска") {
+  //   count = selectedYear.length;
+  } else if (title === "жанру") {
+    count = selectedGenre.length;
+  }
+
+
   return (
     <>
       <div className={
@@ -107,6 +117,14 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
 
             </ul>
           </div>
+        }
+
+        {selectedAuthor && count > 0 ?
+          <div className={styles.filter__count}>
+            {count}
+          </div>
+          :
+          null
         }
       </div>
     </>
