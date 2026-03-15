@@ -2,7 +2,7 @@
 
 import Centerblock from '@/components/Centerblock/Centerblock';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import { resetFilters, setFavoriteTracks } from '@/store/features/trackSlice';
+import { resetFilters, setFavoriteTracks, setFetchIsLoading } from '@/store/features/trackSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect, useState } from 'react';
 
@@ -23,6 +23,8 @@ export default function FavoritePage() {
   }, []);
 
   useEffect(() => {
+    dispatch(setFetchIsLoading(true));
+
     const savedFavorites = localStorage.getItem('favoriteTracks');
     // console.log("savedFavorites: ", savedFavorites);
 
@@ -32,7 +34,13 @@ export default function FavoritePage() {
     if (favoritePlaylist) {
       setMyTracks(favoritePlaylist);
       dispatch(setFavoriteTracks(favoritePlaylist));
-    }
+    };
+
+    const timer = setTimeout(() => {
+      dispatch(setFetchIsLoading(false));
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [dispatch]);
 
   // получить плэйлист текущей страницы в зависимости от иcпользования фильтров, поиска

@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100%;
   overflow: hidden;
-  background-color: #383838;
+  background-color: var(--bg-primary); 
 }
 
 .container {
@@ -10,8 +10,14 @@
   height: 100vh;
   margin: 0 auto;
   position: relative;
-  background-color: #181818;
-  color: #fff;
+  background-color: var(--bg-primary); 
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+.container * {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .main {
@@ -26,4 +32,6 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  overflow-y: auto;
+  height: 100vh;
 }

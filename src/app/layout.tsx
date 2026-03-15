@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 import ReduxProvider from '@/store/ReduxProvider';
+// import { SkeletonTheme } from 'react-loading-skeleton';
+// import 'react-loading-skeleton/dist/skeleton.css';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
@@ -18,11 +23,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const themeCode = `
+    (function() {
+      try {
+        var theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.classList.add(theme);
+      } catch (e) {}
+    })();
+  `;
+
   return (
     <ReduxProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <script dangerouslySetInnerHTML={{ __html: themeCode }} />
+        </head>
         <body className={`${montserrat.variable}`}>
+          {/* <SkeletonTheme baseColor="#313131" highlightColor="#444444"> */}
           {children}
+          {/* </SkeletonTheme>
+          <ToastContainer /> */}
         </body>
       </html>
     </ReduxProvider>

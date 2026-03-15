@@ -8,6 +8,9 @@ body {
   font-family: var(--font-montserrat), 'Arial';
   overflow-y: auto;
   min-height: 100vh;
+  background-color: var(--bg-primary);
+  /* transition: background-color 0.3s ease, color 0.3s ease; */
+  transition: all 0.3s ease;
 }
 
 html, body {
@@ -28,6 +31,40 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+/* тёмная тема */
+:root,
+.dark {
+  --bg-primary: #181818;
+  --bg-secondary: #4E4E4E;
+  --bg-tertiary: #313131;
+  --bg-scroll: #FFFFFF;
+  --bg-scroll-track: rgba(75, 73, 73, 1);
+  --text-primary: #FFFFFF;
+  --bm-button: #d3d3d3;
+  --skeleton-baseColor: #313131;
+  --skeleton-highlight: #4E4E4E;
+}
+
+/* светлая тема */
+.light {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F6F4F4;
+  --bg-tertiary: #F6F4F4;
+  --bg-scroll: #FFFFFF;
+  --bg-scroll-track: #E0E0E0;
+  --text-primary: #000000;
+  --bm-button: #000000;
+  --skeleton-baseColor: #F6F4F4;
+  --skeleton-highlight: #E0E0E0;
+}
+
+/* синхронизация скелетонов */
+.react-loading-skeleton {
+  animation-iteration-count: infinite !important;
+  animation-direction: normal !important;
+  animation-duration: 1.5s !important; 
 }
 
 /* :root {

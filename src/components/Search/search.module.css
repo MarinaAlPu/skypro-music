@@ -18,7 +18,7 @@
   width: 17px;
   height: 17px;
   margin-right: 5px;
-  stroke: #ffffff;
+  stroke: var(--text-primary);
   fill: transparent;
 }
 
@@ -33,12 +33,12 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .search__text::-webkit-input-placeholder {
   background-color: transparent;
-  color: #ffffff;
+  color: var(--text-primary);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -47,7 +47,7 @@
 
 .search__text:-ms-input-placeholder {
   background-color: transparent;
-  color: #ffffff;
+  color: var(--text-primary);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -56,7 +56,7 @@
 
 .search__text::-ms-input-placeholder {
   background-color: transparent;
-  color: #ffffff;
+  color: var(--text-primary);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -65,7 +65,7 @@
 
 .search__text::placeholder {
   background-color: transparent;
-  color: #ffffff;
+  color: var(--text-primary);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

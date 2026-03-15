@@ -7,7 +7,7 @@ import { getTracks, getCategoryTracks } from '@/app/services/tracks/trackApi';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { resetFilters } from "@/store/features/trackSlice";
+import { resetFilters, setFetchIsLoading } from "@/store/features/trackSlice";
 
 
 type CategoryType = {
@@ -37,8 +37,10 @@ export default function CategoryPage() {
   }, []);
 
   useEffect(() => {
+    dispatch(setFetchIsLoading(true));
     setIsLoading(true);
-    if (!fetchIsLoading && allTracks.length) {
+    // if (!fetchIsLoading && allTracks.length) {
+    if (allTracks.length > 0) {
       getCategoryTracks(params.id)
         .then((res: CategoryType) => {
           // console.log("params.id: ", params.id);
@@ -80,9 +82,11 @@ export default function CategoryPage() {
         })
         .finally(() => {
           setIsLoading(false);
+          dispatch(setFetchIsLoading(false));
         });
     }
-  }, [tracks, fetchIsLoading, params.id]);
+  // }, [tracks, fetchIsLoading, params.id]);
+  }, [params.id, allTracks.length, dispatch]);
 
 
     // получить плэйлист текущей страницы

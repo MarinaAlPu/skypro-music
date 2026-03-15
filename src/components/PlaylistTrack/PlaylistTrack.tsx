@@ -8,6 +8,8 @@ import { TrackType } from '@/sharedTypes/sharedTypes';
 import { formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
 import { useLikeTrack } from '@/hooks/useLikeTrack';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 
 type trackTypeProp = {
@@ -25,8 +27,8 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
 
   const isAccessToken = useAppSelector((state) => state.auth.access);
 
-  const { toggleLike, isLike } = useLikeTrack(track);
-
+  const { toggleLike, isLike, isLoading } = useLikeTrack(track);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
@@ -39,6 +41,18 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
   // console.log("currentTrackIsPlay в PlaylistTrack: ", currentTrackIsPlay);
 
+
+    // Эффект для отслеживания окончания загрузки
+  useEffect(() => {
+    if (!isLoading && isAnimating) {
+      setIsAnimating(false);
+    }
+  }, [isLoading, isAnimating]);
+
+  const handleLikeClick = async () => {
+    setIsAnimating(true);
+    toggleLike();
+  };
 
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
@@ -80,10 +94,22 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
             {track.album}
           </Link>
         </div>
-        <div className="track__time">
-          <svg className={styles.track__timeSvg}
+        <div className={styles.track__time}>
+          {/* <svg className={styles.track__timeSvgLike}
             onClick={toggleLike}
+          > */}
+
+          <svg
+            className={classNames(
+              styles.track__timeSvgLike,
+              {
+                [styles.track__timeSvgLikeActive]: isLike && isAccessToken,
+                [styles.track__timeSvgAnimating]: isAnimating
+              }
+            )}
+            onClick={handleLikeClick}
           >
+
             {
               isLike && isAccessToken ?
                 <use xlinkHref="/img/icon/sprite.svg#icon-like-active"></use>

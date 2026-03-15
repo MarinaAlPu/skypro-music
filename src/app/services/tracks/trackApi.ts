@@ -3,6 +3,7 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import { TrackType, CategoryType, FavoriteType } from "@/sharedTypes/sharedTypes";
+import { toast } from 'react-toastify';
 
 
 export const getTracks = (): Promise<TrackType[]> => {
@@ -31,7 +32,8 @@ export const getFavoriteTracks = async (access: string): Promise<FavoriteType> =
     // console.log("resp в getFavoriteTracks: ", resp.data.data);
     return resp.data.data;
   } catch (error) {
-    console.error("Ошибка при получении треков 'Избранное': ", error);
+    // console.error("Ошибка при получении треков 'Избранное': ", error);
+    toast.error("Ошибка при получении треков 'Избранное'");
     throw error;
   }
 }
@@ -48,7 +50,8 @@ export const addTrackToFavorite = async (accessToken: string, trackId: number) =
     return resp.data;
     // return resp;
   } catch (error) {
-    console.error("Ошибка при добавлении трека в избранное: ", error);
+    // console.error("Ошибка при добавлении трека в избранное: ", error);
+    toast.error("Ошибка при добавлении трека в избранное");
     throw error;
   }
 }
@@ -64,7 +67,8 @@ export const deleteTrackFromFavorite = async (accessToken: string, trackId: numb
     // console.log("resp в deleteTrackFromFavorite: ", resp.data);
     return resp.data;
   } catch (error) {
-    console.error("Ошибка при удалении трека из избранного: ", error);
+    // console.error("Ошибка при удалении трека из избранного: ", error);
+    toast.error("Ошибка при удалении трека из избранного");
     throw error;
   }
 }

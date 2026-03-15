@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100%;
   overflow: hidden;
-  background-color: #383838;
+  background-color: var(--bg-primary); 
 }
 
 .container {
@@ -10,7 +10,7 @@
   height: 100vh;
   margin: 0 auto;
   position: relative;
-  background-color: #181818;
+  background-color: var(--bg-primary); 
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@
 }
 
 .not_found__error {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 160px;
   line-height: 168px;
@@ -81,7 +81,7 @@
 }
 
 .not_found__text {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 32px;
   line-height: 40px;
@@ -95,7 +95,7 @@
 }
 
 .not_found__message01 {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -105,7 +105,7 @@
 }
 
 .not_found__message02 {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -140,7 +140,7 @@
   font-size: 18px;
   line-height: 24px;
   letter-spacing: -0.05px;
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -332,7 +332,7 @@
 .trackPlay__image {
   width: 51px;
   height: 51px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -368,7 +368,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
@@ -384,7 +384,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .trackPlay__like,
@@ -453,7 +453,7 @@
   width: 16px;
   height: 16px;
   background: #1a1a1a;
-  border: 2px solid white;
+  border: 2px solid var(--text-primary);
   border-radius: 50%;
   position: relative;
   margin-top: -7px;
@@ -472,7 +472,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: right;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .trackPlay__like {
@@ -504,6 +504,6 @@
 .sidebar__icon {
   width: 40px;
   height: 40px;
-  background-color: #313131;
+  background-color: var(--bg-tertiary);
   border-radius: 50%;
 }
