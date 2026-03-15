@@ -2,7 +2,7 @@
 
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { getUniqueValuesByKey } from '@/utils/helpers';
 import { useAppDispatch } from '@/store/store';
@@ -24,6 +24,8 @@ export default function Filter({ playlist }: FilterProp) {
 
   const [isOpen, setIsOpen] = useState("");
   const [activeFilter, setActiveFilter] = useState<string>('');
+  const filterRef = useRef<HTMLDivElement | null>(null);
+
 
   const onOpenDropdownList = (title: string) => {
     setIsOpen(title === isOpen ? "" : title); // закрыть список, если он уже открыт
@@ -48,9 +50,24 @@ export default function Filter({ playlist }: FilterProp) {
     dispatch(setFilterGenres(genre));
   }
 
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+      setIsOpen("");
+    }
+  };
+
+  useEffect(() => {
+    // добавить обработчик клика вне окна
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      // удалить обработчик клика вне окна при размонтировании компонента
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
 
   return (
-    <div className={styles.centerblock__filter}>
+    <div className={styles.centerblock__filter} ref={filterRef}>
       <div className={styles.filter__title}>Искать по:</div>
       <FilterItem
         title="исполнителю"
