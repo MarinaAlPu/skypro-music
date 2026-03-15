@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-redux';
 import { makeStore, AppStore } from './store';
 import { SkeletonTheme } from 'react-loading-skeleton';
@@ -14,17 +14,23 @@ export default function ReduxProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [mounted, setMounted] = useState(false);
   const storeRef = useRef<AppStore>(null);
+
   if (!storeRef.current) {
     storeRef.current = makeStore();
   }
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     // <Provider store={storeRef.current}>{children}</Provider>
 
     <Provider store={storeRef.current}>
       {/* <SkeletonTheme baseColor="#313131" highlightColor="#4E4E4E"> */}
-      <SkeletonTheme baseColor="var(--skeleton-baseColor)" highlightColor="var(--skeleton-highlight)">
+      <SkeletonTheme baseColor="var(--skeleton-baseColor)" highlightColor="var(--skeleton-highlight)" >
         {children}
         <ToastContainer
           position="top-center"
