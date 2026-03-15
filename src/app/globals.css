@@ -56,6 +56,13 @@ ul {
   --skeleton-highlight: #E0E0E0;
 }
 
+/* синхронизация скелетонов */
+.react-loading-skeleton {
+  animation-iteration-count: infinite !important;
+  animation-direction: normal !important;
+  animation-duration: 1.5s !important; 
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
