@@ -87,7 +87,7 @@
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 /* .centerblock__filter {

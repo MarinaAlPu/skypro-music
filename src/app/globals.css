@@ -41,6 +41,8 @@ ul {
   --bg-tertiary: #313131;
   --text-primary: #FFFFFF;
   --bm-button: #d3d3d3;
+  --skeleton-baseColor: #313131;
+  --skeleton-highlight: #4E4E4E;
 }
 
 /* светлая тема */
@@ -50,6 +52,8 @@ ul {
   --bg-tertiary: #F6F4F4;
   --text-primary: #000000;
   --bm-button: #000000;
+  --skeleton-baseColor: #F6F4F4;
+  --skeleton-highlight: #E0E0E0;
 }
 
 /* :root {
