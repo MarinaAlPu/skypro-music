@@ -2,7 +2,7 @@
 
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { getUniqueValuesByKey } from '@/utils/helpers';
 import { useAppDispatch } from '@/store/store';
@@ -38,25 +38,25 @@ export default function Filter({ playlist }: FilterProp) {
   // console.log("uniqGenres: ", uniqGenres);
   const years = ['По умолчанию', 'Сначала новые', 'Сначала старые'];
 
-  const onSelectAuthor = (author: string) => {
+  const onSelectAuthor = useCallback((author: string) => {
     dispatch(setFilterAuthors(author));
-  }
+  }, [dispatch]);
 
-  const onSelectYear = (year: string) => {
+  const onSelectYear = useCallback((year: string) => {
     dispatch(setFilterYears(year));
-  }
+  }, [dispatch]);
 
-  const onSelectGenre = (genre: string) => {
+  const onSelectGenre = useCallback((genre: string) => {
     dispatch(setFilterGenres(genre));
-  }
-
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
-      setIsOpen("");
-    }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+        setIsOpen("");
+      }
+    };
+
     // добавить обработчик клика вне окна
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
