@@ -35,6 +35,8 @@
   position: absolute;
   top: 49px;
   left: 0px;
+  max-width: max-content;
+   /* fit-content */
 }
 
 .filter__list {
