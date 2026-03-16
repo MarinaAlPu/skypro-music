@@ -35,3 +35,16 @@
   overflow-y: auto;
   height: 100vh;
 }
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #d9b6ff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ad61ff;
+  border-radius: 10px;
+}
