@@ -1,5 +1,4 @@
 .filter__button {
-  /*composes: btn-text from '/src/UI/Button/button.module.css';*/
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -27,8 +26,6 @@
 }
 
 .filter__wrapper {
-  /* width: 248px; */
-  /* height: 305px; */
   padding: 34px;
   background-color: var(--bg-tertiary);
   border-radius: 12px;
@@ -36,7 +33,6 @@
   top: 49px;
   left: 0px;
   max-width: max-content;
-   /* fit-content */
 }
 
 .filter__list {

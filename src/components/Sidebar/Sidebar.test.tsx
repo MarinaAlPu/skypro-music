@@ -85,7 +85,6 @@ describe('Sidebar component with next/navigation', () => {
         <Sidebar />
       </ReduxProvider>
     );
-    // console.log(screen.debug());
 
     const sidebarItems = screen.getAllByRole('link');
 

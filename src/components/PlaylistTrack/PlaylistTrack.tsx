@@ -1,5 +1,6 @@
 'use client';
 
+
 import Link from 'next/link';
 import styles from './playlistTrack.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -9,21 +10,15 @@ import { formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
 import { useLikeTrack } from '@/hooks/useLikeTrack';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 
 
 type trackTypeProp = {
-  // name: string,
-  // author: string,
-  // album: string,
-  // time: string
   track: TrackType,
   playlist: TrackType[]
 }
 
 export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
   const dispatch = useAppDispatch();
-  // console.log("track: ", track);
 
   const isAccessToken = useAppSelector((state) => state.auth.access);
 
@@ -32,17 +27,13 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  // console.log("currentTrack в PlaylistTrack: ", currentTrack);
-
   const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
-  // console.log("currentTrackId в PlaylistTrack: ", currentTrackId);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
-  // console.log("currentTrackIsPlay в PlaylistTrack: ", currentTrackIsPlay);
 
 
-    // Эффект для отслеживания окончания загрузки
+  // отслеживание окончания загрузки
   useEffect(() => {
     if (!isLoading && isAnimating) {
       setIsAnimating(false);
@@ -95,9 +86,6 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
           </Link>
         </div>
         <div className={styles.track__time}>
-          {/* <svg className={styles.track__timeSvgLike}
-            onClick={toggleLike}
-          > */}
 
           <svg
             className={classNames(

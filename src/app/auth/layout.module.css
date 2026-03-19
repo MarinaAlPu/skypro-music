@@ -22,7 +22,6 @@
 
 .modal__form {
     width: 366px;
-    /* background-color: var(--bg-primary); */
     background-color: #FFFFFF;
     border-radius: 12px;
     display: -webkit-box;

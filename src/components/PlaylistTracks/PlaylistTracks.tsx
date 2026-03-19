@@ -1,7 +1,6 @@
 import styles from './playlistTracks.module.css';
 import PlaylistTrack from '../PlaylistTrack/PlaylistTrack';
 import { TrackType } from '@/sharedTypes/sharedTypes';
-import Loading from '../Loading/Loading';
 import { useAppSelector } from '@/store/store';
 import { useEffect, useState, useRef } from 'react';
 import Skeleton from "react-loading-skeleton";
@@ -10,11 +9,6 @@ import { toast } from 'react-toastify';
 
 
 type PlaylistTracksProp = {
-  // name: string,
-  // author: string,
-  // album: string,
-  // time: string
-  // track: TrackType,
   playlist: TrackType[],
   isLoading: boolean,
   error: string,
@@ -23,8 +17,6 @@ type PlaylistTracksProp = {
 
 
 export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequired }: PlaylistTracksProp) {
-  // console.log("треки в PlaylistTracks: ", playlist);
-  // console.log("data в isLoading: ", isLoading);
   const isAccessToken = useAppSelector((state) => state.auth.access);
 
   const [mounted, setMounted] = useState(false);
@@ -58,15 +50,12 @@ export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequi
     <div className={styles.content__playlist}>
       {
         !isAccessToken && isAuthRequired ?
-          // <div className={styles.messageContainer}>Авторизуйтесь чтобы посмотреть избранные треки</div>
           null
           :
           error ?
-            // <div className={styles.errorContainer}>{error}</div>
             null
             :
             isLoading ?
-              // <Loading />
               <>
                 {Array(5).fill(0).map((_, i) => (
                   <div key={i} className={trackStyles.playlist__item}>
@@ -109,10 +98,6 @@ export default function PlaylistTracks({ playlist, isLoading, error, isAuthRequi
                 playlist.map((track) =>
                   <PlaylistTrack
                     key={track._id}
-                    // name={track.name}
-                    // author={track.author}
-                    // album={track.album}
-                    // time={formatTime(track.duration_in_seconds)}
                     track={track}
                     playlist={playlist}
                   />

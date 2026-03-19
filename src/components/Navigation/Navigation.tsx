@@ -1,5 +1,6 @@
 'use client'
 
+
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
@@ -14,7 +15,6 @@ export default function Navigation() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const isAccessToken = useAppSelector((state) => state.auth.access);
-  // console.log("isAccessToken: ", isAccessToken);
   const currentTheme = useAppSelector((state) => state.theme.theme);
 
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -119,7 +119,6 @@ export default function Navigation() {
                   width={39}
                   height={39}
                   className={styles.theme__image}
-                  // src="/img/icon/theme-dark.svg"
                   src={currentTheme === 'dark' ? '/img/icon/theme-dark.svg' : '/img/icon/theme-light.svg'}
                   alt={'theme'}
                   onClick={toggleTheme}

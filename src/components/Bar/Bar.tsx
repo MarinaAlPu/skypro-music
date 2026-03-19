@@ -18,13 +18,11 @@ export default function Bar() {
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  // console.log("currentTrack в Bar: ", currentTrack);
   const currentTrackName = useAppSelector((state) => state.tracks.currentTrack?.name);
   const currentTrackAuthor = useAppSelector((state) => state.tracks.currentTrack?.author);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
-  // console.log("currentTrackIsPlay в Bar: ", currentTrackIsPlay);
 
   // проверить, включен ли shuffle
   const isShuffle = useAppSelector((state) => state.tracks.isShuffle);
@@ -32,7 +30,6 @@ export default function Bar() {
 
 
   const [volume, setVolume] = useState(0.5);
-  // console.log("volume", volume);
   const [isLoop, setIsLoop] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -40,7 +37,6 @@ export default function Bar() {
   const [progressBarTime, setProgressBarTime] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(0.5);
-  // console.log("currentVolume: ", currentVolume);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -78,13 +74,11 @@ export default function Bar() {
 
   const playPauseTrack = () => {
     if (currentTrackIsPlay === false) {
-      // console.log("Нажали кнопку Play");
       if (audioRef.current) {
         audioRef.current.play();
         dispatch(setIsPlay(true));
       }
     } else {
-      // console.log("Нажали кнопку Pause");
       if (audioRef.current) {
         audioRef.current.pause();
         dispatch(setIsPlay(false));
@@ -109,20 +103,13 @@ export default function Bar() {
   };
 
   const onTimeUpdate = () => {
-    // console.log(`трек "${currentTrackName}" isLoadedTrack: `, isLoadedTrack);
     if (audioRef.current && isLoadedTrack) {
-      // // учесть загрузился трек или нет, начинать проиграывать только после загрузки
-      // isLoadedTrack д.б. = true
       setCurrentTime(audioRef.current.currentTime);
       setDuration(audioRef.current.duration);
-
-      // console.log("currentTime: ", currentTime);
-      // console.log("duration: ", duration);
     }
   };
 
   const onLoadedMetadata = () => {
-    // console.log("Start");
     if (audioRef.current) {
       audioRef.current.play();
       dispatch(setIsPlay(true));
@@ -131,10 +118,7 @@ export default function Bar() {
   };
 
   const onEnded = () => {
-    // console.log("isLoop: ", isLoop);
-    // console.log("Next track");
     dispatch(setIsPlay(false));
-    // setIsLoadedTrack(false);
 
     if (isLoop) {
       if (audioRef.current) {
@@ -146,7 +130,6 @@ export default function Bar() {
   };
 
   const onChangeProgress = (e: ChangeEvent<HTMLInputElement>) => {
-    // console.log("e: ", e);
     // 0. получить новое время из события клика по шкале
     const newTime = Number(e.target.value);
     if (audioRef.current) {

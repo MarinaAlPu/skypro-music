@@ -37,7 +37,6 @@
 .track__titleImage {
   width: 51px;
   height: 51px;
-  /* padding: 16px; */
   background: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;

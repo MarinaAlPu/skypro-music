@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useEffect, useRef, useState } from 'react';
 import { Provider } from 'react-redux';
 import { makeStore, AppStore } from './store';
@@ -26,10 +27,7 @@ export default function ReduxProvider({
   }, []);
 
   return (
-    // <Provider store={storeRef.current}>{children}</Provider>
-
     <Provider store={storeRef.current}>
-      {/* <SkeletonTheme baseColor="#313131" highlightColor="#4E4E4E"> */}
       <SkeletonTheme baseColor="var(--skeleton-baseColor)" highlightColor="var(--skeleton-highlight)" >
         {children}
         <ToastContainer

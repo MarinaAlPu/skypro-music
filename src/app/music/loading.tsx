@@ -1,7 +1,6 @@
 import Skeleton from 'react-loading-skeleton'
 
 export default function Loading() {
-  // Вы можете создать структуру, повторяющую дизайн вашей страницы
   return (
     <div className="p-4">
       <h1 className="mb-4">

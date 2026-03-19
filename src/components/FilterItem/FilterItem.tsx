@@ -1,8 +1,8 @@
 'use client';
 
+
 import classNames from 'classnames';
 import styles from './filterItem.module.css';
-import { useState } from 'react';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { useAppSelector } from '@/store/store';
 
@@ -25,20 +25,13 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
   const selectedGenre = useAppSelector((state) => state.tracks.filters.genres)
 
   const uniqueAuthors = [...new Set(playlist.map(track => track.author))];
-  // console.log("uniqueAuthors", uniqueAuthors);
-
   const uniqueReleaseYears = [...new Set(playlist.map(track => new Date(track.release_date).getFullYear()))];
-  // console.log("uniqueReleaseYears", uniqueReleaseYears);
-
   const uniqueGenres = [...new Set(playlist.flatMap(track => track.genre))];
-  // console.log("uniqueGenres", uniqueGenres);
 
 
   let count: number = 0;
   if (title === "исполнителю") {
     count = selectedAuthor.length;
-  // } else if (title === "году выпуска") {
-  //   count = selectedYear.length;
   } else if (title === "жанру") {
     count = selectedGenre.length;
   }
@@ -81,7 +74,6 @@ export default function FilterItem({ title, onClick, isOpen, activeFilter, playl
                 ))}
 
               {title === "году выпуска" &&
-                // uniqueReleaseYears.map((year) => (
                 list.map((year) => (
                   <li
                     className={classNames(
