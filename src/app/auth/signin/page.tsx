@@ -44,17 +44,17 @@ export default function Signin() {
 
     try {
       // авторизоваться
-      const authResp = await authUser({ email, password })
+      // const authResp = await authUser({ email, password })
       // console.log("authResp: ", authResp);
       // console.log("email: ", authResp.data.email);
       // console.log("username: ", authResp.data.username);
       // console.log("_id: ", authResp.data._id);
       // localStorage.setItem("userId", String(authResp.data._id));
 
-      // получить время получения токена в секундах и записать в LS
-      const tokenGetTime = String(new Date().getTime() / 1000);
-      // console.log("время получения токена в секундах: ", tokenGetTime);
-      localStorage.setItem("tokenGetTime", tokenGetTime);
+      // // получить время получения токена в секундах и записать в LS
+      // const tokenGetTime = String(new Date().getTime() / 1000);
+      // // console.log("время получения токена в секундах: ", tokenGetTime);
+      // localStorage.setItem("tokenGetTime", tokenGetTime);
 
       // получить токены, записать в LS
       const tokenResp = await getToken({ email, password })
