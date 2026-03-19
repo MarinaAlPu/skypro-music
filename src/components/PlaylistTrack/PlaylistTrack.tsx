@@ -1,5 +1,6 @@
 'use client';
 
+
 import Link from 'next/link';
 import styles from './playlistTrack.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -8,37 +9,41 @@ import { TrackType } from '@/sharedTypes/sharedTypes';
 import { formatTime } from '@/utils/helpers';
 import classNames from 'classnames';
 import { useLikeTrack } from '@/hooks/useLikeTrack';
+import { useEffect, useState } from 'react';
 
 
 type trackTypeProp = {
-  // name: string,
-  // author: string,
-  // album: string,
-  // time: string
   track: TrackType,
   playlist: TrackType[]
 }
 
 export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
   const dispatch = useAppDispatch();
-  // console.log("track: ", track);
 
   const isAccessToken = useAppSelector((state) => state.auth.access);
 
-  const { toggleLike, isLike } = useLikeTrack(track);
-
+  const { toggleLike, isLike, isLoading } = useLikeTrack(track);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // получить текущий трек
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  // console.log("currentTrack в PlaylistTrack: ", currentTrack);
-
   const currentTrackId = useAppSelector((state) => state.tracks.currentTrack?._id)
-  // console.log("currentTrackId в PlaylistTrack: ", currentTrackId);
 
   // проверить, что текущий трек играет
   const currentTrackIsPlay = useAppSelector((state) => state.tracks.isPlay);
-  // console.log("currentTrackIsPlay в PlaylistTrack: ", currentTrackIsPlay);
 
+
+  // отслеживание окончания загрузки
+  useEffect(() => {
+    if (!isLoading && isAnimating) {
+      setIsAnimating(false);
+    }
+  }, [isLoading, isAnimating]);
+
+  const handleLikeClick = async () => {
+    setIsAnimating(true);
+    toggleLike();
+  };
 
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
@@ -80,10 +85,19 @@ export default function PlaylistTrack({ track, playlist }: trackTypeProp) {
             {track.album}
           </Link>
         </div>
-        <div className="track__time">
-          <svg className={styles.track__timeSvg}
-            onClick={toggleLike}
+        <div className={styles.track__time}>
+
+          <svg
+            className={classNames(
+              styles.track__timeSvgLike,
+              {
+                [styles.track__timeSvgLikeActive]: isLike && isAccessToken,
+                [styles.track__timeSvgAnimating]: isAnimating
+              }
+            )}
+            onClick={handleLikeClick}
           >
+
             {
               isLike && isAccessToken ?
                 <use xlinkHref="/img/icon/sprite.svg#icon-like-active"></use>

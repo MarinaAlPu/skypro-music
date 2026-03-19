@@ -37,8 +37,7 @@
 .track__titleImage {
   width: 51px;
   height: 51px;
-  padding: 16px;
-  background: #313131;
+  background: var(--bg-tertiary);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,7 +62,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .track__titleSpan {
@@ -89,7 +88,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ffffff;
+  color: var(--text-primary);
   text-align: left;
 }
 
@@ -107,19 +106,43 @@
 
 .track__time {
   display: flex;
-  display: flex;
+  flex-shrink: 0;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 65px;
 }
 
-.track__timeSvg {
+@keyframes likePop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.track__timeSvgLike {
   width: 14px;
   height: 12px;
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+  transition: stroke 0.2s ease;
+}
+
+.track__timeSvgLikeActive {
+  stroke: #b672ff;
+  fill: #b672ff;
+}
+
+.track__timeSvgAnimating {
+  animation: likePop 1s ease-in-out infinite;
 }
 
 .track__timeText {
