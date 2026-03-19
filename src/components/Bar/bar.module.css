@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(28, 28, 28, 0.5);
+  /* background: var(--bg-bar); */
 }
 
 .bar__content {
@@ -34,6 +34,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  background-color: var(--bg-barPlayer);
 }
 
 .bar__player {
@@ -400,6 +401,7 @@
   justify-content: flex-end;
   padding-right: 20px;
   padding-bottom: 10px;
+  background: var(--bg-barTime);
 }
 
 .trackPlay__time {

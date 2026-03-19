@@ -138,13 +138,15 @@
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.05px;
-    color: var(--text-primary);
+    /* color: var(--text-primary); */
+    color: #FFFFFF;
 }
 
 .modal__btnSignup {
     width: 278px;
     height: 52px;
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: #FFFFFF;
     border: 1px solid #d0cece;
     border-radius: 6px;
     font-style: normal;

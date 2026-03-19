@@ -3,6 +3,7 @@
   min-height: 100%;
   overflow: hidden;
   background-color: var(--bg-primary); 
+  /* background-color: #181818;  */
 }
 
 .container {
@@ -11,7 +12,9 @@
   margin: 0 auto;
   position: relative;
   background-color: var(--bg-primary); 
+  /* background-color: #181818;  */
   color: var(--text-primary);
+  /* color: #FFFFFF; */
   overflow-x: hidden;
 }
 
@@ -47,4 +50,5 @@
 *::-webkit-scrollbar-thumb {
   background-color: #ad61ff;
   border-radius: 10px;
+  cursor: pointer;
 }

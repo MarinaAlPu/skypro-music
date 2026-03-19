@@ -28,6 +28,7 @@ export default function Bar() {
 
   // проверить, включен ли shuffle
   const isShuffle = useAppSelector((state) => state.tracks.isShuffle);
+  const theme = useAppSelector((state) => state.theme.theme)
 
 
   const [volume, setVolume] = useState(0.5);
@@ -308,7 +309,22 @@ export default function Bar() {
                 onClick={onMute}
               >
                 <svg className={styles.volume__svg}>
-                  <use xlinkHref={isMuted ? "/img/icon/sprite.svg#icon-mute" : "/img/icon/sprite.svg#icon-volume"}></use>
+                  <use xlinkHref={
+                    isMuted ?
+                      (
+                        theme === 'dark' ?
+                          "/img/icon/sprite.svg#icon-mute"
+                          :
+                          "/img/icon/sprite.svg#icon-mute-light"
+                      )
+                      :
+                      (
+                        theme === 'dark' ?
+                          "/img/icon/sprite.svg#icon-volume"
+                          :
+                          "/img/icon/sprite.svg#icon-volume-light"
+                      )
+                  }></use>
 
                 </svg>
               </div>
