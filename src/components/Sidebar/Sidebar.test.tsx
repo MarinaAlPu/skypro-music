@@ -126,7 +126,6 @@ describe('Sidebar component with next/navigation', () => {
       </ReduxProvider>
     );
 
-    console.log(screen.debug());
 
     // проверить, что отображается корректное название категории
     expect(screen.getByText('Плэйлист дня')).toBeInTheDocument();
