@@ -3,6 +3,10 @@
         <path d="M11.9276 12.7748L15.37 17.0644" stroke="white" stroke-linecap="round"/>
         <circle cx="8.48533" cy="8.48526" r="5.5" transform="rotate(-38.7469 8.48533 8.48526)" stroke="white"/>
     </symbol>
+    <symbol id="icon-search-dark"  viewBox="0 0 17 18"  xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.9276 12.7748L15.37 17.0644" stroke="black" stroke-linecap="round"/>
+        <circle cx="8.48533" cy="8.48526" r="5.5" transform="rotate(-38.7469 8.48533 8.48526)" stroke="black"/>
+    </symbol>
     <symbol id="icon-watch"  viewBox="0 0 12 12"  xmlns="http://www.w3.org/2000/svg">
         <circle cx="6" cy="6" r="5.5" stroke="#696969"/>
         <path d="M4 6H6.5V2.5" stroke="#696969"/>
@@ -36,6 +40,24 @@
 	<path d="M9 6L15 13M9 6L15 13" stroke="white"/>
 	<path d="M15 6L9.02068 13.0177M15 6L9.02068 13.0177" stroke="white"/>
     </symbol>
+
+    <symbol id="icon-volume-light" fill="none" viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">
+        <mask id="path-1-inside-1_2985_507" fill="black">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L3 5H0V13H3L8 18V0Z"/>
+        </mask>
+        <path d="M3 5V6H3.41421L3.70711 5.70711L3 5ZM8 0H9V-2.41421L7.29289 -0.707107L8 0ZM0 5V4H-1V5H0ZM0 13H-1V14H0V13ZM3 13L3.70711 12.2929L3.41421 12H3V13ZM8 18L7.29289 18.7071L9 20.4142V18H8ZM3.70711 5.70711L8.70711 0.707107L7.29289 -0.707107L2.29289 4.29289L3.70711 5.70711ZM0 6H3V4H0V6ZM1 13V5H-1V13H1ZM3 12H0V14H3V12ZM8.70711 17.2929L3.70711 12.2929L2.29289 13.7071L7.29289 18.7071L8.70711 17.2929ZM7 0V18H9V0H7Z" fill="black" mask="url(#path-1-inside-1_2985_507)"/>
+        <path d="M11 13C12.1046 13 13 11.2091 13 9C13 6.79086 12.1046 5 11 5" stroke="black"/>
+    </symbol>
+    <symbol id="icon-mute-light" fill="none" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
+	<mask id="path-1-inside-1_8_34" fill="black">
+	<path d="M8 18L3 13H0V5H3L8 0V18Z"/>
+	</mask>
+	<path d="M8 18L3 13H0V5H3L8 0V18Z" fill="none"/>
+	<path d="M8 18L7.29289 18.7071L9 20.4142V18H8ZM3 13L3.70711 12.2929L3.41421 12H3V13ZM0 13H-1V14H0V13ZM0 5V4H-1V5H0ZM3 5V6H3.41421L3.70711 5.70711L3 5ZM8 0H9V-2.41421L7.29289 -0.707107L8 0ZM8 18L8.70711 17.2929L3.70711 12.2929L3 13L2.29289 13.7071L7.29289 18.7071L8 18ZM3 13V12H0V13V14H3V13ZM0 13H1V5H0H-1V13H0ZM0 5V6H3V5V4H0V5ZM3 5L3.70711 5.70711L8.70711 0.707107L8 0L7.29289 -0.707107L2.29289 4.29289L3 5ZM8 0H7V18H8H9V0H8Z" fill="black" mask="url(#path-1-inside-1_8_34)"/>
+	<path d="M9 6L15 13M9 6L15 13" stroke="black"/>
+	<path d="M15 6L9.02068 13.0177M15 6L9.02068 13.0177" stroke="black"/>
+    </symbol>
+
     <symbol id="icon-dislike"  viewBox="0 0 16 15"  xmlns="http://www.w3.org/2000/svg">
         <path d="M8.34372 3.25572H8.36529C9.29718 2.44175 11.7563 1.16576 13.9565 2.76734C17.3111 5.20921 14.2458 10.5 8.36529 14H8.34372M8.34378 3.25572H8.32221C7.39032 2.44175 4.93121 1.16576 2.73102 2.76734C-0.623552 5.20921 2.44172 10.5 8.32221 14H8.34378" />
         <path d="M1 1L15 13.5" />
@@ -66,5 +88,9 @@
     <symbol id='logout' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M25.6711 16.046V14.7419C25.6711 13.2276 24.4435 12 22.9292 12H16.7419C15.2276 12 14 13.2276 14 14.7419V26.0645C14 27.5788 15.2276 28.8065 16.7419 28.8065H22.9292C24.4435 28.8065 25.6711 27.5788 25.6711 26.0645V24.6048M18.3572 20.3254H33.2963M33.2963 20.3254L30.1062 23.5155M33.2963 20.3254L30.1062 17.1353" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="20" cy="20" r="19.5" stroke="white"/>
+    </symbol>
+    <symbol id='logout-dark' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25.6711 16.046V14.7419C25.6711 13.2276 24.4435 12 22.9292 12H16.7419C15.2276 12 14 13.2276 14 14.7419V26.0645C14 27.5788 15.2276 28.8065 16.7419 28.8065H22.9292C24.4435 28.8065 25.6711 27.5788 25.6711 26.0645V24.6048M18.3572 20.3254H33.2963M33.2963 20.3254L30.1062 23.5155M33.2963 20.3254L30.1062 17.1353" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="20" cy="20" r="19.5" stroke="black"/>
     </symbol>
 </svg>
